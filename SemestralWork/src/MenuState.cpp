@@ -1,6 +1,7 @@
 #include "MenuState.hpp"
 #include "TextureManager.hpp"
 #include "MenuButton.hpp"
+#include "Game.hpp"
 #include "SDL2/SDL.h"
 #include <iostream>
 
