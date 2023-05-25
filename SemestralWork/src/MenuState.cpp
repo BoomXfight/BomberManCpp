@@ -25,19 +25,18 @@ void MenuState::render()
 
 bool MenuState::onEnter()
 {
-    if(! TheTextureManager::Instance()->load("TO DO PATH", "buttons", TheGame::Instance()->getRenderer()))
+    if(!TheTextureManager::Instance()->load("Assets/Finished/SinglePlayerSS.png", "SinglePlayer", TheGame::Instance()->getRenderer()))
     {
         std::cout << "Failed to load the button :" << SDL_GetError() << "\n";
         return false;
     }
-    GameObject* button1 = new MenuButton(new LoaderParams(0, 0, 400, 200, "buttons"));
-    GameObject* button2 = new MenuButton(new LoaderParams(1000, 600, 400, 200, "buttons"));
+
+
+    GameObject* button1 = new MenuButton(new LoaderParams(0, 0, 300, 80, "SinglePlayer"));
     m_gameObjects.push_back(button1);
-    m_gameObjects.push_back(button2);
     std::cout << "entering MenuState\n";
     return true;
 }
-
 
 bool MenuState::onExit()
 {
@@ -46,7 +45,7 @@ bool MenuState::onExit()
         m_gameObjects[i]->clean();
     }
     m_gameObjects.clear();
-    TheTextureManager::Instance()->clearFromTextureMap("buttons");
+    TheTextureManager::Instance()->clearFromTextureMap("SPButton");
     std::cout << "exiting MenuState\n";
     return true;
 }
