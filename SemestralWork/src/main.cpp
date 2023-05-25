@@ -13,7 +13,7 @@ int main(int argc, char* argv[])
     if(TheGame::Instance()->init("BomberMan", 0, 0, 960, 540, false))
     {
         std::cout << "game init success!\n";
-        while(TheGame::Instance()->running()) // Game loop
+        while(TheGame::Instance()->isRunning()) // Game loop
         {
             frameStart = SDL_GetTicks();
 
