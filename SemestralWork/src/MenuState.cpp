@@ -31,8 +31,7 @@ bool MenuState::onEnter()
         return false;
     }
 
-
-    GameObject* button1 = new MenuButton(new LoaderParams(0, 0, 300, 80, "SinglePlayer"));
+    GameObject* button1 = new MenuButton(new LoaderParams(0, 0, 300, 80, "SinglePlayer"), s_menuToSinglePlayer);
     m_gameObjects.push_back(button1);
     std::cout << "entering MenuState\n";
     return true;
@@ -48,4 +47,9 @@ bool MenuState::onExit()
     TheTextureManager::Instance()->clearFromTextureMap("SPButton");
     std::cout << "exiting MenuState\n";
     return true;
+}
+
+void MenuState::s_menuToSinglePlayer()
+{
+    std::cout << "Single Player button clicked.\n";
 }
