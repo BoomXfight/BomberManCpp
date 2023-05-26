@@ -1,8 +1,9 @@
 #pragma once
 #include "SDL2/SDL.h"
-#include "vector"
 #include "GameObject.hpp"
 #include "GameStateMachine.hpp"
+#include <vector>
+#include <memory>
 
 class Game
 {
@@ -16,6 +17,7 @@ public:
     void clean();
     void quit();
     bool isRunning();
+    GameStateMachine* getStateMachine();
 
 private:
     Game();

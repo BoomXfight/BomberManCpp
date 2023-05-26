@@ -1,6 +1,6 @@
 #include "GameStateMachine.hpp"
 
-void GameStateMachine::pushState(GameState *pState)
+void GameStateMachine::pushState(GameState* pState)
 {
     m_gameStates.push_back(pState);
     m_gameStates.back()->onEnter();
@@ -18,7 +18,7 @@ void GameStateMachine::popState()
     }
 }
 
-void GameStateMachine::changeState(GameState *pState)
+void GameStateMachine::changeState(GameState* pState)
 {
     if(!m_gameStates.empty())
     {
@@ -28,7 +28,6 @@ void GameStateMachine::changeState(GameState *pState)
         }
         if(m_gameStates.back()->onExit())
         {
-            delete m_gameStates.back();
             m_gameStates.pop_back();
         }
     }

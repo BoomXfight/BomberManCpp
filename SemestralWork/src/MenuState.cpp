@@ -1,6 +1,7 @@
 #include "MenuState.hpp"
 #include "TextureManager.hpp"
 #include "MenuButton.hpp"
+#include "PlayState.hpp"
 #include "Game.hpp"
 #include "SDL2/SDL.h"
 #include <iostream>
@@ -25,13 +26,13 @@ void MenuState::render()
 
 bool MenuState::onEnter()
 {
-    if(!TheTextureManager::Instance()->load("Assets/Finished/SinglePlayerSS.png", "SinglePlayer", TheGame::Instance()->getRenderer()))
+    if(!TheTextureManager::Instance()->load("../Assets/SinglePlayer.png", "SinglePlayer", TheGame::Instance()->getRenderer()))
     {
         std::cout << "Failed to load the button :" << SDL_GetError() << "\n";
         return false;
     }
 
-    GameObject* button1 = new MenuButton(new LoaderParams(0, 0, 300, 80, "SinglePlayer"), s_menuToSinglePlayer);
+    GameObject* button1 = new MenuButton(new LoaderParams(200, 300, 301, 80, "SinglePlayer"), s_menuToSinglePlayer);
     m_gameObjects.push_back(button1);
     std::cout << "entering MenuState\n";
     return true;
@@ -52,4 +53,5 @@ bool MenuState::onExit()
 void MenuState::s_menuToSinglePlayer()
 {
     std::cout << "Single Player button clicked.\n";
+    TheGame ::Instance()->getStateMachine()->changeState(new PlayState());
 }

@@ -15,6 +15,7 @@ void PlayState::render()
 
 bool PlayState::onEnter()
 {
+
     std::cout << "entering PlayState\n";
     return true;
 }
