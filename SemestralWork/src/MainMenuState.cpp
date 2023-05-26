@@ -27,14 +27,30 @@ void MainMenuState::render()
 
 bool MainMenuState::onEnter()
 {
-    if(!TheTextureManager::Instance()->load("../Assets/BomberMan.png", "BomberMan", TheGame::Instance()->getRenderer()))
+    if(!TheTextureManager::Instance()->load("../Assets/BomberManLogo.png", "BomberMan", TheGame::Instance()->getRenderer())
+        || !TheTextureManager::Instance()->load("../Assets/Bomber.png", "Bomber", TheGame::Instance()->getRenderer())
+        || !TheTextureManager::Instance()->load("../Assets/SinglePlayerButton.png", "SinglePlayer", TheGame::Instance()->getRenderer())
+        || !TheTextureManager::Instance()->load("../Assets/MultiPlayer.png", "MultiPlayer", TheGame::Instance()->getRenderer())
+        || !TheTextureManager::Instance()->load("../Assets/ScoreBoard.png", "ScoreBoard", TheGame::Instance()->getRenderer())
+        || !TheTextureManager::Instance()->load("../Assets/Exit.png", "Exit", TheGame::Instance()->getRenderer()))
     {
         std::cout << "Failed to load the button :" << SDL_GetError() << "\n";
         return false;
     }
 
-    GameObject* bomberMan = new StaticObject(new LoaderParams(80, 20, 520, 120, "BomberMan"));
+    GameObject* bomberMan = new StaticObject(new LoaderParams(50, 20, 600, 166, "BomberMan"));
+    GameObject* bomber = new StaticObject(new LoaderParams(530, 240, 325, 250, "Bomber"));
+    GameObject* singlePlayer = new MenuButton(new LoaderParams(180, 210, 250, 80, "SinglePlayer"), s_menuToSinglePlayer);
+    GameObject* multiPlayer = new MenuButton(new LoaderParams(180, 310, 220, 80, "MultiPlayer"), s_menuToSinglePlayer);
+    GameObject* scoreBoard = new MenuButton(new LoaderParams(180, 410, 190, 80, "ScoreBoard"), s_menuToSinglePlayer);
+    GameObject* exit = new MenuButton(new LoaderParams(830, 60, 90, 50, "Exit"), s_menuToSinglePlayer);
+
     m_gameObjects.push_back(bomberMan);
+    m_gameObjects.push_back(bomber);
+    m_gameObjects.push_back(singlePlayer);
+    m_gameObjects.push_back(multiPlayer);
+    m_gameObjects.push_back(scoreBoard);
+    m_gameObjects.push_back(exit);
     std::cout << "entering MenuState\n";
     return true;
 }
