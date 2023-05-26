@@ -1,10 +1,7 @@
 #include <iostream>
 #include "Game.hpp"
-#include "Player.hpp"
-#include "Enemy.hpp"
 #include "InputHandler.hpp"
-#include "MenuState.hpp"
-#include "PlayState.hpp"
+#include "MainMenuState.hpp"
 
 SDL_Renderer* Game::getRenderer() const {return m_pRenderer;}
 
@@ -42,7 +39,7 @@ bool Game::init(const char* title, int x_pos, int y_pos, int width, int height, 
             if(m_pRenderer != 0)
             {
                 std::cout << "renderer creation success\n";
-                SDL_SetRenderDrawColor(m_pRenderer,255,255,255,255);
+                SDL_SetRenderDrawColor(m_pRenderer,0,0,0,255);
             }
             else
             {
@@ -63,7 +60,7 @@ bool Game::init(const char* title, int x_pos, int y_pos, int width, int height, 
     }
 
     m_pGameStateMachine = new GameStateMachine();
-    m_pGameStateMachine->changeState(new MenuState());
+    m_pGameStateMachine->changeState(new MainMenuState());
 
     std::cout << "init success\n";
     m_bRunning = true; // everything inited successfully, start the main loop

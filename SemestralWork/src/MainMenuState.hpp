@@ -3,7 +3,7 @@
 #include "GameObject.hpp"
 #include <vector>
 
-class MenuState : public GameState
+class MainMenuState : public GameState
 {
 public:
     virtual void update();
