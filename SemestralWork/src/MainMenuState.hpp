@@ -13,7 +13,8 @@ public:
     virtual std::string getStateID() const { return s_menuID; }
 
 private:
-    static void s_menuToSinglePlayer();
+    static void menuToSinglePlayer();
+    static void menuToQuit();
 
     static const std::string s_menuID;
     std::vector<GameObject*> m_gameObjects;

@@ -40,10 +40,10 @@ bool MainMenuState::onEnter()
 
     GameObject* bomberMan = new StaticObject(new LoaderParams(50, 20, 600, 166, "BomberMan"));
     GameObject* bomber = new StaticObject(new LoaderParams(530, 240, 325, 250, "Bomber"));
-    GameObject* singlePlayer = new MenuButton(new LoaderParams(180, 210, 250, 80, "SinglePlayer"), s_menuToSinglePlayer);
-    GameObject* multiPlayer = new MenuButton(new LoaderParams(180, 310, 220, 80, "MultiPlayer"), s_menuToSinglePlayer);
-    GameObject* scoreBoard = new MenuButton(new LoaderParams(180, 410, 190, 80, "ScoreBoard"), s_menuToSinglePlayer);
-    GameObject* exit = new MenuButton(new LoaderParams(830, 60, 90, 50, "Exit"), s_menuToSinglePlayer);
+    GameObject* singlePlayer = new MenuButton(new LoaderParams(180, 210, 250, 80, "SinglePlayer"), menuToSinglePlayer);
+    GameObject* multiPlayer = new MenuButton(new LoaderParams(180, 310, 220, 80, "MultiPlayer"), menuToSinglePlayer);
+    GameObject* scoreBoard = new MenuButton(new LoaderParams(180, 410, 190, 80, "ScoreBoard"), menuToSinglePlayer);
+    GameObject* exit = new MenuButton(new LoaderParams(830, 60, 90, 50, "Exit"), menuToQuit);
 
     m_gameObjects.push_back(bomberMan);
     m_gameObjects.push_back(bomber);
@@ -67,8 +67,12 @@ bool MainMenuState::onExit()
     return true;
 }
 
-void MainMenuState::s_menuToSinglePlayer()
+void MainMenuState::menuToSinglePlayer()
 {
-    std::cout << "Single Player button clicked.\n";
-    TheGame ::Instance()->getStateMachine()->changeState(new PlayState());
+    TheGame::Instance()->getStateMachine()->changeState(new PlayState());
+}
+
+void MainMenuState::menuToQuit()
+{
+    TheGame::Instance()->quit();
 }

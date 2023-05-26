@@ -94,6 +94,11 @@ void Game::clean()
     SDL_Quit();
 }
 
+void Game::quit()
+{
+    m_bRunning = false;
+}
+
 GameStateMachine* Game::getStateMachine(){return m_pGameStateMachine;}
 
 Game* Game::s_pInstance = 0;
