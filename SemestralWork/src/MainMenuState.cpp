@@ -2,7 +2,7 @@
 #include "TextureManager.hpp"
 #include "MenuButton.hpp"
 #include "StaticObject.hpp"
-#include "PlayState.hpp"
+#include "SinglePlayerMenuState.hpp"
 #include "Game.hpp"
 #include "SDL2/SDL.h"
 #include <iostream>
@@ -63,13 +63,18 @@ bool MainMenuState::onExit()
     }
     m_gameObjects.clear();
     TheTextureManager::Instance()->clearFromTextureMap("BomberMan");
+    TheTextureManager::Instance()->clearFromTextureMap("Bomber");
+    TheTextureManager::Instance()->clearFromTextureMap("SinglePlayer");
+    TheTextureManager::Instance()->clearFromTextureMap("MultiPlayer");
+    TheTextureManager::Instance()->clearFromTextureMap("ScoreBoard");
+    TheTextureManager::Instance()->clearFromTextureMap("Exit");
     std::cout << "exiting MenuState\n";
     return true;
 }
 
 void MainMenuState::menuToSinglePlayer()
 {
-    TheGame::Instance()->getStateMachine()->changeState(new PlayState());
+    TheGame::Instance()->getStateMachine()->changeState(new SinglePlayerMenuState());
 }
 
 void MainMenuState::menuToQuit()
