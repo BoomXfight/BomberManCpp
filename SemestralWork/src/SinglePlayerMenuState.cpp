@@ -64,7 +64,7 @@ bool SinglePlayerMenuState::onExit()
     TheTextureManager::Instance()->clearFromTextureMap("Bomber");
     TheTextureManager::Instance()->clearFromTextureMap("Nick");
     TheTextureManager::Instance()->clearFromTextureMap("Play");
-    std::cout << "exiting MenuState\n";
+    std::cout << "exiting SinglePlayerMenuState\n";
     return true;
 }
 
