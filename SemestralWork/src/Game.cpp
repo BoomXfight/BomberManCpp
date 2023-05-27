@@ -99,6 +99,26 @@ void Game::quit()
     m_bRunning = false;
 }
 
+void Game::setP1(std::string s)
+{
+    player1 = s;
+}
+
+void Game::setP2(std::string s)
+{
+    player2 = s;
+}
+
+bool Game::P1Ready()
+{
+    return(player1.size()>0);
+}
+
+bool Game::P2Ready()
+{
+    return(player2.size()>0);
+}
+
 GameStateMachine* Game::getStateMachine(){return m_pGameStateMachine;}
 
 Game* Game::s_pInstance = 0;

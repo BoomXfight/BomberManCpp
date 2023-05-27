@@ -19,6 +19,8 @@ public:
     bool getMouseButtonState(int buttonNumber);
     Vector2D* getMousePosition();
     bool isKeyDown(SDL_Scancode key);
+    std::string showInput();
+    std::string getInput();
 
 private:
     InputHandler();
@@ -28,11 +30,13 @@ private:
     void onMouseMove(SDL_Event& event);
     void onMouseButtonDown(SDL_Event& event);
     void onMouseButtonUp(SDL_Event& event);
+    void input(SDL_Event& event);
 
     static InputHandler* s_pInstance;
     std::vector<bool> m_mouseButtonStates; // mouse input
     Vector2D m_mousePosition;
     const Uint8* m_keystates; // keyboard input
+    std::string m_input;
 };
 
 typedef InputHandler TheInputHandler;

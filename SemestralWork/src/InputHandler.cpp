@@ -42,6 +42,10 @@ void InputHandler::update()
                 onKeyUp();
                 break;
 
+            case SDL_TEXTINPUT:
+                input(event);
+                break;
+
             default:
                 break;
         }
@@ -125,6 +129,12 @@ void InputHandler::onMouseMove(SDL_Event& event)
     m_mousePosition.setY(event.motion.y);
 }
 
+void InputHandler::input(SDL_Event& event)
+{
+    m_input = event.text.text;
+}
+
+
 void InputHandler::onKeyDown()
 {
     m_keystates = SDL_GetKeyboardState(0);
@@ -133,6 +143,21 @@ void InputHandler::onKeyDown()
 void InputHandler::onKeyUp()
 {
     m_keystates = SDL_GetKeyboardState(0);
+}
+
+std::string InputHandler::showInput()
+{
+    return m_input;
+}
+
+std::string InputHandler::getInput()
+{
+    //std::cout << m_input;
+    std::string tmp;
+    tmp = m_input;
+    m_input = "";
+    //std::cout << tmp;
+    return tmp;
 }
 
 InputHandler* InputHandler::s_pInstance = 0;

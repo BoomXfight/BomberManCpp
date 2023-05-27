@@ -16,8 +16,15 @@ public:
     void handleEvents();
     void clean();
     void quit();
+    void setP1(std::string s);
+    void setP2(std::string s);
+    bool P1Ready();
+    bool P2Ready();
+    std::string getP1() {return player1;}
+    std::string getP2() {return player2;}
     bool isRunning();
     GameStateMachine* getStateMachine();
+
 
 private:
     Game();
@@ -29,6 +36,9 @@ private:
 
     int m_currentFrame;
     bool m_bRunning;
+
+    std::string player1;
+    std::string player2;
 
     std::vector<GameObject*> m_gameObjects;
     GameStateMachine* m_pGameStateMachine;
