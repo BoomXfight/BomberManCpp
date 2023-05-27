@@ -15,6 +15,7 @@ public:
 private:
     static void menuToQuit();
     static void SpMenuToMainMenu();
+    static void SpMenuToSpPlay();
 
     static const std::string s_menuID;
     std::vector<GameObject*> m_gameObjects;
