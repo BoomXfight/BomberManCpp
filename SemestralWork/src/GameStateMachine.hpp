@@ -12,6 +12,7 @@ public:
     void update();
     void render();
 
-private:
+
+//private:
     std::vector<GameState*> m_gameStates;
 };

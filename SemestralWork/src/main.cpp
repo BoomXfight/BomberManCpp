@@ -2,11 +2,10 @@
 #include <iostream>
 #include "Game.hpp"
 
-const int FPS = 60;
-const int DELAY_TIME = 1000.0f / FPS;
-
 int main(int argc, char* argv[])
 {
+    float FPS = 60;
+    int DELAY_TIME = 1000.0f / FPS;
     Uint32 frameStart, frameTime;
 
     std::cout << "game init attempt...\n";
@@ -22,6 +21,13 @@ int main(int argc, char* argv[])
             TheGame::Instance()->render();
 
             frameTime = SDL_GetTicks() - frameStart;
+            if(TheGame::Instance()->getStateMachine()->m_gameStates.back()->getStateID() == "SinglePlayerMenu"
+            || TheGame::Instance()->getStateMachine()->m_gameStates.back()->getStateID() == "MainMenu")
+            {
+                FPS = 10;
+                DELAY_TIME = 1000.0f / FPS;
+            }
+
             if(frameTime < DELAY_TIME) // Takes care of a 60 FPS
             {
                 SDL_Delay((int)(DELAY_TIME - frameTime));

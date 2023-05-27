@@ -3,6 +3,7 @@
 #include "MenuButton.hpp"
 #include "StaticObject.hpp"
 #include "SinglePlayerMenuState.hpp"
+#include "MultiPlayerMenuState.hpp"
 #include "Game.hpp"
 #include "SDL2/SDL.h"
 #include <iostream>
@@ -41,7 +42,7 @@ bool MainMenuState::onEnter()
     GameObject* bomberMan = new StaticObject(new LoaderParams(50, 20, 600, 166, "BomberMan"));
     GameObject* bomber = new StaticObject(new LoaderParams(530, 240, 325, 250, "Bomber"));
     GameObject* singlePlayer = new MenuButton(new LoaderParams(180, 210, 250, 80, "SinglePlayer"), menuToSinglePlayer);
-    GameObject* multiPlayer = new MenuButton(new LoaderParams(180, 310, 220, 80, "MultiPlayer"), menuToSinglePlayer);
+    GameObject* multiPlayer = new MenuButton(new LoaderParams(180, 310, 220, 80, "MultiPlayer"), menuToMultiPlayer);
     GameObject* scoreBoard = new MenuButton(new LoaderParams(180, 410, 190, 80, "ScoreBoard"), menuToSinglePlayer);
     GameObject* exit = new MenuButton(new LoaderParams(830, 60, 90, 50, "Exit"), menuToQuit);
 
@@ -76,6 +77,11 @@ void MainMenuState::menuToSinglePlayer()
 {
     TheGame::Instance()->getStateMachine()->changeState(new SinglePlayerMenuState());
 }
+
+void MainMenuState::menuToMultiPlayer()
+{
+    TheGame::Instance()->getStateMachine()->changeState(new MultiPlayerMenuState());
+};
 
 void MainMenuState::menuToQuit()
 {
