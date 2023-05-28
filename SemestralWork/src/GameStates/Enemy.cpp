@@ -1,5 +1,5 @@
 #include "Enemy.hpp"
-#include "InputHandler.hpp"
+#include "../Singletons/InputHandler.hpp"
 
 Enemy::Enemy(const LoaderParams* pParams) :
         SDLGameObject(pParams)

@@ -1,10 +1,10 @@
 #include "MainMenuState.hpp"
-#include "TextureManager.hpp"
-#include "MenuButton.hpp"
-#include "StaticObject.hpp"
+#include "../Singletons/TextureManager.hpp"
+#include "../GameObjects/MenuButton.hpp"
+#include "../GameObjects/StaticObject.hpp"
 #include "SinglePlayerMenuState.hpp"
 #include "MultiPlayerMenuState.hpp"
-#include "Game.hpp"
+#include "../Singletons/Game.hpp"
 #include "SDL2/SDL.h"
 #include <iostream>
 

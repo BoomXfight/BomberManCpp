@@ -1,18 +1,20 @@
 #pragma once
-#include <vector>
 #include "GameState.hpp"
-#include "GameObject.hpp"
+#include "../GameObjects/GameObject.hpp"
+#include <vector>
 
-class PlayState : public GameState
+
+class MultiPlayerPlayState : public GameState
 {
+
 public:
     virtual void update();
     virtual void render();
     virtual bool onEnter();
     virtual bool onExit();
-    virtual std::string getStateID() const { return s_playID; }
+    virtual std::string getStateID() const {return s_menuID;};
 
 private:
-    static const std::string s_playID;
+    static const std::string s_menuID;
     std::vector<GameObject*> m_gameObjects;
 };

@@ -1,6 +1,6 @@
 #include <SDL2/SDL.h>
 #include <iostream>
-#include "Game.hpp"
+#include "Singletons/Game.hpp"
 
 int main(int argc, char* argv[])
 {

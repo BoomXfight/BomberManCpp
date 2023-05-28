@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Game.hpp"
 #include "InputHandler.hpp"
-#include "MainMenuState.hpp"
+#include "../GameStates/MainMenuState.hpp"
 
 SDL_Renderer* Game::getRenderer() const {return m_pRenderer;}
 

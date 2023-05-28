@@ -1,7 +1,7 @@
 #include "PlayState.hpp"
-#include "TextureManager.hpp"
-#include "Game.hpp"
-#include "Player.hpp"
+#include "../Singletons/TextureManager.hpp"
+#include "../Singletons/Game.hpp"
+#include "../GameObjects/Player.hpp"
 #include <iostream>
 
 const std::string PlayState::s_playID = "PLAY";

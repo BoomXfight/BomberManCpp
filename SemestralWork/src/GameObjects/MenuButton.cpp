@@ -1,6 +1,6 @@
 #include "MenuButton.hpp"
-#include "Vector2D.hpp"
-#include "InputHandler.hpp"
+#include "../Vector2D.hpp"
+#include "../Singletons/InputHandler.hpp"
 
 MenuButton::MenuButton(const LoaderParams* pParams, void (*callback)()) : SDLGameObject(pParams), m_callback(callback)
 {

@@ -1,7 +1,7 @@
 #pragma once
 #include "SDL2/SDL.h"
 #include <vector>
-#include "Vector2D.hpp"
+#include "../Vector2D.hpp"
 
 enum mouse_buttons
 {
@@ -16,6 +16,7 @@ public:
     static InputHandler* Instance();
     void update();
     void clean();
+    void reset();
     bool getMouseButtonState(int buttonNumber);
     Vector2D* getMousePosition();
     bool isKeyDown(SDL_Scancode key);

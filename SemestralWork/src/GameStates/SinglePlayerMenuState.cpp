@@ -1,11 +1,11 @@
 #include "SinglePlayerMenuState.hpp"
-#include "TextureManager.hpp"
-#include "Game.hpp"
-#include "StaticObject.hpp"
-#include "MenuButton.hpp"
+#include "../Singletons/TextureManager.hpp"
+#include "../Singletons/Game.hpp"
+#include "../GameObjects/StaticObject.hpp"
+#include "../GameObjects/MenuButton.hpp"
 #include "MainMenuState.hpp"
 #include "SinglePlayerPlayState.hpp"
-#include "TextSquare.hpp"
+#include "../GameObjects/TextSquare.hpp"
 #include <iostream>
 
 const std::string SinglePlayerMenuState::s_menuID = "SinglePlayerMenu";

@@ -56,6 +56,15 @@ void InputHandler::clean()
 {
 }
 
+/**
+ * This method resets the mouse button states to false
+ */
+void InputHandler::reset()
+{
+    for(int i = 0; i < 3; i++)
+        m_mouseButtonStates.push_back(false);
+}
+
 InputHandler::InputHandler()
         : m_mousePosition(Vector2D(0,0)), m_keystates(nullptr)
 {

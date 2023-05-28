@@ -1,6 +1,6 @@
 #include "TextSquare.hpp"
-#include "InputHandler.hpp"
-#include "Game.hpp"
+#include "../Singletons/InputHandler.hpp"
+#include "../Singletons/Game.hpp"
 #include <iostream>
 
 TextSquare::TextSquare(const LoaderParams* pParams)

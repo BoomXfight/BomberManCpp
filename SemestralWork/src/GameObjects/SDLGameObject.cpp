@@ -1,5 +1,5 @@
 #include "SDLGameObject.hpp"
-#include "Game.hpp"
+#include "../Singletons/Game.hpp"
 
 SDLGameObject::SDLGameObject(const LoaderParams* pParams)
         : GameObject(pParams), m_position(pParams->getX(), pParams->getY()), m_velocity(0,0), m_acceleration(0,0)

@@ -1,5 +1,5 @@
 #include "Player.hpp"
-#include "InputHandler.hpp"
+#include "../Singletons/InputHandler.hpp"
 
 Player::Player(const LoaderParams* pParams) : SDLGameObject(pParams)
 {}

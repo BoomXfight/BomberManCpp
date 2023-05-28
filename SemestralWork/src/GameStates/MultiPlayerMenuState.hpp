@@ -1,9 +1,8 @@
-#pragma once
 #include "GameState.hpp"
-#include "GameObject.hpp"
+#include "../GameObjects/GameObject.hpp"
 #include <vector>
 
-class SinglePlayerMenuState : public GameState
+class MultiPlayerMenuState : public GameState
 {
 public:
     virtual void update();
@@ -14,10 +13,9 @@ public:
 
 private:
     static void menuToQuit();
-    static void SpMenuToMainMenu();
-    static void SpMenuToSpPlay();
+    static void MpMenuToMainMenu();
+    static void MpMenuToMpPlay();
 
-    std::string m_player;
-    static const std::string s_menuID;
+    std::string s_menuID;
     std::vector<GameObject*> m_gameObjects;
 };

@@ -1,7 +1,7 @@
 #pragma once
-#include "TextureManager.hpp"
+#include "../Singletons/TextureManager.hpp"
 #include "GameObject.hpp"
-#include "Vector2D.hpp"
+#include "../Vector2D.hpp"
 
 class SDLGameObject : public GameObject
 {
