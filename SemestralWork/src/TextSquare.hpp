@@ -19,5 +19,6 @@ private:
 
     void handleInput();
     std::string m_text;
+    bool active;
     bool m_bReleased;
 };

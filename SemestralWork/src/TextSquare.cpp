@@ -4,7 +4,7 @@
 #include <iostream>
 
 TextSquare::TextSquare(const LoaderParams* pParams)
-    : SDLGameObject(pParams)
+    : SDLGameObject(pParams), active(false)
 {
     SDL_StopTextInput();
     m_currentFrame = NOT_CLICKED;
@@ -25,10 +25,11 @@ void TextSquare::update()
        && pMousePos->getY() > m_position.getY()
        && TheInputHandler::Instance()->getMouseButtonState(LEFT) && m_bReleased)
     {
-        m_currentFrame = CLICKED;
         if(!SDL_IsTextInputActive())
         {
+            m_currentFrame = CLICKED;
             SDL_StartTextInput();
+            active = true;
             std::cout << "TextInputOn\n";
         }
         m_bReleased = false;
@@ -43,28 +44,28 @@ void TextSquare::clean()
 
 void TextSquare::handleInput()
 {
-    if(!TheInputHandler::Instance()->showInput().empty())
+    if(active)
     {
-        m_text += TheInputHandler::Instance()->getInput();
-        std::cout << m_text << std::endl;
-    }
-
-    if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_BACKSPACE))
-    {
-        m_text.pop_back();
-        std::cout << m_text << std::endl;
-    }
-
-    if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RETURN)
-    || TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_KP_ENTER))
-    {
-        if(SDL_IsTextInputActive())
-        {
-            SDL_StopTextInput();
-            std::cout << "Text input off" << std::endl;
+        if (!TheInputHandler::Instance()->showInput().empty()) {
+            m_text += TheInputHandler::Instance()->getInput();
+            std::cout << m_text << std::endl;
         }
-        m_currentFrame = NOT_CLICKED;
-        m_bReleased = true;
+
+        if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_BACKSPACE)) {
+            m_text.pop_back();
+            std::cout << m_text << std::endl;
+        }
+
+        if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RETURN)
+            || TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_KP_ENTER)) {
+            if (SDL_IsTextInputActive()) {
+                SDL_StopTextInput();
+                active = false;
+                std::cout << "Text input off" << std::endl;
+            }
+            m_currentFrame = NOT_CLICKED;
+            m_bReleased = true;
+        }
     }
 }
 

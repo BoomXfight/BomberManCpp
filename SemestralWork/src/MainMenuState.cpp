@@ -58,6 +58,9 @@ bool MainMenuState::onEnter()
 
 bool MainMenuState::onExit()
 {
+    TheGame ::Instance()->setP1(""); // Reset the player names
+    TheGame ::Instance()->setP2("");
+
     for(int i = 0; i < m_gameObjects.size(); i++)
     {
         m_gameObjects[i]->clean();

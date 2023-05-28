@@ -58,8 +58,10 @@ bool SinglePlayerMenuState::onEnter()
 
 bool SinglePlayerMenuState::onExit()
 {
-    if(TextSquare* a = dynamic_cast<TextSquare*>(m_gameObjects[0]))
+    if(TextSquare* a = dynamic_cast<TextSquare*>(m_gameObjects[0])) {
         TheGame::Instance()->setP1(a->getText());
+        std::cout << "P1 set" << std::endl;
+    }
 
     for(int i = 0; i < m_gameObjects.size(); i++)
     {

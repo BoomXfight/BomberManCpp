@@ -24,7 +24,7 @@ int main(int argc, char* argv[])
             if(TheGame::Instance()->getStateMachine()->m_gameStates.back()->getStateID() == "SinglePlayerMenu"
             || TheGame::Instance()->getStateMachine()->m_gameStates.back()->getStateID() == "MainMenu")
             {
-                FPS = 20;
+                FPS = 15;
                 DELAY_TIME = 1000.0f / FPS;
             }
 
