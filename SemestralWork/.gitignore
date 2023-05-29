@@ -1,3 +1,6 @@
 *.out
 *.o
 *.pxo
+cmake-build-debug
+CMakeLists.txt
+

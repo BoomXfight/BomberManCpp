@@ -2,9 +2,10 @@
 #include "../Singletons/TextureManager.hpp"
 #include "../Singletons/Game.hpp"
 #include "../GameObjects/Player.hpp"
+#include "../StateParser.hpp"
 #include <iostream>
 
-const std::string PlayState::s_playID = "PLAY";
+const std::string PlayState::s_playID = "PLAY_STATE";
 
 void PlayState::update()
 {
@@ -24,12 +25,9 @@ void PlayState::render()
 
 bool PlayState::onEnter()
 {
-    if(!TheTextureManager::Instance()->load("../Assets/Helicopter.png", "helicopter", TheGame::Instance()->getRenderer()))
-    {
-        return false;
-    }
-    GameObject* player = new Player(new LoaderParams(0, 0, 131,80, "helicopter"));
-    m_gameObjects.push_back(player);
+    StateParser stateParser;
+    stateParser.parseState("../src/GameStates.xml", s_playID, &m_gameObjects,&m_textureIDList);
+
     std::cout << "entering PlayState\n";
     return true;
 }

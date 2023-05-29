@@ -1,9 +1,13 @@
 #include "Enemy.hpp"
 #include "../Singletons/InputHandler.hpp"
 
-Enemy::Enemy(const LoaderParams* pParams) :
-        SDLGameObject(pParams)
+Enemy::Enemy() : SDLGameObject()
 {}
+
+void Enemy::load(const LoaderParams *pParams)
+{
+    SDLGameObject::load(pParams);
+}
 
 void Enemy::draw()
 {

@@ -1,7 +1,12 @@
 #include "StaticObject.hpp"
 
-StaticObject::StaticObject(const LoaderParams* pParams) : SDLGameObject(pParams)
+StaticObject::StaticObject() : SDLGameObject()
 {}
+
+void StaticObject::load(const LoaderParams *pParams)
+{
+    SDLGameObject::load(pParams);
+}
 
 void StaticObject::draw()
 {

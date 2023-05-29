@@ -3,10 +3,15 @@
 #include "../Singletons/Game.hpp"
 #include <iostream>
 
-TextSquare::TextSquare(const LoaderParams* pParams)
-    : SDLGameObject(pParams), active(false)
+TextSquare::TextSquare() : SDLGameObject()
 {
+}
+
+void TextSquare::load(const LoaderParams *pParams)
+{
+    SDLGameObject::load(pParams);
     SDL_StopTextInput();
+    active = false;
     m_currentFrame = NOT_CLICKED;
     m_bReleased = true;
 }

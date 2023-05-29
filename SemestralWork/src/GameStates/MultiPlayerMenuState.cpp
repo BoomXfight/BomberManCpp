@@ -1,12 +1,29 @@
 #include "MultiPlayerMenuState.hpp"
+#include "MainMenuState.hpp"
+#include "MultiPlayerPlayState.hpp"
 #include "../Singletons/Game.hpp"
 #include "../Singletons/TextureManager.hpp"
 #include "../GameObjects/StaticObject.hpp"
 #include "../GameObjects/TextSquare.hpp"
 #include "../GameObjects/MenuButton.hpp"
-#include "MainMenuState.hpp"
-#include "MultiPlayerPlayState.hpp"
+#include "../StateParser.hpp"
 #include <iostream>
+
+const std::string MultiPlayerMenuState::s_menuID = "MULTI_PLAYER_MENU";
+
+void MultiPlayerMenuState::setCallbacks(const std::vector<Callback> &callbacks)
+{
+    // go through the game objects
+    for(int i = 0; i < m_gameObjects.size(); i++)
+    {
+        // if they are of type MenuButton then assign a callback based on the id passed in from the file
+        if(dynamic_cast<MenuButton*>(m_gameObjects[i]))
+        {
+            MenuButton* pButton = dynamic_cast<MenuButton*>(m_gameObjects[i]);
+            pButton->setCallback(callbacks[pButton->getCallbackID()]);
+        }
+    }
+}
 
 void MultiPlayerMenuState::update()
 {
@@ -22,42 +39,14 @@ void MultiPlayerMenuState::render()
 
 bool MultiPlayerMenuState::onEnter()
 {
-    if(!TheTextureManager::Instance()->load("../Assets/MultiPlayerHeading.png", "MultiPlayer", TheGame::Instance()->getRenderer())
-    || !TheTextureManager::Instance()->load("../Assets/Exit.png", "Exit", TheGame::Instance()->getRenderer())
-    || !TheTextureManager::Instance()->load("../Assets/Back.png", "Back", TheGame::Instance()->getRenderer())
-    || !TheTextureManager::Instance()->load("../Assets/Bomberman3.png", "BomberMan", TheGame::Instance()->getRenderer())
-    || !TheTextureManager::Instance()->load("../Assets/BomberWoman.png", "BomberWoman", TheGame::Instance()->getRenderer())
-    || !TheTextureManager::Instance()->load("../Assets/Player1.png", "Player1", TheGame::Instance()->getRenderer())
-    || !TheTextureManager::Instance()->load("../Assets/Player2.png", "Player2", TheGame::Instance()->getRenderer())
-    || !TheTextureManager::Instance()->load("../Assets/PlayButton.png", "Play", TheGame::Instance()->getRenderer())
-    || !TheTextureManager::Instance()->load("../Assets/InputSquare.png", "Input", TheGame::Instance()->getRenderer()))
-    {
-        std::cout << "Failed to load the button :" << SDL_GetError() << "\n";
-        return false;
-    }
+    StateParser stateParser;
+    stateParser.parseState("../src/GameStates.xml", s_menuID, &m_gameObjects,&m_textureIDList);
+    m_callbacks.push_back(0);
+    m_callbacks.push_back(menuToQuit);
+    m_callbacks.push_back(MpMenuToMainMenu);
+    m_callbacks.push_back(MpMenuToMpPlay);
 
-    GameObject* multiPlayer = new StaticObject(new LoaderParams(150, 10, 660, 166, "MultiPlayer"));
-    GameObject* bomberMan = new StaticObject(new LoaderParams(30, 220, 271, 300, "BomberMan"));
-    GameObject* bomberWoman = new StaticObject(new LoaderParams(720, 220, 197, 300, "BomberWoman"));
-    GameObject* player1 = new StaticObject(new LoaderParams(320, 190, 160, 30, "Player1"));
-    GameObject* player2 = new StaticObject(new LoaderParams(320, 280, 160, 30, "Player2"));
-    GameObject* exit = new MenuButton(new LoaderParams(840, 40, 90, 50, "Exit"), menuToQuit);
-    GameObject* back = new MenuButton(new LoaderParams(30, 40, 90, 50, "Back"), MpMenuToMainMenu);
-    GameObject* play = new MenuButton(new LoaderParams(380, 360, 200, 160, "Play"), MpMenuToMpPlay);
-    GameObject* p1 = new TextSquare(new LoaderParams(490, 190, 200, 60, "Input"));
-    GameObject* p2 = new TextSquare(new LoaderParams(490, 280, 200, 60, "Input"));
-
-    m_gameObjects.push_back(p1);
-    m_gameObjects.push_back(p2);
-    m_gameObjects.push_back(multiPlayer);
-    m_gameObjects.push_back(exit);
-    m_gameObjects.push_back(back);
-    m_gameObjects.push_back(bomberMan);
-    m_gameObjects.push_back(bomberWoman);
-    m_gameObjects.push_back(player1);
-    m_gameObjects.push_back(player2);
-    m_gameObjects.push_back(play);
-
+    setCallbacks(m_callbacks);
     std::cout << "entering MultiPlayerMenu state\n";
     return true;
 }
@@ -79,15 +68,11 @@ bool MultiPlayerMenuState::onExit()
         m_gameObjects[i]->clean();
     }
     m_gameObjects.clear();
-    TheTextureManager::Instance()->clearFromTextureMap("MultiPlayer");
-    TheTextureManager::Instance()->clearFromTextureMap("Exit");
-    TheTextureManager::Instance()->clearFromTextureMap("Back");
-    TheTextureManager::Instance()->clearFromTextureMap("Input");
-    TheTextureManager::Instance()->clearFromTextureMap("BomberMan");
-    TheTextureManager::Instance()->clearFromTextureMap("BomberWoman");
-    TheTextureManager::Instance()->clearFromTextureMap("Player1");
-    TheTextureManager::Instance()->clearFromTextureMap("Player2");
-    TheTextureManager::Instance()->clearFromTextureMap("Play");
+
+    for(int i = 0; i < m_textureIDList.size(); i++)
+    {
+        TheTextureManager::Instance()->clearFromTextureMap(m_textureIDList[i]);
+    }
     std::cout << "exiting MultiPlayerMenuState\n";
     return true;
 }

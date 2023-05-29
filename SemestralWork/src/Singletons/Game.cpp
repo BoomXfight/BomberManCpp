@@ -1,6 +1,11 @@
 #include <iostream>
 #include "Game.hpp"
 #include "InputHandler.hpp"
+#include "GameObjectFactory.hpp"
+#include "../GameObjects/MenuButton.hpp"
+#include "../GameObjects/Player.hpp"
+#include "../GameObjects/StaticObject.hpp"
+#include "../GameObjects/TextSquare.hpp"
 #include "../GameStates/MainMenuState.hpp"
 
 SDL_Renderer* Game::getRenderer() const {return m_pRenderer;}
@@ -59,8 +64,15 @@ bool Game::init(const char* title, int x_pos, int y_pos, int width, int height, 
         return false;
     }
 
+    TheGameObjectFactory ::Instance()->registerType("MenuButton", new MenuButtonCreator());
+    TheGameObjectFactory ::Instance()->registerType("Player", new PlayerCreator());
+    TheGameObjectFactory ::Instance()->registerType("StaticObject", new StaticObjectCreator());
+    TheGameObjectFactory ::Instance()->registerType("TextSquare", new TextSquareCreator());
+
     m_pGameStateMachine = new GameStateMachine();
     m_pGameStateMachine->changeState(new MainMenuState());
+
+
 
     std::cout << "init success\n";
     m_bRunning = true; // everything inited successfully, start the main loop

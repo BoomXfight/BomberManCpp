@@ -1,9 +1,10 @@
 #pragma once
 #include "GameState.hpp"
+#include "MenuState.hpp"
 #include "../GameObjects/GameObject.hpp"
 #include <vector>
 
-class SinglePlayerMenuState : public GameState
+class SinglePlayerMenuState : public MenuState
 {
 public:
     virtual void update();
@@ -13,6 +14,8 @@ public:
     virtual std::string getStateID() const {return s_menuID;};
 
 private:
+    virtual void setCallbacks(const std::vector<Callback>& callbacks);
+
     static void menuToQuit();
     static void SpMenuToMainMenu();
     static void SpMenuToSpPlay();

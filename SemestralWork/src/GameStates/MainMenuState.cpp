@@ -1,14 +1,27 @@
 #include "MainMenuState.hpp"
 #include "../Singletons/TextureManager.hpp"
+#include "../Singletons/Game.hpp"
 #include "../GameObjects/MenuButton.hpp"
-#include "../GameObjects/StaticObject.hpp"
+#include "../StateParser.hpp"
 #include "SinglePlayerMenuState.hpp"
 #include "MultiPlayerMenuState.hpp"
-#include "../Singletons/Game.hpp"
-#include "SDL2/SDL.h"
 #include <iostream>
 
-const std::string MainMenuState::s_menuID = "MainMenu";
+const std::string MainMenuState::s_menuID = "MAIN_MENU";
+
+void MainMenuState::setCallbacks(const std::vector<Callback> &callbacks)
+{
+    // go through the game objects
+    for(int i = 0; i < m_gameObjects.size(); i++)
+    {
+    // if they are of type MenuButton then assign a callback based on the id passed in from the file
+        if(dynamic_cast<MenuButton*>(m_gameObjects[i]))
+        {
+            MenuButton* pButton = dynamic_cast<MenuButton*>(m_gameObjects[i]);
+            pButton->setCallback(callbacks[pButton->getCallbackID()]);
+        }
+    }
+}
 
 void MainMenuState::update()
 {
@@ -28,30 +41,16 @@ void MainMenuState::render()
 
 bool MainMenuState::onEnter()
 {
-    if(!TheTextureManager::Instance()->load("../Assets/BomberManLogo.png", "BomberMan", TheGame::Instance()->getRenderer())
-        || !TheTextureManager::Instance()->load("../Assets/Bomber.png", "Bomber", TheGame::Instance()->getRenderer())
-        || !TheTextureManager::Instance()->load("../Assets/SinglePlayerButton.png", "SinglePlayer", TheGame::Instance()->getRenderer())
-        || !TheTextureManager::Instance()->load("../Assets/MultiPlayer.png", "MultiPlayer", TheGame::Instance()->getRenderer())
-        || !TheTextureManager::Instance()->load("../Assets/ScoreBoard.png", "ScoreBoard", TheGame::Instance()->getRenderer())
-        || !TheTextureManager::Instance()->load("../Assets/Exit.png", "Exit", TheGame::Instance()->getRenderer()))
-    {
-        std::cout << "Failed to load the button :" << SDL_GetError() << "\n";
-        return false;
-    }
+    // parse the state
+    StateParser stateParser;
+    if(!stateParser.parseState("../src/GameStates.xml", s_menuID, &m_gameObjects,&m_textureIDList))
+        std::cout << "Nerozumim" << std::endl;
+    m_callbacks.push_back(0);
+    m_callbacks.push_back(menuToSinglePlayer);
+    m_callbacks.push_back(menuToMultiPlayer);
+    m_callbacks.push_back(menuToQuit);
 
-    GameObject* bomberMan = new StaticObject(new LoaderParams(50, 20, 600, 166, "BomberMan"));
-    GameObject* bomber = new StaticObject(new LoaderParams(530, 240, 325, 250, "Bomber"));
-    GameObject* singlePlayer = new MenuButton(new LoaderParams(180, 210, 250, 80, "SinglePlayer"), menuToSinglePlayer);
-    GameObject* multiPlayer = new MenuButton(new LoaderParams(180, 310, 220, 80, "MultiPlayer"), menuToMultiPlayer);
-    GameObject* scoreBoard = new MenuButton(new LoaderParams(180, 410, 190, 80, "ScoreBoard"), menuToSinglePlayer);
-    GameObject* exit = new MenuButton(new LoaderParams(830, 60, 90, 50, "Exit"), menuToQuit);
-
-    m_gameObjects.push_back(bomberMan);
-    m_gameObjects.push_back(bomber);
-    m_gameObjects.push_back(singlePlayer);
-    m_gameObjects.push_back(multiPlayer);
-    m_gameObjects.push_back(scoreBoard);
-    m_gameObjects.push_back(exit);
+    setCallbacks(m_callbacks);
     std::cout << "entering MenuState\n";
     return true;
 }
@@ -66,12 +65,11 @@ bool MainMenuState::onExit()
         m_gameObjects[i]->clean();
     }
     m_gameObjects.clear();
-    TheTextureManager::Instance()->clearFromTextureMap("BomberMan");
-    TheTextureManager::Instance()->clearFromTextureMap("Bomber");
-    TheTextureManager::Instance()->clearFromTextureMap("SinglePlayer");
-    TheTextureManager::Instance()->clearFromTextureMap("MultiPlayer");
-    TheTextureManager::Instance()->clearFromTextureMap("ScoreBoard");
-    TheTextureManager::Instance()->clearFromTextureMap("Exit");
+
+    for(int i = 0; i < m_textureIDList.size(); i++)
+    {
+        TheTextureManager::Instance()->clearFromTextureMap(m_textureIDList[i]);
+    }
     std::cout << "exiting MenuState\n";
     return true;
 }

@@ -1,14 +1,29 @@
 #include "SinglePlayerMenuState.hpp"
+#include "MainMenuState.hpp"
+#include "SinglePlayerPlayState.hpp"
 #include "../Singletons/TextureManager.hpp"
 #include "../Singletons/Game.hpp"
 #include "../GameObjects/StaticObject.hpp"
 #include "../GameObjects/MenuButton.hpp"
-#include "MainMenuState.hpp"
-#include "SinglePlayerPlayState.hpp"
 #include "../GameObjects/TextSquare.hpp"
+#include "../StateParser.hpp"
 #include <iostream>
 
-const std::string SinglePlayerMenuState::s_menuID = "SinglePlayerMenu";
+const std::string SinglePlayerMenuState::s_menuID = "SINGLE_PLAYER_MENU";
+
+void SinglePlayerMenuState::setCallbacks(const std::vector<Callback> &callbacks)
+{
+    // go through the game objects
+    for(int i = 0; i < m_gameObjects.size(); i++)
+    {
+        // if they are of type MenuButton then assign a callback based on the id passed in from the file
+        if(dynamic_cast<MenuButton*>(m_gameObjects[i]))
+        {
+            MenuButton* pButton = dynamic_cast<MenuButton*>(m_gameObjects[i]);
+            pButton->setCallback(callbacks[pButton->getCallbackID()]);
+        }
+    }
+}
 
 void SinglePlayerMenuState::update()
 {
@@ -24,34 +39,14 @@ void SinglePlayerMenuState::render()
 
 bool SinglePlayerMenuState::onEnter()
 {
-    if(!TheTextureManager::Instance()->load("../Assets/SinglePlayerHeading.png", "SinglePlayer", TheGame::Instance()->getRenderer())
-    || !TheTextureManager::Instance()->load("../Assets/Exit.png", "Exit", TheGame::Instance()->getRenderer())
-    || !TheTextureManager::Instance()->load("../Assets/Back.png", "Back", TheGame::Instance()->getRenderer())
-    || !TheTextureManager::Instance()->load("../Assets/Bomber2.png", "Bomber", TheGame::Instance()->getRenderer())
-    || !TheTextureManager::Instance()->load("../Assets/Nickname.png", "Nickname", TheGame::Instance()->getRenderer())
-    || !TheTextureManager::Instance()->load("../Assets/PlayButton.png", "Play", TheGame::Instance()->getRenderer())
-    || !TheTextureManager::Instance()->load("../Assets/InputSquare.png", "Input", TheGame::Instance()->getRenderer()))
-    {
-        std::cout << "Failed to load the button :" << SDL_GetError() << "\n";
-        return false;
-    }
+    StateParser stateParser;
+    stateParser.parseState("../src/GameStates.xml", s_menuID, &m_gameObjects,&m_textureIDList);
+    m_callbacks.push_back(0);
+    m_callbacks.push_back(menuToQuit);
+    m_callbacks.push_back(SpMenuToMainMenu);
+    m_callbacks.push_back(SpMenuToSpPlay);
 
-    GameObject* singlePlayer = new StaticObject(new LoaderParams(150, 20, 660, 166, "SinglePlayer"));
-    GameObject* bomber = new StaticObject(new LoaderParams(520, 220, 350, 304, "Bomber"));
-    GameObject* nick = new StaticObject(new LoaderParams(150, 200, 180, 30, "Nickname"));
-    GameObject* exit = new MenuButton(new LoaderParams(840, 40, 90, 50, "Exit"), menuToQuit);
-    GameObject* back = new MenuButton(new LoaderParams(30, 40, 90, 50, "Back"), SpMenuToMainMenu);
-    GameObject* play = new MenuButton(new LoaderParams(150, 330, 200, 160, "Play"), SpMenuToSpPlay);
-    GameObject* text = new TextSquare(new LoaderParams(150, 240, 200, 60, "Input"));
-
-    m_gameObjects.push_back(text);
-    m_gameObjects.push_back(singlePlayer);
-    m_gameObjects.push_back(bomber);
-    m_gameObjects.push_back(nick);
-    m_gameObjects.push_back(exit);
-    m_gameObjects.push_back(back);
-    m_gameObjects.push_back(play);
-
+    setCallbacks(m_callbacks);
     std::cout << "entering SinglePlayerMenu state\n";
     return true;
 }
@@ -68,6 +63,12 @@ bool SinglePlayerMenuState::onExit()
         m_gameObjects[i]->clean();
     }
     m_gameObjects.clear();
+
+    for(int i = 0; i < m_textureIDList.size(); i++)
+    {
+        TheTextureManager::Instance()->clearFromTextureMap(m_textureIDList[i]);
+    }
+    /*
     TheTextureManager::Instance()->clearFromTextureMap("SinglePlayer");
     TheTextureManager::Instance()->clearFromTextureMap("Exit");
     TheTextureManager::Instance()->clearFromTextureMap("Back");
@@ -75,6 +76,7 @@ bool SinglePlayerMenuState::onExit()
     TheTextureManager::Instance()->clearFromTextureMap("Nick");
     TheTextureManager::Instance()->clearFromTextureMap("Play");
     TheTextureManager::Instance()->clearFromTextureMap("Input");
+     */
     std::cout << "exiting SinglePlayerMenuState\n";
     return true;
 }

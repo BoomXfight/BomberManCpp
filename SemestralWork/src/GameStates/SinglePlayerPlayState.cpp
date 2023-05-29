@@ -1,11 +1,13 @@
 #include "../Singletons/InputHandler.hpp"
 #include "../Singletons/Game.hpp"
+#include "../Singletons/TextureManager.hpp"
+#include "../StateParser.hpp"
 #include "SinglePlayerPlayState.hpp"
 #include "GameState.hpp"
 #include "PauseState.hpp"
 #include <iostream>
 
-const std::string SinglePlayerPlayState::s_menuID = "SinglePlayerPlay";
+const std::string SinglePlayerPlayState::s_menuID = "SINGLE_PLAYER_PLAY_STATE";
 
 void SinglePlayerPlayState::update()
 {
@@ -26,6 +28,8 @@ void SinglePlayerPlayState::render()
 
 bool SinglePlayerPlayState::onEnter()
 {
+    StateParser stateParser;
+    stateParser.parseState("../src/GameStates.xml", s_menuID, &m_gameObjects,&m_textureIDList);
     std::cout << "Entering SinglePLayerPlayState" << std::endl;
 }
 
@@ -36,8 +40,13 @@ bool SinglePlayerPlayState::onExit()
         m_gameObjects[i]->clean();
     }
     m_gameObjects.clear();
+
+    for(int i = 0; i < m_textureIDList.size(); i++)
+    {
+        TheTextureManager::Instance()->clearFromTextureMap(m_textureIDList[i]);
+    }
+
     std::cout << "exiting SinglePlayerPlayState\n";
     return true;
 }
-
 
