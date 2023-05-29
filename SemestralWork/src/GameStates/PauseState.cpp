@@ -66,6 +66,7 @@ bool PauseState::onExit()
         m_gameObjects[i]->clean();
     }
     m_gameObjects.clear();
+
     TheTextureManager::Instance()->clearFromTextureMap("resumeButton");
     TheTextureManager::Instance()->clearFromTextureMap("mainButton");
     TheTextureManager::Instance()->clearFromTextureMap("paused");

@@ -12,7 +12,7 @@ void GameStateMachine::popState()
     {
         if (m_gameStates.back()->onExit())
         {
-            delete m_gameStates.back();
+            //delete m_gameStates.back(); -> caused seg fault
             m_gameStates.pop_back();
         }
     }
