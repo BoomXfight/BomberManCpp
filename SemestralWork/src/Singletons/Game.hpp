@@ -24,6 +24,8 @@ public:
     std::string getP2() {return player2;}
     bool isRunning();
     GameStateMachine* getStateMachine();
+    int getGameWidth() const {return m_gameWidth;}
+    int getGameHeight() const {return m_gameHeight;}
 
 
 private:
@@ -36,6 +38,8 @@ private:
 
     int m_currentFrame;
     bool m_bRunning;
+    int m_gameWidth;
+    int m_gameHeight;
 
     std::string player1;
     std::string player2;

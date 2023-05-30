@@ -36,7 +36,10 @@ bool Game::init(const char* title, int x_pos, int y_pos, int width, int height, 
 
         std::cout << "SDL init success\n";
 
-        m_pWindow = SDL_CreateWindow(title, x_pos, y_pos, width, height, flags);
+        m_gameWidth = width;
+        m_gameHeight = height;
+
+        m_pWindow = SDL_CreateWindow(title, x_pos, y_pos, m_gameWidth, m_gameHeight, flags);
         if(m_pWindow != 0)
         {
             std::cout << "window creation success\n";
@@ -71,8 +74,6 @@ bool Game::init(const char* title, int x_pos, int y_pos, int width, int height, 
 
     m_pGameStateMachine = new GameStateMachine();
     m_pGameStateMachine->changeState(new MainMenuState());
-
-
 
     std::cout << "init success\n";
     m_bRunning = true; // everything inited successfully, start the main loop

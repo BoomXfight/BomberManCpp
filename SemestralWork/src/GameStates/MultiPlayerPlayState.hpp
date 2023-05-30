@@ -1,5 +1,6 @@
 #pragma once
 #include "GameState.hpp"
+#include "../Level.hpp"
 #include "../GameObjects/GameObject.hpp"
 #include <vector>
 
@@ -17,4 +18,6 @@ public:
 private:
     static const std::string s_menuID;
     std::vector<GameObject*> m_gameObjects;
+
+    Level* pLevel;
 };

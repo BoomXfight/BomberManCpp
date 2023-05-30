@@ -2,6 +2,7 @@
 #include "../Singletons/Game.hpp"
 #include "../Singletons/TextureManager.hpp"
 #include "../StateParser.hpp"
+#include "../LevelParser.hpp"
 #include "MultiPlayerPlayState.hpp"
 #include "GameState.hpp"
 #include "PauseState.hpp"
@@ -11,8 +12,7 @@ const std::string MultiPlayerPlayState::s_menuID = "MULTI_PLAYER_PLAY_STATE";
 
 void MultiPlayerPlayState::update()
 {
-    for(size_t i = 0; i < m_gameObjects.size(); i++)
-        m_gameObjects[i]->update();
+    pLevel->update();
 
     if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_ESCAPE))
     {
@@ -22,19 +22,20 @@ void MultiPlayerPlayState::update()
 
 void MultiPlayerPlayState::render()
 {
-    for(size_t i = 0; i < m_gameObjects.size(); i++)
-        m_gameObjects[i]->draw();
+    pLevel->render();
 }
 
 bool MultiPlayerPlayState::onEnter()
 {
-    StateParser stateParser;
-    stateParser.parseState("../src/GameStates.xml", s_menuID, &m_gameObjects,&m_textureIDList);
-    std::cout << "Entering SinglePLayerPlayState" << std::endl;
+    LevelParser levelParser;
+    pLevel = levelParser.parseLevel("../Assets/map1.tmx");
+    std::cout << "Entering MultiPLayerPlayState" << std::endl;
+    return true;
 }
 
 bool MultiPlayerPlayState::onExit()
 {
+    /*
     for(int i = 0; i < m_gameObjects.size(); i++)
     {
         m_gameObjects[i]->clean();
@@ -45,6 +46,7 @@ bool MultiPlayerPlayState::onExit()
     {
         TheTextureManager::Instance()->clearFromTextureMap(m_textureIDList[i]);
     }
+     */
     std::cout << "exiting SinglePlayerPlayState\n";
     return true;
 }
