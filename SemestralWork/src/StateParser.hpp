@@ -1,6 +1,8 @@
 #pragma once
 #include "GameObjects/GameObject.hpp"
 #include "tinyxml.h"
+#include "libxml/parser.h"
+#include "libxml/tree.h"
 #include <iostream>
 #include <vector>
 
@@ -11,6 +13,6 @@ public:
                     std::vector<std::string> *pTextureIDs);
 
 private:
-    void parseObjects(TiXmlElement* pStateRoot, std::vector<GameObject*> *pObjects);
-    void parseTextures(TiXmlElement* pStateRoot, std::vector<std::string> *pTextureIDs);
+    void parseObjects(xmlNodePtr objectRoot, std::vector<GameObject *> *pObjects);
+    void parseTextures(xmlNodePtr textureRoot, std::vector<std::string> *pTextureIDs);
 };
