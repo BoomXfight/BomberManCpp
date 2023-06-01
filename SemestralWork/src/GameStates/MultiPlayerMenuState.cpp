@@ -6,7 +6,7 @@
 #include "../GameObjects/StaticObject.hpp"
 #include "../GameObjects/TextSquare.hpp"
 #include "../GameObjects/MenuButton.hpp"
-#include "../StateParser.hpp"
+#include "StateParser.hpp"
 #include <iostream>
 
 // a unique ID for this state used in the xml file

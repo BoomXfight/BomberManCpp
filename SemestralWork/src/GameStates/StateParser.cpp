@@ -1,8 +1,8 @@
 #include "StateParser.hpp"
-#include "Singletons/TextureManager.hpp"
-#include "Singletons/Game.hpp"
-#include "Singletons/GameObjectFactory.hpp"
-#include "LoaderParams.hpp"
+#include "../Singletons/TextureManager.hpp"
+#include "../Singletons/Game.hpp"
+#include "../Singletons/GameObjectFactory.hpp"
+#include "../LoaderParams.hpp"
 
 bool StateParser::parseState(const char* stateFile, std::string stateID,
                              std::vector<GameObject*> *pObjects, std::vector<std::string> *pTextureIDs)

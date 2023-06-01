@@ -35,7 +35,7 @@
       </properties>
     </object>
   </objectgroup>
-  <properties>
+  <objectProperties>
     <property name="Bomber1" value="../Assets/BomberManAnimation.png"/>
-  </properties>
+  </objectProperties>
 </map>

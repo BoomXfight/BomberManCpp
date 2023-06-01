@@ -1,7 +1,7 @@
 #include "../Singletons/InputHandler.hpp"
 #include "../Singletons/Game.hpp"
 #include "../Singletons/TextureManager.hpp"
-#include "../LevelParser.hpp"
+#include "../Levels/LevelParser.hpp"
 #include "MultiPlayerPlayState.hpp"
 #include "GameState.hpp"
 #include "PauseMenuState.hpp"

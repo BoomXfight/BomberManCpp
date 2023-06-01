@@ -2,7 +2,7 @@
 #include "../Singletons/TextureManager.hpp"
 #include "../Singletons/Game.hpp"
 #include "../GameObjects/Player.hpp"
-#include "../StateParser.hpp"
+#include "StateParser.hpp"
 #include <iostream>
 
 const std::string PlayState::s_playID = "PLAY_STATE";

@@ -1,5 +1,5 @@
 #pragma once
-#include "GameObjects/GameObject.hpp"
+#include "../GameObjects/GameObject.hpp"
 #include "tinyxml.h"
 #include "libxml/parser.h"
 #include "libxml/tree.h"

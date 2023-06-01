@@ -2,7 +2,7 @@
 #include "../Singletons/TextureManager.hpp"
 #include "../Singletons/Game.hpp"
 #include "../GameObjects/MenuButton.hpp"
-#include "../StateParser.hpp"
+#include "StateParser.hpp"
 #include "SinglePlayerMenuState.hpp"
 #include "MultiPlayerMenuState.hpp"
 #include <iostream>

@@ -4,7 +4,7 @@
 #include "../Singletons/TextureManager.hpp"
 #include "../Singletons/InputHandler.hpp"
 #include "../GameObjects/MenuButton.hpp"
-#include "../StateParser.hpp"
+#include "StateParser.hpp"
 #include <iostream>
 
 // a unique ID for this state used in the xml file

@@ -1,7 +1,7 @@
 #include "../Singletons/InputHandler.hpp"
 #include "../Singletons/Game.hpp"
 #include "../Singletons/TextureManager.hpp"
-#include "../StateParser.hpp"
+#include "StateParser.hpp"
 #include "SinglePlayerPlayState.hpp"
 #include "GameState.hpp"
 #include "PauseMenuState.hpp"

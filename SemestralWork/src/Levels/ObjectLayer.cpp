@@ -15,3 +15,8 @@ void ObjectLayer::render()
         m_gameObjects[i]->draw();
     }
 }
+
+std::vector<GameObject*>* ObjectLayer::getGameObjects()
+{
+    return &m_gameObjects;
+}
