@@ -3,12 +3,12 @@
     <!--The Main Menu State-->
     <MAIN_MENU>
         <TEXTURES>
-            <texture filename = "../Assets/BomberManLogo.png" ID = "BomberMan"/>
-            <texture filename = "../Assets/SinglePlayerButton.png" ID = "SinglePlayer"/>
-            <texture filename = "../Assets/MultiPlayerButton.png" ID = "MultiPlayer"/>
-            <texture filename = "../Assets/ScoreBoard.png" ID = "ScoreBoard"/>
-            <texture filename = "../Assets/Exit.png" ID = "Exit"/>
-            <texture filename = "../Assets/Bomber.png" ID = "Bomber"/>
+            <texture filename = "../Assets/MainMenuState/BomberManLogo.png" ID = "BomberMan"/>
+            <texture filename = "../Assets/MainMenuState/SinglePlayerButton.png" ID = "SinglePlayer"/>
+            <texture filename = "../Assets/MainMenuState/MultiPlayerButton.png" ID = "MultiPlayer"/>
+            <texture filename = "../Assets/MainMenuState/ScoreBoard.png" ID = "ScoreBoard"/>
+            <texture filename = "../Assets/MainMenuState/Exit.png" ID = "Exit"/>
+            <texture filename = "../Assets/MainMenuState/Bomber.png" ID = "Bomber"/>
         </TEXTURES>
 
         <OBJECTS>
@@ -24,15 +24,15 @@
     <!--The Multi Player Menu State-->
     <MULTI_PLAYER_MENU>
         <TEXTURES>
-            <texture filename = "../Assets/MultiPlayerHeading.png" ID = "MultiPlayer"/>
-            <texture filename = "../Assets/Exit.png" ID = "Exit"/>
-            <texture filename = "../Assets/Back.png" ID = "Back"/>
-            <texture filename = "../Assets/Bomberman3.png" ID = "BomberMan"/>
-            <texture filename = "../Assets/BomberWoman.png" ID = "BomberWoman"/>
-            <texture filename = "../Assets/Player1.png" ID = "Player1"/>
-            <texture filename = "../Assets/Player2.png" ID = "Player2"/>
-            <texture filename = "../Assets/PlayButton.png" ID = "Play"/>
-            <texture filename = "../Assets/InputSquare.png" ID = "Input"/>
+            <texture filename = "../Assets/MultiPlayerMenuState/MultiPlayerHeading.png" ID = "MultiPlayer"/>
+            <texture filename = "../Assets/MultiPlayerMenuState/Exit.png" ID = "Exit"/>
+            <texture filename = "../Assets/MultiPlayerMenuState/Back.png" ID = "Back"/>
+            <texture filename = "../Assets/MultiPlayerMenuState/Bomberman3.png" ID = "BomberMan"/>
+            <texture filename = "../Assets/MultiPlayerMenuState/BomberWoman.png" ID = "BomberWoman"/>
+            <texture filename = "../Assets/MultiPlayerMenuState/Player1.png" ID = "Player1"/>
+            <texture filename = "../Assets/MultiPlayerMenuState/Player2.png" ID = "Player2"/>
+            <texture filename = "../Assets/MultiPlayerMenuState/PlayButton.png" ID = "Play"/>
+            <texture filename = "../Assets/MultiPlayerMenuState/InputSquare.png" ID = "Input"/>
         </TEXTURES>
 
         <OBJECTS>
@@ -52,13 +52,13 @@
     <!--Single Player Menu State-->
     <SINGLE_PLAYER_MENU>
         <TEXTURES>
-            <texture filename = "../Assets/MultiPlayerHeading.png" ID = "SinglePlayer"/>
-            <texture filename = "../Assets/Exit.png" ID = "Exit"/>
-            <texture filename = "../Assets/Back.png" ID = "Back"/>
-            <texture filename = "../Assets/Bomber2.png" ID = "Bomber"/>
-            <texture filename = "../Assets/Nickname.png" ID = "Nickname"/>
-            <texture filename = "../Assets/PlayButton.png" ID = "Play"/>
-            <texture filename = "../Assets/InputSquare.png" ID = "Input"/>
+            <texture filename = "../Assets/SinglePlayerMenuState/SinglePlayerHeading.png" ID = "SinglePlayer"/>
+            <texture filename = "../Assets/SinglePlayerMenuState/Exit.png" ID = "Exit"/>
+            <texture filename = "../Assets/SinglePlayerMenuState/Back.png" ID = "Back"/>
+            <texture filename = "../Assets/SinglePlayerMenuState/Bomber2.png" ID = "Bomber"/>
+            <texture filename = "../Assets/SinglePlayerMenuState/Nickname.png" ID = "Nickname"/>
+            <texture filename = "../Assets/SinglePlayerMenuState/PlayButton.png" ID = "Play"/>
+            <texture filename = "../Assets/SinglePlayerMenuState/InputSquare.png" ID = "Input"/>
         </TEXTURES>
 
         <OBJECTS>
@@ -93,10 +93,10 @@
     <!--Pause State-->
     <PAUSE_STATE>
         <TEXTURES>
-            <texture filename = "../Assets/Resume.png" ID = "resumeButton"/>
-            <texture filename = "../Assets/ReturnToMainMenu.png" ID = "mainButton"/>
-            <texture filename = "../Assets/GamePaused.png" ID = "paused"/>
-            <texture filename = "../Assets/Exit2.png" ID = "exitButton"/>
+            <texture filename = "../Assets/PauseState/Resume.png" ID = "resumeButton"/>
+            <texture filename = "../Assets/PauseState/ReturnToMainMenu.png" ID = "mainButton"/>
+            <texture filename = "../Assets/PauseState/GamePaused.png" ID = "paused"/>
+            <texture filename = "../Assets/PauseState/Exit2.png" ID = "exitButton"/>
         </TEXTURES>
 
         <OBJECTS>

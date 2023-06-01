@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="git" orientation="orthogonal" renderorder="right-down" width="32" height="18" tilewidth="30" tileheight="30" infinite="0" nextlayerid="2" nextobjectid="1">
   <tileset firstgid="1" name="BomberMan" tilewidth="30" tileheight="30" spacing="1" margin="1" tilecount="36" columns="6">
-    <image source="../Assets/TileSet.png" width="200" height="200"/>
+    <image source="../Assets/Maps/TileSet.png" width="200" height="200"/>
   </tileset>
   <layer id="1" name="Tile Layer 1" width="32" height="18">
     <data encoding="csv">

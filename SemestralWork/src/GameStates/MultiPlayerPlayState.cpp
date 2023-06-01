@@ -15,6 +15,7 @@ const std::string MultiPlayerPlayState::s_playID = "MULTI_PLAYER_PLAY_STATE";
 void MultiPlayerPlayState::update()
 {
     pLevel->update();
+    pLevel->getLayers();
 
     if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_ESCAPE))
         TheGame::Instance()->getStateMachine()->pushState(new PauseMenuState());
@@ -35,7 +36,7 @@ void MultiPlayerPlayState::render()
 bool MultiPlayerPlayState::onEnter()
 {
     LevelParser levelParser;
-    pLevel = levelParser.parseLevel("../Assets/map1.tmx");
+    pLevel = levelParser.parseLevel("../Assets/Maps/map2.tmx");
     std::cout << "Entering MultiPLayerPlayState" << std::endl;
     return true;
 }

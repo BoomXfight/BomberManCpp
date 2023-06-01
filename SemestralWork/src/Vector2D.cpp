@@ -82,6 +82,6 @@ Vector2D& Vector2D::operator/=(float scalar)
 void Vector2D::normalize()
 {
     float l = length();
-    if ( l > 0)
+    if (l > 0)
         (*this) *= 1 / l;
 }
