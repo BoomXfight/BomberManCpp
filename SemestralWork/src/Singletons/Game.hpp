@@ -9,8 +9,7 @@ class Game
 {
 public:
     static Game* Instance();
-    SDL_Renderer* getRenderer() const;
-    bool init(const char* title, int x_pos, int y_pos, int width, int height, bool fullscreen);
+    bool init(const char* title, int x_WindowPos, int y_WindowPos, int windowWidth, int windowHeight, bool fullscreen);
     void render();
     void update();
     void handleEvents();
@@ -20,12 +19,13 @@ public:
     void setP2(std::string s);
     bool P1Ready();
     bool P2Ready();
-    std::string getP1() {return player1;}
-    std::string getP2() {return player2;}
     bool isRunning();
-    GameStateMachine* getStateMachine();
-    int getGameWidth() const {return m_gameWidth;}
-    int getGameHeight() const {return m_gameHeight;}
+    std::string getP1();
+    std::string getP2();
+    SDL_Renderer* getRenderer() const;
+    GameStateMachine* getStateMachine() const;
+    int getGameWidth() const;
+    int getGameHeight() const;
 
 
 private:
@@ -36,15 +36,15 @@ private:
     SDL_Window* m_pWindow;
     SDL_Renderer* m_pRenderer;
 
-    int m_currentFrame;
-    bool m_bRunning;
-    int m_gameWidth;
-    int m_gameHeight;
+    int m_pCurrentFrame;
+    int m_pGameWidth;
+    int m_pGameHeight;
+    bool m_pIsRunning;
 
-    std::string player1;
-    std::string player2;
+    std::string m_pPlayer1;
+    std::string m_pPlayer2;
 
-    std::vector<GameObject*> m_gameObjects;
+    std::vector<GameObject*> m_pGameObjects;
     GameStateMachine* m_pGameStateMachine;
 };
 

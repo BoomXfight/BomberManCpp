@@ -8,25 +8,25 @@
 #include "../GameObjects/TextSquare.hpp"
 #include "../GameStates/MainMenuState.hpp"
 
-SDL_Renderer* Game::getRenderer() const {return m_pRenderer;}
-
 Game* Game::Instance()
 {
     if(s_pInstance == 0)
-    {
         s_pInstance = new Game();
-        return s_pInstance;
-    }
+
     return s_pInstance;
 }
 
-Game::~Game() {}
-
-Game::Game() {}
-
-bool Game::isRunning() {return m_bRunning;}
-
-bool Game::init(const char* title, int x_pos, int y_pos, int width, int height, bool fullscreen)
+/**
+ * This method initializes the game
+ * @param[in] title
+ * @param[in] x_WindowPos
+ * @param[in] y_WindowPos
+ * @param[in] windowWidth
+ * @param[in] windowHeight
+ * @param[in] fullscreen
+ * @return true -> success, false -> failure
+ */
+bool Game::init(const char* title, int x_WindowPos, int y_WindowPos, int windowWidth, int windowHeight, bool fullscreen)
 {
     if(SDL_Init(SDL_INIT_VIDEO) == 0) // SDL_INIT_EVERYTHING
     {
@@ -36,10 +36,12 @@ bool Game::init(const char* title, int x_pos, int y_pos, int width, int height, 
 
         std::cout << "SDL init success\n";
 
-        m_gameWidth = width;
-        m_gameHeight = height;
+        m_pGameWidth = windowWidth;
+        m_pGameHeight = windowHeight;
 
-        m_pWindow = SDL_CreateWindow(title, x_pos, y_pos, m_gameWidth, m_gameHeight, flags);
+        m_pWindow = SDL_CreateWindow(title, x_WindowPos, y_WindowPos,
+                                     m_pGameWidth, m_pGameHeight, flags);
+
         if(m_pWindow != 0)
         {
             std::cout << "window creation success\n";
@@ -67,22 +69,24 @@ bool Game::init(const char* title, int x_pos, int y_pos, int width, int height, 
         return false;
     }
 
+    //Register game objects for TheGameObjectFactory
     TheGameObjectFactory ::Instance()->registerType("MenuButton", new MenuButtonCreator());
     TheGameObjectFactory ::Instance()->registerType("Player", new PlayerCreator());
     TheGameObjectFactory ::Instance()->registerType("StaticObject", new StaticObjectCreator());
     TheGameObjectFactory ::Instance()->registerType("TextSquare", new TextSquareCreator());
 
+    //Begin with mainMenuState
     m_pGameStateMachine = new GameStateMachine();
     m_pGameStateMachine->changeState(new MainMenuState());
 
     std::cout << "init success\n";
-    m_bRunning = true; // everything inited successfully, start the main loop
+    m_pIsRunning = true;
     return true;
 }
 
 void Game::render()
 {
-    SDL_RenderClear(m_pRenderer); // clear the renderer to the draw color
+    SDL_RenderClear(m_pRenderer);
     m_pGameStateMachine->render(); // rendering current game state
     SDL_RenderPresent(m_pRenderer); // draw to the screen
 }
@@ -101,7 +105,7 @@ void Game::clean()
 {
     std::cout << "cleaning game\n";
     TheInputHandler::Instance()->clean();
-    TheGame::Instance()->m_bRunning = false;
+    TheGame::Instance()->m_pIsRunning = false;
     SDL_DestroyWindow(m_pWindow);
     SDL_DestroyRenderer(m_pRenderer);
     SDL_Quit();
@@ -109,29 +113,66 @@ void Game::clean()
 
 void Game::quit()
 {
-    m_bRunning = false;
+    m_pIsRunning = false;
 }
 
 void Game::setP1(std::string s)
 {
-    player1 = s;
+    m_pPlayer1 = s;
 }
 
 void Game::setP2(std::string s)
 {
-    player2 = s;
+    m_pPlayer2 = s;
 }
 
 bool Game::P1Ready()
 {
-    return(player1.size()>0);
+    return(m_pPlayer1.size()>0);
 }
 
 bool Game::P2Ready()
 {
-    return(player2.size()>0);
+    return(m_pPlayer2.size()>0);
 }
 
-GameStateMachine* Game::getStateMachine(){return m_pGameStateMachine;}
+bool Game::isRunning()
+{
+    return m_pIsRunning;
+}
+
+std::string Game::getP1()
+{
+    return m_pPlayer1;
+}
+
+std::string Game::getP2()
+{
+    return m_pPlayer2;
+}
+
+SDL_Renderer* Game::getRenderer() const
+{
+    return m_pRenderer;
+}
+
+GameStateMachine* Game::getStateMachine() const
+{
+    return m_pGameStateMachine;
+}
+
+int Game::getGameWidth() const
+{
+    return m_pGameWidth;
+}
+
+int Game::getGameHeight() const
+{
+    return m_pGameHeight;
+}
+
+Game::~Game() {}
+
+Game::Game() {}
 
 Game* Game::s_pInstance = 0;
