@@ -17,7 +17,7 @@ void Enemy::draw()
 void Enemy::update()
 {
     handleInput();
-    m_currentFrame = int(((SDL_GetTicks() / 100) % 8));
+    m_currentFrame = int(((SDL_GetTicks() / 100) % m_numFrames));
     SDLGameObject::update();
 }
 

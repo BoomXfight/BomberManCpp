@@ -21,8 +21,9 @@ int main(int argc, char* argv[])
             TheGame::Instance()->render();
 
             frameTime = SDL_GetTicks() - frameStart;
-            if(TheGame::Instance()->getStateMachine()->m_gameStates.back()->getStateID() == "SinglePlayerMenu"
-            || TheGame::Instance()->getStateMachine()->m_gameStates.back()->getStateID() == "MainMenu")
+            if(TheGame::Instance()->getStateMachine()->m_gameStates.back()->getStateID() == "MAIN_MENU"
+            || TheGame::Instance()->getStateMachine()->m_gameStates.back()->getStateID() == "SINGLE_PLAYER_MENU"
+            || TheGame::Instance()->getStateMachine()->m_gameStates.back()->getStateID() == "MULTI_PLAYER_MENU" )
             {
                 FPS = 15;
                 DELAY_TIME = 1000.0f / FPS;

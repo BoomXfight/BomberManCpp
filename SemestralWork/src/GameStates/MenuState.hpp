@@ -13,4 +13,3 @@ protected:
 
     std::vector<Callback> m_callbacks;
 };
-

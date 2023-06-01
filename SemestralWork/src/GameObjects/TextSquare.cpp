@@ -57,8 +57,11 @@ void TextSquare::handleInput()
         }
 
         if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_BACKSPACE)) {
-            m_text.pop_back();
-            std::cout << m_text << std::endl;
+            if(!m_text.empty())
+            {
+                m_text.pop_back();
+                std::cout << m_text << std::endl;
+            }
         }
 
         if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RETURN)

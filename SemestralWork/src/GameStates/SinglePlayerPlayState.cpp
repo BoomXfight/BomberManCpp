@@ -4,7 +4,7 @@
 #include "../StateParser.hpp"
 #include "SinglePlayerPlayState.hpp"
 #include "GameState.hpp"
-#include "PauseState.hpp"
+#include "PauseMenuState.hpp"
 #include <iostream>
 
 const std::string SinglePlayerPlayState::s_menuID = "SINGLE_PLAYER_PLAY_STATE";
@@ -16,7 +16,7 @@ void SinglePlayerPlayState::update()
 
     if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_ESCAPE))
     {
-        TheGame::Instance()->getStateMachine()->pushState(new PauseState());
+        TheGame::Instance()->getStateMachine()->pushState(new PauseMenuState());
     }
 }
 

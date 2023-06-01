@@ -6,13 +6,11 @@
 class GameStateMachine
 {
 public:
-    void pushState(GameState* pState); // add without removing
-    void changeState(GameState* pState); // remove and add another
-    void popState(); // remove, don't add
+    void pushState(GameState* pState);
+    void changeState(GameState* pState);
+    void popState();
     void update();
     void render();
 
-
-//private:
     std::vector<GameState*> m_gameStates;
 };

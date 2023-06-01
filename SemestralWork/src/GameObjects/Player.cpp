@@ -1,7 +1,7 @@
 #include "Player.hpp"
 #include "../Singletons/InputHandler.hpp"
 
-Player::Player() : SDLGameObject()
+Player::Player() : SDLGameObject(), moving(false)
 {}
 
 void Player::load(const LoaderParams *pParams)
@@ -17,7 +17,12 @@ void Player::draw()
 void Player::update()
 {
     handleInput();
-    m_currentFrame = int(((SDL_GetTicks() / 100) % 4)); // Depends on the sprite and animation
+
+    if(moving)
+        m_currentFrame = int(((SDL_GetTicks() / 200) % m_numFrames));
+    else
+        m_currentFrame = 1;
+
     SDLGameObject::update();
 }
 
@@ -26,24 +31,51 @@ void Player::clean()
 
 void Player::handleInput()
 {
-    /**if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT))
+    if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT))
     {
-        m_position += Vector2D(2,0);
+        m_currentRow = 3;
+        m_position += Vector2D(4,0);
+        moving = true;
     }
-    if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_LEFT))
+    else if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_LEFT))
     {
-        m_position += Vector2D(-2,0);
+        m_currentRow = 4;
+        m_position += Vector2D(-4,0);
+        moving = true;
     }
-    if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_UP))
+    else if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_UP))
     {
-        m_position += Vector2D(0,-2);
+        m_currentRow = 2;
+        m_position += Vector2D(0,-4);
+        moving = true;
     }
-    if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_DOWN))
+    else if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_DOWN))
     {
-        m_position += Vector2D(0,2);
+        m_currentRow = 1;
+        m_position += Vector2D(0,4);
+        moving = true;
     }
-    */
-    Vector2D* target = TheInputHandler::Instance()->getMousePosition();
-    m_velocity = *target - m_position;
-    m_velocity /= 50;
+    else
+        moving = false;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
