@@ -2,21 +2,17 @@
 
 void ObjectLayer::update()
 {
-    for(int i = 0; i < m_gameObjects.size(); i++)
-    {
-        m_gameObjects[i]->update();
-    }
+    for(int i = 0; i < mGameObjects.size(); i++)
+        mGameObjects[i]->update();
 }
 
 void ObjectLayer::render()
 {
-    for(int i = 0; i < m_gameObjects.size(); i++)
-    {
-        m_gameObjects[i]->draw();
-    }
+    for(int i = 0; i < mGameObjects.size(); i++)
+        mGameObjects[i]->draw();
 }
 
 std::vector<GameObject*>* ObjectLayer::getGameObjects()
 {
-    return &m_gameObjects;
+    return &mGameObjects;
 }

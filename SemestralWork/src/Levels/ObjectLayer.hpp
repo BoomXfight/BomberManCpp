@@ -11,5 +11,5 @@ public:
     std::vector<GameObject*>* getGameObjects();
 
 private:
-    std::vector<GameObject*> m_gameObjects;
+    std::vector<GameObject*> mGameObjects;
 };
