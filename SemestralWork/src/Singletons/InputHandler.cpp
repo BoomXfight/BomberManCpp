@@ -5,9 +5,8 @@
 InputHandler* InputHandler::Instance()
 {
     if(s_pInstance == 0)
-    {
         s_pInstance = new InputHandler();
-    }
+
     return s_pInstance;
 }
 
@@ -65,13 +64,6 @@ void InputHandler::reset()
         m_mouseButtonStates.push_back(false);
 }
 
-InputHandler::InputHandler()
-        : m_mousePosition(Vector2D(0,0)), m_keystates(nullptr)
-{
-    for(int i = 0; i < 3; i++) // mouse buttons = false
-        m_mouseButtonStates.push_back(false);
-}
-
 bool InputHandler::getMouseButtonState(int buttonNumber)
 {
     return m_mouseButtonStates[buttonNumber];
@@ -87,15 +79,52 @@ bool InputHandler::isKeyDown(SDL_Scancode key)
     if(m_keystates != 0)
     {
         if(m_keystates[key] == 1)
-        {
             return true;
-        }
+
         else
-        {
             return false;
-        }
     }
     return false;
+}
+
+std::string InputHandler::showInput()
+{
+    return m_input;
+}
+
+std::string InputHandler::getInput()
+{
+    //std::cout << m_input;
+    std::string tmp;
+    tmp = m_input;
+    m_input = "";
+    //std::cout << tmp;
+    return tmp;
+}
+
+InputHandler::InputHandler()
+        : m_mousePosition(Vector2D(0,0)), m_keystates(nullptr)
+{
+    for(int i = 0; i < 3; i++) // mouse buttons = false
+        m_mouseButtonStates.push_back(false);
+}
+
+InputHandler::~InputHandler() {}
+
+void InputHandler::onKeyDown()
+{
+    m_keystates = SDL_GetKeyboardState(0);
+}
+
+void InputHandler::onKeyUp()
+{
+    m_keystates = SDL_GetKeyboardState(0);
+}
+
+void InputHandler::onMouseMove(SDL_Event& event)
+{
+    m_mousePosition.setX(event.motion.x);
+    m_mousePosition.setY(event.motion.y);
 }
 
 void InputHandler::onMouseButtonDown(SDL_Event& event)
@@ -132,41 +161,9 @@ void InputHandler::onMouseButtonUp(SDL_Event& event)
     }
 }
 
-void InputHandler::onMouseMove(SDL_Event& event)
-{
-    m_mousePosition.setX(event.motion.x);
-    m_mousePosition.setY(event.motion.y);
-}
-
 void InputHandler::input(SDL_Event& event)
 {
     m_input = event.text.text;
-}
-
-
-void InputHandler::onKeyDown()
-{
-    m_keystates = SDL_GetKeyboardState(0);
-}
-
-void InputHandler::onKeyUp()
-{
-    m_keystates = SDL_GetKeyboardState(0);
-}
-
-std::string InputHandler::showInput()
-{
-    return m_input;
-}
-
-std::string InputHandler::getInput()
-{
-    //std::cout << m_input;
-    std::string tmp;
-    tmp = m_input;
-    m_input = "";
-    //std::cout << tmp;
-    return tmp;
 }
 
 InputHandler* InputHandler::s_pInstance = 0;
