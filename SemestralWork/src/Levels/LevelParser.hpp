@@ -6,15 +6,15 @@
 class LevelParser
 {
 public:
-    Level* parseLevel(const char* levelFile);
+    Level* parseLevel(const char* pLevelFile);
 
 private:
-    void parseTileSets(xmlNodePtr pTileSetRoot, std::vector<Tileset>* pTileSets);
-    void parseTileLayer(xmlNodePtr pTileElement,std::vector<Layer*> *pLayers, const std::vector<Tileset>* pTileSets);
-    void parseObjectLayer(xmlNodePtr pObjectElement, std::vector<Layer*> *pLayers);
+    void parseTileSets(xmlNodePtr pTileSetRoot, std::vector<TileSet>* pTileSets);
+    void parseTileLayer(xmlNodePtr pTileElement,std::vector<Layer*>* pLayers, const std::vector<TileSet>* pTileSets);
+    void parseObjectLayer(xmlNodePtr pObjectElement, std::vector<Layer*>* pLayers);
     void parseTextures(xmlNodePtr pTextureRoot);
 
-    int m_tileSize;
-    int m_width;
-    int m_height;
+    int mTileSize;
+    int mWidth;
+    int mHeight;
 };

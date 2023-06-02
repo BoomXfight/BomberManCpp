@@ -12,38 +12,36 @@
  * @param[in] levelFile
  * @return Level* -> created level
  */
-Level* LevelParser::parseLevel(const char *levelFile)
+Level* LevelParser::parseLevel(const char* pLevelFile)
 {
-    xmlDocPtr levelDocument = xmlParseFile(levelFile);
+    xmlDocPtr levelDocument = xmlParseFile(pLevelFile);
 
-    Level* pLevel = new Level();
+    Level* level = new Level();
 
     // get the root node
-    xmlNodePtr pRoot = xmlDocGetRootElement(levelDocument);
+    xmlNodePtr root = xmlDocGetRootElement(levelDocument);
 
-    xmlChar* tileSizeAttr = xmlGetProp(pRoot, (const xmlChar*)"tilewidth");
-    xmlChar* widthAttr = xmlGetProp(pRoot, (const xmlChar*)"width");
-    xmlChar* heightAttr = xmlGetProp(pRoot, (const xmlChar*)"height");
+    xmlChar* tileSizeAttr = xmlGetProp(root, (const xmlChar*)"tilewidth");
+    xmlChar* widthAttr = xmlGetProp(root, (const xmlChar*)"width");
+    xmlChar* heightAttr = xmlGetProp(root, (const xmlChar*)"height");
 
-    m_tileSize = atoi((const char*)tileSizeAttr);
-    m_width = atoi((const char*)widthAttr);
-    m_height = atoi((const char*)heightAttr);
+    mTileSize = atoi((const char*)tileSizeAttr);
+    mWidth = atoi((const char*)widthAttr);
+    mHeight = atoi((const char*)heightAttr);
 
     xmlFree(tileSizeAttr);
     xmlFree(widthAttr);
     xmlFree(heightAttr);
 
-    // parse the tileset
-    for (xmlNodePtr e = pRoot->children; e != nullptr; e = e->next)
+    // parse the tileSet
+    for (xmlNodePtr e = root->children; e != nullptr; e = e->next)
     {
         if (xmlStrcmp(e->name, (const xmlChar*)"tileset") == 0)
-        {
-            parseTileSets(e, pLevel->getTilesets());
-        }
+            parseTileSets(e, level->getTileSets());
     }
 
     // parse object layers and tile layers
-    for (xmlNodePtr e = pRoot->children; e != nullptr; e = e->next)
+    for (xmlNodePtr e = root->children; e != nullptr; e = e->next)
     {
         if (xmlStrcmp(e->name, (const xmlChar*)"objectgroup") == 0 || xmlStrcmp(e->name, (const xmlChar*)"layer") == 0)
         {
@@ -51,16 +49,16 @@ Level* LevelParser::parseLevel(const char *levelFile)
             if (firstChild != nullptr)
             {
                 if (xmlStrcmp(firstChild->name, (const xmlChar*)"object") == 0)
-                    parseObjectLayer(e, pLevel->getLayers());
+                    parseObjectLayer(e, level->getLayers());
 
                 else if (xmlStrcmp(firstChild->name, (const xmlChar*)"data") == 0)
-                    parseTileLayer(e, pLevel->getLayers(), pLevel->getTilesets());
+                    parseTileLayer(e, level->getLayers(), level->getTileSets());
             }
         }
     }
 
     // parse textures
-    for (xmlNodePtr e = pRoot->children; e != NULL; e = e->next)
+    for (xmlNodePtr e = root->children; e != nullptr; e = e->next)
     {
         if (xmlStrcmp(e->name, (const xmlChar*)"objectProperties") == 0)
         {
@@ -71,7 +69,7 @@ Level* LevelParser::parseLevel(const char *levelFile)
     }
 
     xmlFreeDoc(levelDocument);
-    return pLevel;
+    return level;
 }
 
 /**
@@ -79,7 +77,7 @@ Level* LevelParser::parseLevel(const char *levelFile)
  * @param[in] pTileSetRoot
  * @param[in,out] pTileSets
  */
-void LevelParser::parseTileSets(xmlNodePtr pTileSetRoot, std::vector<Tileset>* pTileSets)
+void LevelParser::parseTileSets(xmlNodePtr pTileSetRoot, std::vector<TileSet>* pTileSets)
 {
     // add the map sheet into the texture manager
     xmlNode* firstChild = pTileSetRoot->children->next;
@@ -90,14 +88,14 @@ void LevelParser::parseTileSets(xmlNodePtr pTileSetRoot, std::vector<Tileset>* p
     xmlFree(source);
 
     // create a tileSet object
-    Tileset tileSet;
+    TileSet tileSet;
     if (firstChild != nullptr)
     {
         xmlChar* widthAttr = xmlGetProp(firstChild, (const xmlChar*)"width");
         xmlChar* heightAttr = xmlGetProp(firstChild, (const xmlChar*)"height");
 
-        tileSet.width = atoi((const char*)widthAttr);
-        tileSet.height = atoi((const char*)heightAttr);
+        tileSet.mWidth = atoi((const char*)widthAttr);
+        tileSet.mHeight = atoi((const char*)heightAttr);
 
         xmlFree(widthAttr);
         xmlFree(heightAttr);
@@ -110,13 +108,13 @@ void LevelParser::parseTileSets(xmlNodePtr pTileSetRoot, std::vector<Tileset>* p
     xmlChar* marginAttr = xmlGetProp(pTileSetRoot, (const xmlChar*)"margin");
     xmlChar* columnsAttr = xmlGetProp(pTileSetRoot, (const xmlChar*)"columns");
 
-    tileSet.firstGridID = atoi((const char*)firstGridAttr);
-    tileSet.tileWidth = atoi((const char*)tileWidthAttr);
-    tileSet.tileHeight = atoi((const char*)tileHeightAttr);
-    tileSet.spacing = atoi((const char*)spacingAttr);
-    tileSet.margin = atoi((const char*)marginAttr);
-    tileSet.numColumns = atoi((const char*)columnsAttr);
-    tileSet.name = (const char*) name;
+    tileSet.mFirstGridID = atoi((const char*)firstGridAttr);
+    tileSet.mTileWidth = atoi((const char*)tileWidthAttr);
+    tileSet.mTileHeight = atoi((const char*)tileHeightAttr);
+    tileSet.mSpacing = atoi((const char*)spacingAttr);
+    tileSet.mMargin = atoi((const char*)marginAttr);
+    tileSet.mNumColumns = atoi((const char*)columnsAttr);
+    tileSet.mName = (const char*) name;
 
     xmlFree(firstGridAttr);
     xmlFree(tileWidthAttr);
@@ -136,9 +134,9 @@ void LevelParser::parseTileSets(xmlNodePtr pTileSetRoot, std::vector<Tileset>* p
  * @param[in,out] pTileSets
  */
 void LevelParser::parseTileLayer(xmlNodePtr pTileElement, std::vector<Layer*> *pLayers,
-                                 const std::vector<Tileset>* pTileSets)
+                                 const std::vector<TileSet>* pTileSets)
 {
-    TileLayer* pTileLayer = new TileLayer(m_tileSize, *pTileSets);
+    TileLayer* pTileLayer = new TileLayer(mTileSize, *pTileSets);
 
     // Tile data
     std::vector<std::vector<int>> data; // 2D array for representing the map
@@ -164,21 +162,21 @@ void LevelParser::parseTileLayer(xmlNodePtr pTileElement, std::vector<Layer*> *p
     }
 
     // Transfer the data from the string to vector of integers
-    std::vector<int> gids;
+    std::vector<int> ids;
     for (size_t i = 0; i < decodeIDs.size(); i++)
     {
         if (isdigit(decodeIDs[i]))
-            gids.push_back(decodeIDs[i] - '0');
+            ids.push_back(decodeIDs[i] - '0');
     }
 
     // Finally create a 2D map matrix
-    std::vector<int> layerRow(m_width);
-    for (int j = 0; j < m_height; j++)
+    std::vector<int> layerRow(mWidth);
+    for (int j = 0; j < mHeight; j++)
         data.push_back(layerRow);
 
-    for (int rows = 0; rows < m_height; rows++)
-        for (int cols = 0; cols < m_width; cols++)
-            data[rows][cols] = gids[rows * m_width + cols];
+    for (int rows = 0; rows < mHeight; rows++)
+        for (int cols = 0; cols < mWidth; cols++)
+            data[rows][cols] = ids[rows * mWidth + cols];
 
     pTileLayer->setTileIDs(data);
     pLayers->push_back(pTileLayer);
