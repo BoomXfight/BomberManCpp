@@ -86,7 +86,7 @@ void TextureManager::drawFrame(const std::string& pIdentifier, int pX, int pY, i
     destRect.x = pX;
     destRect.y = pY;
     SDL_RenderCopyEx(pRenderer, mTextureMap[pIdentifier], &srcRect, &destRect, 0,
-                     0, pFlip);
+                     nullptr, pFlip);
 }
 
 /**

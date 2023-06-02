@@ -18,10 +18,10 @@ public:
     void clean();
     void reset();
     bool getMouseButtonState(int buttonNumber);
-    Vector2D* getMousePosition();
     bool isKeyDown(SDL_Scancode key);
+    Vector2D* getMousePosition();
     std::string showInput();
-    std::string getInput();
+    std::string getResetInput();
 
 private:
     InputHandler();
@@ -33,11 +33,11 @@ private:
     void onMouseButtonUp(SDL_Event& event);
     void input(SDL_Event& event);
 
-    static InputHandler* s_pInstance;
-    std::vector<bool> m_mouseButtonStates; // mouse input
-    Vector2D m_mousePosition;
-    const Uint8* m_keystates; // keyboard input
-    std::string m_input;
+    static InputHandler* mInstance;
+    std::vector<bool> mMouseButtonStates;
+    Vector2D mMousePosition;
+    const Uint8* mKeyStates;
+    std::string mInput;
 };
 
 typedef InputHandler TheInputHandler;

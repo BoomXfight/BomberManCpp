@@ -4,12 +4,15 @@
 
 InputHandler* InputHandler::Instance()
 {
-    if(s_pInstance == 0)
-        s_pInstance = new InputHandler();
+    if(mInstance == 0)
+        mInstance = new InputHandler();
 
-    return s_pInstance;
+    return mInstance;
 }
 
+/**
+ * This method registers and processes the input throughout the game
+ */
 void InputHandler::update()
 {
     SDL_Event event;
@@ -61,85 +64,80 @@ void InputHandler::clean()
 void InputHandler::reset()
 {
     for(int i = 0; i < 3; i++)
-        m_mouseButtonStates.push_back(false);
+        mMouseButtonStates.push_back(false);
 }
 
-bool InputHandler::getMouseButtonState(int buttonNumber)
+bool InputHandler::getMouseButtonState(int pButtonNumber)
 {
-    return m_mouseButtonStates[buttonNumber];
+    return mMouseButtonStates[pButtonNumber];
 }
 
-Vector2D* InputHandler::getMousePosition()
+bool InputHandler::isKeyDown(SDL_Scancode pKey)
 {
-    return &m_mousePosition;
-}
-
-bool InputHandler::isKeyDown(SDL_Scancode key)
-{
-    if(m_keystates != 0)
+    if(mKeyStates != 0)
     {
-        if(m_keystates[key] == 1)
+        if(mKeyStates[pKey] == 1)
             return true;
-
-        else
-            return false;
     }
     return false;
 }
 
-std::string InputHandler::showInput()
+Vector2D* InputHandler::getMousePosition()
 {
-    return m_input;
+    return &mMousePosition;
 }
 
-std::string InputHandler::getInput()
+std::string InputHandler::showInput()
 {
-    //std::cout << m_input;
+    return mInput;
+}
+
+std::string InputHandler::getResetInput()
+{
     std::string tmp;
-    tmp = m_input;
-    m_input = "";
-    //std::cout << tmp;
+    tmp = mInput;
+    mInput = "";
     return tmp;
 }
 
 InputHandler::InputHandler()
-        : m_mousePosition(Vector2D(0,0)), m_keystates(nullptr)
+        : mMousePosition(Vector2D(0,0)), mKeyStates(nullptr)
 {
     for(int i = 0; i < 3; i++) // mouse buttons = false
-        m_mouseButtonStates.push_back(false);
+        mMouseButtonStates.push_back(false);
 }
 
 InputHandler::~InputHandler() {}
 
 void InputHandler::onKeyDown()
 {
-    m_keystates = SDL_GetKeyboardState(0);
+    mKeyStates = SDL_GetKeyboardState(nullptr);
 }
 
 void InputHandler::onKeyUp()
 {
-    m_keystates = SDL_GetKeyboardState(0);
+    mKeyStates = SDL_GetKeyboardState(nullptr);
 }
 
 void InputHandler::onMouseMove(SDL_Event& event)
 {
-    m_mousePosition.setX(event.motion.x);
-    m_mousePosition.setY(event.motion.y);
+    mMousePosition.setX(event.motion.x);
+    mMousePosition.setY(event.motion.y);
 }
 
 void InputHandler::onMouseButtonDown(SDL_Event& event)
 {
     if(event.button.button == SDL_BUTTON_LEFT)
     {
-        m_mouseButtonStates[LEFT] = true;
+        mMouseButtonStates[LEFT] = true;
     }
     if(event.button.button == SDL_BUTTON_MIDDLE)
     {
-        m_mouseButtonStates[MIDDLE] = true;
+        mMouseButtonStates[MIDDLE] = true;
     }
     if(event.button.button == SDL_BUTTON_RIGHT)
     {
-        m_mouseButtonStates[RIGHT] = true;
+        mMouseButtonStates[RIGHT] = true;
     }
 }
 
@@ -147,23 +145,23 @@ void InputHandler::onMouseButtonUp(SDL_Event& event)
 {
     if(event.button.button == SDL_BUTTON_LEFT)
     {
-        m_mouseButtonStates[LEFT] = false;
+        mMouseButtonStates[LEFT] = false;
     }
 
     if(event.button.button == SDL_BUTTON_MIDDLE)
     {
-        m_mouseButtonStates[MIDDLE] = false;
+        mMouseButtonStates[MIDDLE] = false;
     }
 
     if(event.button.button == SDL_BUTTON_RIGHT)
     {
-        m_mouseButtonStates[RIGHT] = false;
+        mMouseButtonStates[RIGHT] = false;
     }
 }
 
 void InputHandler::input(SDL_Event& event)
 {
-    m_input = event.text.text;
+    mInput = event.text.text;
 }
 
-InputHandler* InputHandler::s_pInstance = 0;
+InputHandler* InputHandler::mInstance = 0;
