@@ -8,18 +8,19 @@ class TextureManager
 {
 public:
     static TextureManager* Instance();
-    bool load(std::string fileName,std::string id,SDL_Renderer* pRenderer);
-    void draw(std::string id, int x, int y, int width, int height, SDL_Renderer* pRenderer, SDL_RendererFlip flip = SDL_FLIP_NONE);
-    void drawFrame(std::string id, int x, int y, int width, int height, int currentRow, int currentFrame, SDL_Renderer* pRenderer,
-                   SDL_RendererFlip flip = SDL_FLIP_NONE);
-    void drawTile(std::string id, int margin, int spacing, int x, int y, int width, int height, int currentRow,
-                  int currentFrame, SDL_Renderer *pRenderer);
-    void clearFromTextureMap(std::string id);
+    bool load(const std::string& pFileName, const std::string& pIdentifier, SDL_Renderer* pRenderer);
+    void draw(const std::string& pIdentifier, int pX, int pY, int pWidth, int pHeight,
+              SDL_Renderer* pRenderer, SDL_RendererFlip pFlip = SDL_FLIP_NONE);
+    void drawFrame(const std::string& pIdentifier, int pX, int pY, int pWidth, int pHeight, int pCurrentRow,
+                   int pCurrentFrame, SDL_Renderer* pRenderer, SDL_RendererFlip pFlip = SDL_FLIP_NONE);
+    void drawTile(const std::string& pIdentifier, int pMargin, int pSpacing, int pX, int pY, int pWidth,
+                  int pHeight, int pCurrentRow, int pCurrentFrame, SDL_Renderer *pRenderer);
+    void clearFromTextureMap(const std::string& pIdentifier);
 
 private:
-    TextureManager() {}
-    static TextureManager* s_pInstance;
-    std::map<std::string, SDL_Texture*> m_textureMap; // Map of textures which can be used throughout the whole program
+    TextureManager();
+    static TextureManager* mInstance;
+    std::map<std::string, SDL_Texture*> mTextureMap;
 };
 
 typedef TextureManager TheTextureManager;
