@@ -3,18 +3,20 @@
 
 BaseCreator::~BaseCreator() {};
 
-GameObjectFactory* GameObjectFactory::s_pInstance = nullptr;
-
 GameObjectFactory* GameObjectFactory::Instance()
 {
     if(s_pInstance == 0)
-    {
         s_pInstance = new GameObjectFactory();
-        return s_pInstance;
-    }
+
     return s_pInstance;
 }
 
+/**
+ * This method registers a new type that is suitable for creation -> has a creator method
+ * @param[in] typeID
+ * @param[in] pCreator
+ * @return ture -> successfully registered, false -> registration failed
+ */
 bool GameObjectFactory::registerType(std::string typeID, BaseCreator *pCreator)
 {
     std::map<std::string, BaseCreator*>::iterator it = m_creators.find(typeID);
@@ -28,7 +30,12 @@ bool GameObjectFactory::registerType(std::string typeID, BaseCreator *pCreator)
     return true;
 }
 
-GameObject *GameObjectFactory::create(std::string typeID)
+/**
+ * This method creates an object specified by id if registered
+ * @param[in] typeID
+ * @return nullptr -> failed to create a desired object, GameObject* -> successful creation
+ */
+GameObject* GameObjectFactory::create(std::string typeID)
 {
     std::map<std::string, BaseCreator*>::iterator it = m_creators.find(typeID);
     if(it == m_creators.end())
@@ -40,6 +47,9 @@ GameObject *GameObjectFactory::create(std::string typeID)
     return pCreator->createGameObject();
 }
 
+
 GameObjectFactory::GameObjectFactory() {}
 
 GameObjectFactory::~GameObjectFactory() {}
+
+GameObjectFactory* GameObjectFactory::s_pInstance = nullptr;
