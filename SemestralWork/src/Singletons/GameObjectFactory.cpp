@@ -5,51 +5,50 @@ BaseCreator::~BaseCreator() {};
 
 GameObjectFactory* GameObjectFactory::Instance()
 {
-    if(s_pInstance == 0)
-        s_pInstance = new GameObjectFactory();
+    if(mInstance == nullptr)
+       mInstance = new GameObjectFactory();
 
-    return s_pInstance;
+    return mInstance;
 }
 
 /**
  * This method registers a new type that is suitable for creation -> has a creator method
  * @param[in] typeID
  * @param[in] pCreator
- * @return ture -> successfully registered, false -> registration failed
+ * @return ture -> successfully registered, false -> already registered
  */
-bool GameObjectFactory::registerType(std::string typeID, BaseCreator *pCreator)
+bool GameObjectFactory::registerType(const std::string& pTypeID, BaseCreator *pCreator)
 {
-    std::map<std::string, BaseCreator*>::iterator it = m_creators.find(typeID);
-    if(it != m_creators.end())
+    auto it = mCreators.find(pTypeID);
+    if(it != mCreators.end()) // Already registered
     {
         delete pCreator;
         return false;
     }
 
-    m_creators[typeID] = pCreator;
+    mCreators[pTypeID] = pCreator;
     return true;
 }
 
 /**
- * This method creates an object specified by id if registered
+ * This method creates an object (if registered) specified by an id
  * @param[in] typeID
  * @return nullptr -> failed to create a desired object, GameObject* -> successful creation
  */
-GameObject* GameObjectFactory::create(std::string typeID)
+GameObject* GameObjectFactory::create(const std::string& pTypeID)
 {
-    std::map<std::string, BaseCreator*>::iterator it = m_creators.find(typeID);
-    if(it == m_creators.end())
+    auto it = mCreators.find(pTypeID);
+    if(it == mCreators.end())
     {
-        std::cout << "could not find type: " << typeID << std::endl;
+        std::cout << "could not find type: " << pTypeID << std::endl;
         return nullptr;
     }
     BaseCreator* pCreator = (*it).second;
     return pCreator->createGameObject();
 }
 
-
 GameObjectFactory::GameObjectFactory() {}
 
 GameObjectFactory::~GameObjectFactory() {}
 
-GameObjectFactory* GameObjectFactory::s_pInstance = nullptr;
+GameObjectFactory* GameObjectFactory::mInstance = nullptr;

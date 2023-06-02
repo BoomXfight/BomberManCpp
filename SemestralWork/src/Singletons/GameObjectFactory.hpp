@@ -8,22 +8,21 @@ class BaseCreator
 public:
     virtual GameObject* createGameObject() const = 0;
     virtual ~BaseCreator();
-
 };
 
 class GameObjectFactory
 {
 public:
     static GameObjectFactory* Instance();
-    bool registerType(std::string typeID, BaseCreator *pCreator);
-    GameObject *create(std::string typeID);
+    bool registerType(const std::string& pTypeID, BaseCreator *pCreator);
+    GameObject *create(const std::string& pTypeID);
 
 private:
     GameObjectFactory();
     ~GameObjectFactory();
 
-    static GameObjectFactory* s_pInstance;
-    std::map<std::string, BaseCreator*> m_creators;
+    static GameObjectFactory* mInstance;
+    std::map<std::string, BaseCreator*> mCreators;
 };
 
 typedef GameObjectFactory TheGameObjectFactory;
