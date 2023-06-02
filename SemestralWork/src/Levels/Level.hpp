@@ -3,17 +3,17 @@
 #include <string>
 #include <vector>
 
-struct Tileset
+struct TileSet
 {
-    int firstGridID;
-    int tileWidth;
-    int tileHeight;
-    int spacing;
-    int margin;
-    int width;
-    int height;
-    int numColumns;
-    std::string name;
+    int mFirstGridID;
+    int mTileWidth;
+    int mTileHeight;
+    int mSpacing;
+    int mMargin;
+    int mWidth;
+    int mHeight;
+    int mNumColumns;
+    std::string mName;
 };
 
 class Level
@@ -22,13 +22,13 @@ public:
     ~Level();
     void update();
     void render();
-    std::vector<Tileset>* getTilesets();
+    std::vector<TileSet>* getTileSets();
     std::vector<Layer*>* getLayers();
 
 private:
     friend class LevelParser;
     Level()  {}
 
-    std::vector<Tileset> m_tilesets;
-    std::vector<Layer*> m_layers;
+    std::vector<TileSet> mTileSets;
+    std::vector<Layer*> mLayers;
 };
