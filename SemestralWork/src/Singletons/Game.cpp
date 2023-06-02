@@ -10,62 +10,60 @@
 
 Game* Game::Instance()
 {
-    if(s_pInstance == 0)
-        s_pInstance = new Game();
+    if(mInstance == nullptr)
+       mInstance = new Game();
 
-    return s_pInstance;
+    return mInstance;
 }
 
 /**
  * This method initializes the game
- * @param[in] title
- * @param[in] x_WindowPos
- * @param[in] y_WindowPos
- * @param[in] windowWidth
- * @param[in] windowHeight
- * @param[in] fullscreen
- * @return true -> success, false -> failure
+ * @param[in] pTitle
+ * @param[in] pX_WindowPos
+ * @param[in] pY_WindowPos
+ * @param[in] pWindowWidth
+ * @param[in] pWindowHeight
+ * @param[in] pFullscreen
+ * @return true -> Game initialization success, false -> Failed to initialize the game
  */
-bool Game::init(const char* title, int x_WindowPos, int y_WindowPos, int windowWidth, int windowHeight, bool fullscreen)
+bool Game::init(const char* pTitle, int pX_WindowPos, int pY_WindowPos, int pWindowWidth, int pWindowHeight,
+                bool pFullscreen)
 {
     if(SDL_Init(SDL_INIT_VIDEO) == 0) // SDL_INIT_EVERYTHING
     {
         int flags = 0;
-        if(fullscreen)
+        if(pFullscreen)
             flags = SDL_WINDOW_FULLSCREEN;
 
-        std::cout << "SDL init success\n";
+        std::cout << "SDL init success" << std::endl;
 
-        m_pGameWidth = windowWidth;
-        m_pGameHeight = windowHeight;
-
-        m_pWindow = SDL_CreateWindow(title, x_WindowPos, y_WindowPos,
-                                     m_pGameWidth, m_pGameHeight, flags);
-
-        if(m_pWindow != 0)
+        mGameWidth = pWindowWidth;
+        mGameHeight = pWindowHeight;
+        mWindow = SDL_CreateWindow(pTitle, pX_WindowPos, pY_WindowPos,mGameWidth, mGameHeight, flags);
+        if(mWindow != nullptr)
         {
-            std::cout << "window creation success\n";
-            m_pRenderer = SDL_CreateRenderer(m_pWindow, -1, 0);
-            if(m_pRenderer != 0)
+            std::cout << "Window creation success" << std::endl;
+            mRenderer = SDL_CreateRenderer(mWindow, -1, 0);
+            if(mRenderer != nullptr)
             {
-                std::cout << "renderer creation success\n";
-                SDL_SetRenderDrawColor(m_pRenderer,0,0,0,255);
+                std::cout << "Renderer creation success" << std::endl;
+                SDL_SetRenderDrawColor(mRenderer,0,0,0,255);
             }
             else
             {
-                std::cout << "renderer init fail: " << SDL_GetError() << '\n';
+                std::cout << "Renderer init fail: " << SDL_GetError() << std::endl;
                 return false;
             }
         }
         else
         {
-            std::cout << "window init fail: " << SDL_GetError() << '\n';
+            std::cout << "Window init fail: " << SDL_GetError() << std::endl;
             return false;
         }
     }
     else
     {
-        std::cout << "SDL init fail: " << SDL_GetError() << '\n';
+        std::cout << "SDL init fail: " << SDL_GetError() << std::endl;
         return false;
     }
 
@@ -76,24 +74,24 @@ bool Game::init(const char* title, int x_WindowPos, int y_WindowPos, int windowW
     TheGameObjectFactory ::Instance()->registerType("TextSquare", new TextSquareCreator());
 
     //Begin with mainMenuState
-    m_pGameStateMachine = new GameStateMachine();
-    m_pGameStateMachine->changeState(new MainMenuState());
+    mGameStateMachine = new GameStateMachine();
+    mGameStateMachine->changeState(new MainMenuState());
 
     std::cout << "init success\n";
-    m_pIsRunning = true;
+    mIsRunning = true;
     return true;
 }
 
 void Game::render()
 {
-    SDL_RenderClear(m_pRenderer);
-    m_pGameStateMachine->render(); // rendering current game state
-    SDL_RenderPresent(m_pRenderer); // draw to the screen
+    SDL_RenderClear(mRenderer);
+    mGameStateMachine->render(); // rendering current game state
+    SDL_RenderPresent(mRenderer); // draw to the screen
 }
 
 void Game::update()
 {
-    m_pGameStateMachine->update(); // updating current game state
+    mGameStateMachine->update(); // updating current game state
 }
 
 void Game::handleEvents()
@@ -103,76 +101,76 @@ void Game::handleEvents()
 
 void Game::clean()
 {
-    std::cout << "cleaning game\n";
+    std::cout << "Cleaning the game" << std::endl;
     TheInputHandler::Instance()->clean();
-    TheGame::Instance()->m_pIsRunning = false;
-    SDL_DestroyWindow(m_pWindow);
-    SDL_DestroyRenderer(m_pRenderer);
+    TheGame::Instance()->mIsRunning = false;
+    SDL_DestroyWindow(mWindow);
+    SDL_DestroyRenderer(mRenderer);
     SDL_Quit();
 }
 
 void Game::quit()
 {
-    m_pIsRunning = false;
+    mIsRunning = false;
 }
 
 void Game::setP1(std::string s)
 {
-    m_pPlayer1 = s;
+    mPlayer1 = s;
 }
 
 void Game::setP2(std::string s)
 {
-    m_pPlayer2 = s;
+    mPlayer2 = s;
 }
 
 bool Game::P1Ready()
 {
-    return(m_pPlayer1.size()>0);
+    return(!mPlayer1.empty());
 }
 
 bool Game::P2Ready()
 {
-    return(m_pPlayer2.size()>0);
+    return(!mPlayer2.empty());
 }
 
 bool Game::isRunning()
 {
-    return m_pIsRunning;
+    return mIsRunning;
 }
 
-std::string Game::getP1()
+std::string Game::getP1() const
 {
-    return m_pPlayer1;
+    return mPlayer1;
 }
 
-std::string Game::getP2()
+std::string Game::getP2() const
 {
-    return m_pPlayer2;
+    return mPlayer2;
 }
 
 SDL_Renderer* Game::getRenderer() const
 {
-    return m_pRenderer;
+    return mRenderer;
 }
 
 GameStateMachine* Game::getStateMachine() const
 {
-    return m_pGameStateMachine;
+    return mGameStateMachine;
 }
 
 int Game::getGameWidth() const
 {
-    return m_pGameWidth;
+    return mGameWidth;
 }
 
 int Game::getGameHeight() const
 {
-    return m_pGameHeight;
+    return mGameHeight;
 }
 
 Game::~Game() {}
 
 Game::Game() {}
 
-Game* Game::s_pInstance = 0;
+Game* Game::mInstance = nullptr;

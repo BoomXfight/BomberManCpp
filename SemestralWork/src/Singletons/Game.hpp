@@ -9,7 +9,8 @@ class Game
 {
 public:
     static Game* Instance();
-    bool init(const char* title, int x_WindowPos, int y_WindowPos, int windowWidth, int windowHeight, bool fullscreen);
+    bool init(const char* pTitle, int pX_WindowPos, int pY_WindowPos, int pWindowWidth, int pWindowHeight,
+              bool pFullscreen);
     void render();
     void update();
     void handleEvents();
@@ -20,32 +21,31 @@ public:
     bool P1Ready();
     bool P2Ready();
     bool isRunning();
-    std::string getP1();
-    std::string getP2();
+    std::string getP1() const;
+    std::string getP2() const;
     SDL_Renderer* getRenderer() const;
     GameStateMachine* getStateMachine() const;
     int getGameWidth() const;
     int getGameHeight() const;
 
-
 private:
     Game();
     ~Game();
-    static Game* s_pInstance;
+    static Game* mInstance;
 
-    SDL_Window* m_pWindow;
-    SDL_Renderer* m_pRenderer;
+    SDL_Window* mWindow;
+    SDL_Renderer* mRenderer;
 
-    int m_pCurrentFrame;
-    int m_pGameWidth;
-    int m_pGameHeight;
-    bool m_pIsRunning;
+    int mCurrentFrame; // ??
+    int mGameWidth;
+    int mGameHeight;
+    bool mIsRunning;
 
-    std::string m_pPlayer1;
-    std::string m_pPlayer2;
+    std::string mPlayer1;
+    std::string mPlayer2;
 
-    std::vector<GameObject*> m_pGameObjects;
-    GameStateMachine* m_pGameStateMachine;
+    std::vector<GameObject*> mGameObjects;
+    GameStateMachine* mGameStateMachine;
 };
 
 typedef Game TheGame;
