@@ -8,23 +8,23 @@
 class TileLayer : public Layer
 {
 public:
-    TileLayer(int tileSize, const std::vector<Tileset> &tilesets);
+    TileLayer(int pTileSize, const std::vector<TileSet>& pTileSets);
 
     virtual void update();
     virtual void render();
 
-    void setTileIDs(const std::vector<std::vector<int>>& data);
-    void setTileSize(int tileSize);
-    Tileset getTilesetByID(int tileID);
+    void setTileIDs(const std::vector<std::vector<int>>& pData);
+    void setTileSize(int pTileSize);
+    TileSet getTileSetByID(int pTileID);
 
 private:
-    int m_numColumns;
-    int m_numRows;
-    int m_tileSize;
+    int mNumColumns;
+    int mNumRows;
+    int mTileSize;
 
-    Vector2D m_position;
-    Vector2D m_velocity;
+    Vector2D mPosition;
+    Vector2D mVelocity;
 
-    const std::vector<Tileset> &m_tilesets;
-    std::vector<std::vector<int>> m_tileIDs;
+    const std::vector<TileSet>& mTileSets;
+    std::vector<std::vector<int>> mTileIDs;
 };
