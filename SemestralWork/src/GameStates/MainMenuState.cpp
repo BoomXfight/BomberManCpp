@@ -75,9 +75,9 @@ std::string MainMenuState::getStateID() const
 
 /**
  * This method assigns a callback function to gameObjects that require it
- * @param callbacks
+ * @param[in] pCallbacks
  */
-void MainMenuState::setCallbacks(const std::vector<Callback> &callbacks)
+void MainMenuState::setCallbacks(const std::vector<Callback> &pCallbacks)
 {
     for(int i = 0; i < mGameObjects.size(); i++)
     {
@@ -85,7 +85,7 @@ void MainMenuState::setCallbacks(const std::vector<Callback> &callbacks)
         if(dynamic_cast<MenuButton*>(mGameObjects[i]))
         {
             MenuButton* pButton = dynamic_cast<MenuButton*>(mGameObjects[i]);
-            pButton->setCallback(callbacks[pButton->getCallbackID()]);
+            pButton->setCallback(pCallbacks[pButton->getCallbackID()]);
         }
     }
 }

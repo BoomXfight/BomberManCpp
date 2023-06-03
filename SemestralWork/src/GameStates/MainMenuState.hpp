@@ -13,7 +13,7 @@ public:
     std::string getStateID() const override;
 
 private:
-    void setCallbacks(const std::vector<Callback>& callbacks) override;
+    void setCallbacks(const std::vector<Callback>& pCallbacks) override;
 
     static void menuToSinglePlayer();
     static void menuToMultiPlayer();
