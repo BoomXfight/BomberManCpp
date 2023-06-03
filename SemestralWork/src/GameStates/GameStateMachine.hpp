@@ -12,5 +12,5 @@ public:
     void update();
     void render();
 
-    std::vector<GameState*> m_gameStates;
+    std::vector<GameState*> mGameStates;
 };
