@@ -7,45 +7,43 @@
 #include "MultiPlayerMenuState.hpp"
 #include <iostream>
 
-// a unique ID for this state used in the xml file
-const std::string MainMenuState::s_menuID = "MAIN_MENU";
 
 /**
  * This method updates the gameObjects of the MainMenuState
  */
 void MainMenuState::update()
 {
-    for(int i = 0; i < m_gameObjects.size(); i++)
-        m_gameObjects[i]->update();
+    for(int i = 0; i < mGameObjects.size(); i++)
+        mGameObjects[i]->update();
 }
 
 /**
- * This method renders the gameObject of the MainMenuState
+ * This method renders the gameObjects of the MainMenuState
  */
 void MainMenuState::render()
 {
-    for(int i = 0; i < m_gameObjects.size(); i++)
-        m_gameObjects[i]->draw();
+    for(int i = 0; i < mGameObjects.size(); i++)
+        mGameObjects[i]->draw();
 }
 
 /**
- * This method initializes the MainMenuState from an xml file
+ * This method initializes the MainMenuState from an xml load file
  * @return true -> success, false -> failed to parse a gameState file
  */
 bool MainMenuState::onEnter()
 {
     StateParser stateParser;
-    if(! stateParser.parseState("../src/GameStates.xml", s_menuID, &m_gameObjects,&m_textureIDList))
+    if(! stateParser.parseState("../src/GameStates.xml", mMenuID, &mGameObjects,&mTextureIDList))
         return false;
 
     // Initialize the callback functions
-    m_callbacks.push_back(0); // TO DO REMOVE AND REPAIR
+    m_callbacks.push_back(nullptr); // TO DO REMOVE AND REPAIR
     m_callbacks.push_back(menuToSinglePlayer);
     m_callbacks.push_back(menuToMultiPlayer);
     m_callbacks.push_back(menuToQuit);
 
     setCallbacks(m_callbacks);
-    std::cout << "entering MainMenuState\n";
+    std::cout << "Entering MainMenuState" << std::endl;
     return true;
 }
 
@@ -58,21 +56,21 @@ bool MainMenuState::onExit()
     TheGame ::Instance()->setP1(""); // Reset the player names
     TheGame ::Instance()->setP2("");
 
-    for(int i = 0; i < m_gameObjects.size(); i++)
-        m_gameObjects[i]->clean();
+    for(int i = 0; i < mGameObjects.size(); i++)
+        mGameObjects[i]->clean();
 
-    m_gameObjects.clear();
+    mGameObjects.clear();
 
-    for(int i = 0; i < m_textureIDList.size(); i++)
-        TheTextureManager::Instance()->clearFromTextureMap(m_textureIDList[i]);
+    for(int i = 0; i < mTextureIDList.size(); i++)
+        TheTextureManager::Instance()->clearFromTextureMap(mTextureIDList[i]);
 
-    std::cout << "exiting MenuState\n";
+    std::cout << "exiting MenuState" << std::endl;
     return true;
 }
 
 std::string MainMenuState::getStateID() const
 {
-    return s_menuID;
+    return mMenuID;
 }
 
 /**
@@ -81,12 +79,12 @@ std::string MainMenuState::getStateID() const
  */
 void MainMenuState::setCallbacks(const std::vector<Callback> &callbacks)
 {
-    for(int i = 0; i < m_gameObjects.size(); i++)
+    for(int i = 0; i < mGameObjects.size(); i++)
     {
         // MenuButton requires callback function
-        if(dynamic_cast<MenuButton*>(m_gameObjects[i]))
+        if(dynamic_cast<MenuButton*>(mGameObjects[i]))
         {
-            MenuButton* pButton = dynamic_cast<MenuButton*>(m_gameObjects[i]);
+            MenuButton* pButton = dynamic_cast<MenuButton*>(mGameObjects[i]);
             pButton->setCallback(callbacks[pButton->getCallbackID()]);
         }
     }
@@ -115,3 +113,6 @@ void MainMenuState::menuToQuit()
 {
     TheGame::Instance()->quit();
 }
+
+// a unique ID for the MainMenuState used in the xml load file
+const std::string MainMenuState::mMenuID = "MAIN_MENU";

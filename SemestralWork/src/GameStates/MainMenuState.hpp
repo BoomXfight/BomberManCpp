@@ -19,6 +19,6 @@ private:
     static void menuToMultiPlayer();
     static void menuToQuit();
 
-    static const std::string s_menuID;
-    std::vector<GameObject*> m_gameObjects;
+    static const std::string mMenuID;
+    std::vector<GameObject*> mGameObjects;
 };
