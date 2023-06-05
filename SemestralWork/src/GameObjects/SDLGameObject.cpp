@@ -5,30 +5,39 @@ SDLGameObject::SDLGameObject() : GameObject()
 {
 }
 
-void SDLGameObject::load(const LoaderParams *pParams)
-{
-    m_position = Vector2D(pParams->getX(),pParams->getY());
-    //m_velocity = Vector2D(0,0);
-    //m_acceleration = Vector2D(0,0);
-    m_width = pParams->getWidth();
-    m_height = pParams->getHeight();
-    m_textureID = pParams->getTextureID();
-    m_currentRow = 1;
-    m_currentFrame = 1;
-    m_numFrames = pParams->getNumFrames();
-}
-
+/**
+ * This method draws an SDLGameObject to the screen
+ */
 void SDLGameObject::draw()
 {
-    TextureManager::Instance()->drawFrame(m_textureID, (int)m_position.getX(), (int)m_position.getY(),
-                                          m_width, m_height, m_currentRow, m_currentFrame,
-                                          TheGame::Instance()->getRenderer());
+    TextureManager::Instance()->drawFrame(mTextureID, (int)mPosition.getX(), (int)mPosition.getY(),
+                                          mWidth, mHeight, mCurrentRow,
+                                          mCurrentFrame,TheGame::Instance()->getRenderer());
 }
 
+/**
+ * This method updates the SDLGameObject
+ */
 void SDLGameObject::update()
 {
-    m_velocity += m_acceleration;
-    m_position += m_velocity;
+    mVelocity += mAcceleration;
+    mPosition += mVelocity;
 }
 
 void SDLGameObject::clean() {}
+
+/**
+ * This method loads the SDLGameObject
+ * @param[in] pParams
+ */
+void SDLGameObject::load(const LoaderParams *pParams)
+{
+    mPosition = Vector2D(pParams->getX(),pParams->getY());
+    mWidth = pParams->getWidth();
+    mHeight = pParams->getHeight();
+    mTextureID = pParams->getTextureID();
+    mCurrentRow = 1;
+    mCurrentFrame = 1;
+    mNumFrames = pParams->getNumFrames();
+}
+

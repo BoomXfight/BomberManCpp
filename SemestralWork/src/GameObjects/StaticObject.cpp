@@ -15,7 +15,7 @@ void StaticObject::draw()
 
 void StaticObject::update()
 {
-    m_currentFrame = 0;
+    mCurrentFrame = 0;
     SDLGameObject::update();
 }
 

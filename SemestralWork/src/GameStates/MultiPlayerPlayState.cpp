@@ -3,8 +3,8 @@
 #include "../Singletons/TextureManager.hpp"
 #include "../Levels/LevelParser.hpp"
 #include "MultiPlayerPlayState.hpp"
-#include "GameState.hpp"
-#include "PauseMenuState.hpp"
+#include "../GameStates/GameState.hpp"
+#include "../GameStates/PauseMenuState.hpp"
 #include <iostream>
 
 /**

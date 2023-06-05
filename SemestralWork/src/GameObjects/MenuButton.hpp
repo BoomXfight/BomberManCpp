@@ -6,12 +6,12 @@ class MenuButton : public SDLGameObject
 {
 public:
     MenuButton();
-    virtual void load(const LoaderParams *pParams);
-    virtual void draw();
-    virtual void update();
-    virtual void clean();
-    int getCallbackID() {return m_callbackID;};
-    void setCallback(void(*callback)()) {m_callback = callback;};
+    void load(const LoaderParams* pParams) override;
+    void draw() override;
+    void update() override;
+    void clean() override;
+    int getCallbackID();
+    void setCallback(void(*callback)());
 
 private:
     enum button_state
@@ -21,15 +21,12 @@ private:
         CLICKED = 2
     };
 
-    int m_callbackID;
-    void (*m_callback)();
-    bool m_bReleased;
+    int mCallbackID;
+    void (*mCallback)();
+    bool mReleased;
 };
 
 class MenuButtonCreator : public BaseCreator
 {
-    GameObject* createGameObject() const
-    {
-        return new MenuButton();
-    }
+    GameObject* createGameObject() const {return new MenuButton();}
 };

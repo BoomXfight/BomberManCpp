@@ -1,6 +1,5 @@
 #include "TextSquare.hpp"
 #include "../Singletons/InputHandler.hpp"
-#include "../Singletons/Game.hpp"
 #include <iostream>
 
 TextSquare::TextSquare() : SDLGameObject()
@@ -11,9 +10,9 @@ void TextSquare::load(const LoaderParams *pParams)
 {
     SDLGameObject::load(pParams);
     SDL_StopTextInput();
-    active = false;
-    m_currentFrame = NOT_CLICKED;
-    m_bReleased = true;
+    mActive = false;
+    mCurrentFrame = NOT_CLICKED;
+    mReleased = true;
 }
 
 void TextSquare::draw()
@@ -24,20 +23,20 @@ void TextSquare::draw()
 void TextSquare::update()
 {
     Vector2D* pMousePos = TheInputHandler::Instance() ->getMousePosition();
-    if(pMousePos->getX() < (m_position.getX() + m_width)
-       && pMousePos->getX() > m_position.getX()
-       && pMousePos->getY() < (m_position.getY() + m_height)
-       && pMousePos->getY() > m_position.getY()
-       && TheInputHandler::Instance()->getMouseButtonState(LEFT) && m_bReleased)
+    if(pMousePos->getX() < (mPosition.getX() + mWidth)
+       && pMousePos->getX() > mPosition.getX()
+       && pMousePos->getY() < (mPosition.getY() + mHeight)
+       && pMousePos->getY() > mPosition.getY()
+       && TheInputHandler::Instance()->getMouseButtonState(LEFT) && mReleased)
     {
         if(!SDL_IsTextInputActive())
         {
-            m_currentFrame = CLICKED;
+            mCurrentFrame = CLICKED;
             SDL_StartTextInput();
-            active = true;
-            std::cout << "TextInputOn\n";
+            mActive = true;
+            std::cout << "TextInputOn" << std::endl;
         }
-        m_bReleased = false;
+        mReleased = false;
     }
     handleInput();
 }
@@ -47,37 +46,43 @@ void TextSquare::clean()
     SDLGameObject::clean();
 }
 
+std::string TextSquare::getText()
+{
+    return mText;
+}
+
+/**
+ * This method handles the user input and reactions with the TextSquare gameObject
+ */
 void TextSquare::handleInput()
 {
-    if(active)
+    if(mActive)
     {
-        if (!TheInputHandler::Instance()->showInput().empty()) {
-            m_text += TheInputHandler::Instance()->getResetInput();
-            std::cout << m_text << std::endl;
+        if (!TheInputHandler::Instance()->showInput().empty())
+        {
+            mText += TheInputHandler::Instance()->getResetInput();
+            std::cout << mText << std::endl;
         }
 
         if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_BACKSPACE)) {
-            if(!m_text.empty())
+            if(!mText.empty())
             {
-                m_text.pop_back();
-                std::cout << m_text << std::endl;
+                mText.pop_back();
+                std::cout << mText << std::endl;
             }
         }
 
         if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RETURN)
-            || TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_KP_ENTER)) {
-            if (SDL_IsTextInputActive()) {
+            || TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_KP_ENTER))
+        {
+            if (SDL_IsTextInputActive())
+            {
                 SDL_StopTextInput();
-                active = false;
+                mActive = false;
                 std::cout << "Text input off" << std::endl;
             }
-            m_currentFrame = NOT_CLICKED;
-            m_bReleased = true;
+            mCurrentFrame = NOT_CLICKED;
+            mReleased = true;
         }
     }
-}
-
-std::string TextSquare::getText()
-{
-    return m_text;
 }

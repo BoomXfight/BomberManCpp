@@ -1,7 +1,7 @@
 #include "Player.hpp"
 #include "../Singletons/InputHandler.hpp"
 
-Player::Player() : SDLGameObject(), moving(false)
+Player::Player() : SDLGameObject(), mMoving(false)
 {}
 
 void Player::load(const LoaderParams *pParams)
@@ -18,10 +18,10 @@ void Player::update()
 {
     handleInput();
 
-    if(moving)
-        m_currentFrame = int(((SDL_GetTicks() / 200) % m_numFrames));
+    if(mMoving)
+        mCurrentFrame = int(((SDL_GetTicks() / 200) % mNumFrames));
     else
-        m_currentFrame = 1;
+        mCurrentFrame = 1;
 
     SDLGameObject::update();
 }
@@ -33,49 +33,28 @@ void Player::handleInput()
 {
     if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT))
     {
-        m_currentRow = 3;
-        m_position += Vector2D(4,0);
-        moving = true;
+        mCurrentRow = 3;
+        mPosition += Vector2D(4,0);
+        mMoving = true;
     }
     else if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_LEFT))
     {
-        m_currentRow = 4;
-        m_position += Vector2D(-4,0);
-        moving = true;
+        mCurrentRow = 4;
+        mPosition += Vector2D(-4,0);
+        mMoving = true;
     }
     else if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_UP))
     {
-        m_currentRow = 2;
-        m_position += Vector2D(0,-4);
-        moving = true;
+        mCurrentRow = 2;
+        mPosition += Vector2D(0,-4);
+        mMoving = true;
     }
     else if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_DOWN))
     {
-        m_currentRow = 1;
-        m_position += Vector2D(0,4);
-        moving = true;
+        mCurrentRow = 1;
+        mPosition += Vector2D(0,4);
+        mMoving = true;
     }
     else
-        moving = false;
+        mMoving = false;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -6,10 +6,10 @@ class TextSquare : public SDLGameObject
 {
 public:
     TextSquare();
-    virtual void load(const LoaderParams* pParams);
-    virtual void draw();
-    virtual void update();
-    virtual void clean();
+    void load(const LoaderParams* pParams) override;
+    void draw() override;
+    void update() override;
+    void clean() override;
     virtual std::string getText();
 
 private:
@@ -20,15 +20,12 @@ private:
     };
 
     void handleInput();
-    std::string m_text;
-    bool active;
-    bool m_bReleased;
+    std::string mText;
+    bool mActive;
+    bool mReleased;
 };
 
 class TextSquareCreator : public BaseCreator
 {
-    GameObject* createGameObject() const
-    {
-        return new TextSquare();
-    }
+    GameObject* createGameObject() const {return new TextSquare();}
 };

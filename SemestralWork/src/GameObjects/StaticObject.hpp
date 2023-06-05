@@ -6,16 +6,13 @@ class StaticObject : public SDLGameObject
 {
 public:
     StaticObject();
-    virtual void load(const LoaderParams *pParams);
-    virtual void draw();
-    virtual void update();
-    virtual void clean();
+    void load(const LoaderParams *pParams) override;
+    void draw() override;
+    void update() override;
+    void clean() override;
 };
 
 class StaticObjectCreator : public BaseCreator
 {
-    GameObject* createGameObject() const
-    {
-        return new StaticObject();
-    }
+    GameObject* createGameObject() const {return new StaticObject();}
 };

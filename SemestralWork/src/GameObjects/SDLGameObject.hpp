@@ -7,20 +7,20 @@ class SDLGameObject : public GameObject
 {
 public:
     SDLGameObject();
-    virtual void draw();
-    virtual void update();
-    virtual void clean();
-    virtual void load(const LoaderParams *pParams);
+    void draw() override;
+    void update() override;
+    void clean() override;
+    void load(const LoaderParams *pParams) override;
 
 protected:
-    Vector2D m_position;
-    Vector2D m_velocity;
-    Vector2D m_acceleration;
+    Vector2D mPosition;
+    Vector2D mVelocity;
+    Vector2D mAcceleration;
 
-    int m_width;
-    int m_height;
-    int m_currentRow;
-    int m_currentFrame;
-    int m_numFrames;
-    std::string m_textureID;
+    int mWidth;
+    int mHeight;
+    int mCurrentRow;
+    int mCurrentFrame;
+    int mNumFrames;
+    std::string mTextureID;
 };
