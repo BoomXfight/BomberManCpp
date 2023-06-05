@@ -8,10 +8,10 @@ int main(int argc, char* argv[])
     int DELAY_TIME = 1000.0f / FPS;
     Uint32 frameStart, frameTime;
 
-    std::cout << "game init attempt...\n";
+    std::cout << "Game init attempt." << std::endl;
     if(TheGame::Instance()->init("BomberMan", 0, 0, 960, 540, false))
     {
-        std::cout << "game init success!\n";
+        std::cout << "Game init success!" << std::endl;
         while(TheGame::Instance()->isRunning()) // Game loop
         {
             frameStart = SDL_GetTicks();
@@ -20,9 +20,11 @@ int main(int argc, char* argv[])
             TheGame::Instance()->update();
             TheGame::Instance()->render();
 
+            // Fewer FPS during menu states to prevent double clicks
             if(TheGame::Instance()->getStateMachine()->mGameStates.back()->getStateID() == "MAIN_MENU"
             || TheGame::Instance()->getStateMachine()->mGameStates.back()->getStateID() == "SINGLE_PLAYER_MENU"
-            || TheGame::Instance()->getStateMachine()->mGameStates.back()->getStateID() == "MULTI_PLAYER_MENU" )
+            || TheGame::Instance()->getStateMachine()->mGameStates.back()->getStateID() == "MULTI_PLAYER_MENU"
+            || TheGame::Instance()->getStateMachine()->mGameStates.back()->getStateID() == "PAUSE_STATE")
             {
                 FPS = 20;
                 DELAY_TIME = 1000.0f / FPS;
@@ -35,11 +37,11 @@ int main(int argc, char* argv[])
     }
     else
     {
-        std::cout << "game init failure - " << SDL_GetError() << "\n";
+        std::cout << "Game init failure: " << SDL_GetError() << std::endl;
         return -1;
     }
 
-    std::cout << "game closing...\n";
+    std::cout << "Game closing." << std::endl;
     TheGame::Instance()->clean();
     return 0;
 }

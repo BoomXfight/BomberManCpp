@@ -72,24 +72,6 @@
         </OBJECTS>
     </SINGLE_PLAYER_MENU>
 
-    <!--Single Player Play State-->
-    <SINGLE_PLAYER_PLAY_STATE>
-        <TEXTURES>
-        </TEXTURES>
-
-        <OBJECTS>
-        </OBJECTS>
-    </SINGLE_PLAYER_PLAY_STATE>
-
-    <!--Multi Player Play State-->
-    <MULTI_PLAYER_PLAY_STATE>
-        <TEXTURES>
-        </TEXTURES>
-
-        <OBJECTS>
-        </OBJECTS>
-    </MULTI_PLAYER_PLAY_STATE>
-
     <!--Pause State-->
     <PAUSE_STATE>
         <TEXTURES>
