@@ -7,15 +7,13 @@
 #include "PauseMenuState.hpp"
 #include <iostream>
 
-const std::string MultiPlayerPlayState::s_playID = "MULTI_PLAYER_PLAY_STATE";
-
 /**
  * This method updates the current level as well as checks for a game pause
  */
 void MultiPlayerPlayState::update()
 {
-    pLevel->update();
-    pLevel->getLayers();
+    mLevel->update();
+    mLevel->getLayers();
 
     if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_ESCAPE))
         TheGame::Instance()->getStateMachine()->pushState(new PauseMenuState());
@@ -26,7 +24,7 @@ void MultiPlayerPlayState::update()
  */
 void MultiPlayerPlayState::render()
 {
-    pLevel->render();
+    mLevel->render();
 }
 
 /**
@@ -36,7 +34,7 @@ void MultiPlayerPlayState::render()
 bool MultiPlayerPlayState::onEnter()
 {
     LevelParser levelParser;
-    pLevel = levelParser.parseLevel("../Assets/Maps/map2.tmx");
+    mLevel = levelParser.parseLevel("../Assets/Maps/map2.tmx");
     std::cout << "Entering MultiPLayerPlayState" << std::endl;
     return true;
 }
@@ -47,19 +45,21 @@ bool MultiPlayerPlayState::onEnter()
  */
 bool MultiPlayerPlayState::onExit()
 {
-    for(int i = 0; i < m_gameObjects.size(); i++)
-        m_gameObjects[i]->clean();
+    for(int i = 0; i < mGameObjects.size(); i++)
+        mGameObjects[i]->clean();
 
-    m_gameObjects.clear();
+    mGameObjects.clear();
 
-    for(int i = 0; i < m_textureIDList.size(); i++)
-        TheTextureManager::Instance()->clearFromTextureMap(m_textureIDList[i]);
+    for(int i = 0; i < mTextureIDList.size(); i++)
+        TheTextureManager::Instance()->clearFromTextureMap(mTextureIDList[i]);
 
-    std::cout << "exiting SinglePlayerPlayState\n";
+    std::cout << "Exiting MinglePlayerPlayState" << std::endl;
     return true;
 }
 
 std::string MultiPlayerPlayState::getStateID() const
 {
-    return s_playID;
+    return mPlayID;
 }
+
+const std::string MultiPlayerPlayState::mPlayID = "MULTI_PLAYER_PLAY_STATE";
