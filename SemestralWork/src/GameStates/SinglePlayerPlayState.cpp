@@ -7,6 +7,9 @@
 #include "PauseMenuState.hpp"
 #include <iostream>
 
+/**
+ * This method updates the current level as well as checks for a game pause
+ */
 void SinglePlayerPlayState::update()
 {
     mLevel->update();
@@ -16,11 +19,18 @@ void SinglePlayerPlayState::update()
         TheGame::Instance()->getStateMachine()->pushState(new PauseMenuState());
 }
 
+/**
+ * This method renders the current level
+ */
 void SinglePlayerPlayState::render()
 {
     mLevel->render();
 }
 
+/**
+ * This method initializes the current level from the file
+ * @return true
+ */
 bool SinglePlayerPlayState::onEnter()
 {
     LevelParser levelParser;
@@ -29,6 +39,10 @@ bool SinglePlayerPlayState::onEnter()
     return true;
 }
 
+/**
+ * This method cleans up after the current game state
+ * @return true
+ */
 bool SinglePlayerPlayState::onExit()
 {
     for(int i = 0; i < mGameObjects.size(); i++)

@@ -20,7 +20,7 @@ void MultiPlayerPlayState::update()
 }
 
 /**
- * This method renders a current level
+ * This method renders the current level
  */
 void MultiPlayerPlayState::render()
 {
@@ -41,7 +41,7 @@ bool MultiPlayerPlayState::onEnter()
 
 /**
  * This method cleans up after the current game state
- * @return
+ * @return true
  */
 bool MultiPlayerPlayState::onExit()
 {
