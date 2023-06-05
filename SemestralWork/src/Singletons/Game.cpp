@@ -35,18 +35,18 @@ bool Game::init(const char* pTitle, int pX_WindowPos, int pY_WindowPos, int pWin
         if(pFullscreen)
             flags = SDL_WINDOW_FULLSCREEN;
 
-        std::cout << "SDL init success" << std::endl;
+        std::cout << "SDL init success." << std::endl;
 
         mGameWidth = pWindowWidth;
         mGameHeight = pWindowHeight;
         mWindow = SDL_CreateWindow(pTitle, pX_WindowPos, pY_WindowPos,mGameWidth, mGameHeight, flags);
         if(mWindow != nullptr)
         {
-            std::cout << "Window creation success" << std::endl;
+            std::cout << "Window creation success." << std::endl;
             mRenderer = SDL_CreateRenderer(mWindow, -1, 0);
             if(mRenderer != nullptr)
             {
-                std::cout << "Renderer creation success" << std::endl;
+                std::cout << "Renderer creation success." << std::endl;
                 SDL_SetRenderDrawColor(mRenderer,0,0,0,255);
             }
             else
@@ -77,7 +77,7 @@ bool Game::init(const char* pTitle, int pX_WindowPos, int pY_WindowPos, int pWin
     mGameStateMachine = new GameStateMachine();
     mGameStateMachine->changeState(new MainMenuState());
 
-    std::cout << "init success\n";
+    std::cout << "Init success." << std::endl;
     mIsRunning = true;
     return true;
 }
