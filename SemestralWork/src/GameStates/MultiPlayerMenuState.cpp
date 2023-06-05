@@ -9,25 +9,22 @@
 #include "StateParser.hpp"
 #include <iostream>
 
-// a unique ID for this state used in the xml file
-const std::string MultiPlayerMenuState::s_menuID = "MULTI_PLAYER_MENU";
-
 /**
- * This method updates the gameObjects of the MainMenuState
+ * This method updates the gameObjects of the MultiPlayerMenuState
  */
 void MultiPlayerMenuState::update()
 {
-    for(size_t i = 0; i < m_gameObjects.size(); i++)
-        m_gameObjects[i]->update();
+    for(size_t i = 0; i < mGameObjects.size(); i++)
+        mGameObjects[i]->update();
 }
 
 /**
- * This method renders the gameObject of the MainMenuState
+ * This method renders the gameObjects of the MultiPlayerMenuState
  */
 void MultiPlayerMenuState::render()
 {
-    for(size_t i = 0; i < m_gameObjects.size(); i++)
-        m_gameObjects[i]->draw();
+    for(size_t i = 0; i < mGameObjects.size(); i++)
+        mGameObjects[i]->draw();
 }
 
 /**
@@ -37,52 +34,52 @@ void MultiPlayerMenuState::render()
 bool MultiPlayerMenuState::onEnter()
 {
     StateParser stateParser;
-    if(! stateParser.parseState("../src/GameStates.xml", s_menuID, &m_gameObjects,&m_textureIDList))
+    if(! stateParser.parseState("../src/GameStates.xml", mMenuID, &mGameObjects,&mTextureIDList))
         return false;
 
-    m_callbacks.push_back(0);
-    m_callbacks.push_back(menuToQuit);
-    m_callbacks.push_back(mpMenuToMainMenu);
-    m_callbacks.push_back(mpMenuToMpPlay);
+    mCallbacks.push_back(nullptr);
+    mCallbacks.push_back(menuToQuit);
+    mCallbacks.push_back(mpMenuToMainMenu);
+    mCallbacks.push_back(mpMenuToMpPlay);
 
-    setCallbacks(m_callbacks);
-    std::cout << "entering MultiPlayerMenu state\n";
+    setCallbacks(mCallbacks);
+    std::cout << "Entering MultiPlayerMenu state" << std::endl;
     return true;
 }
 
 /**
- * This method cleans up at the end of gameState and sets the active players
+ * This method cleans up at the end of MultiPlayerMenuState and sets the active players
  * @return true
  */
 bool MultiPlayerMenuState::onExit()
 {
-    if(TextSquare* a = dynamic_cast<TextSquare*>(m_gameObjects[0]))
+    if(TextSquare* a = dynamic_cast<TextSquare*>(mGameObjects[0]))
     {
         TheGame::Instance()->setP1(a->getText());
         std::cout << "P1 set" << std::endl;
     }
 
-    if(TextSquare* b = dynamic_cast<TextSquare*>(m_gameObjects[1]))
+    if(TextSquare* b = dynamic_cast<TextSquare*>(mGameObjects[1]))
     {
         TheGame::Instance()->setP2(b->getText());
         std::cout << "P2 set" << std::endl;
     }
 
-    for(int i = 0; i < m_gameObjects.size(); i++)
-        m_gameObjects[i]->clean();
+    for(int i = 0; i < mGameObjects.size(); i++)
+        mGameObjects[i]->clean();
 
-    m_gameObjects.clear();
+    mGameObjects.clear();
 
-    for(int i = 0; i < m_textureIDList.size(); i++)
-        TheTextureManager::Instance()->clearFromTextureMap(m_textureIDList[i]);
+    for(int i = 0; i < mTextureIDList.size(); i++)
+        TheTextureManager::Instance()->clearFromTextureMap(mTextureIDList[i]);
 
-    std::cout << "exiting MultiPlayerMenuState\n";
+    std::cout << "Exiting MultiPlayerMenuState" << std::endl;
     return true;
 }
 
 std::string MultiPlayerMenuState::getStateID() const
 {
-    return s_menuID;
+    return mMenuID;
 }
 
 /**
@@ -91,17 +88,16 @@ std::string MultiPlayerMenuState::getStateID() const
  */
 void MultiPlayerMenuState::setCallbacks(const std::vector<Callback> &callbacks)
 {
-    for(int i = 0; i < m_gameObjects.size(); i++)
+    for(int i = 0; i < mGameObjects.size(); i++)
     {
         // if they are of type MenuButton then assign a callback based on the id passed in from the file
-        if(dynamic_cast<MenuButton*>(m_gameObjects[i]))
+        if(dynamic_cast<MenuButton*>(mGameObjects[i]))
         {
-            MenuButton* pButton = dynamic_cast<MenuButton*>(m_gameObjects[i]);
+            MenuButton* pButton = dynamic_cast<MenuButton*>(mGameObjects[i]);
             pButton->setCallback(callbacks[pButton->getCallbackID()]);
         }
     }
 }
-
 
 void MultiPlayerMenuState::menuToQuit()
 {
@@ -133,3 +129,6 @@ void MultiPlayerMenuState::mpMenuToMpPlay()
     else
         std::cout << "Player2 : guest" << std::endl;
 }
+
+// a unique ID for the MultiPlayerMenuState state used in the xml file
+const std::string MultiPlayerMenuState::mMenuID = "MULTI_PLAYER_MENU";

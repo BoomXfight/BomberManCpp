@@ -13,12 +13,12 @@ public:
     std::string getStateID() const override;
 
 private:
-    void setCallbacks(const std::vector<Callback>& callbacks) override;
+    void setCallbacks(const std::vector<Callback>& pCallbacks) override;
 
     static void menuToQuit();
     static void mpMenuToMainMenu();
     static void mpMenuToMpPlay();
 
-    static const std::string s_menuID;
-    std::vector<GameObject*> m_gameObjects;
+    static const std::string mMenuID;
+    std::vector<GameObject*> mGameObjects;
 };
