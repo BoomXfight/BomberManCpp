@@ -9,10 +9,10 @@
 class StateParser
 {
 public:
-    bool parseState(const char* stateFile, std::string stateID, std::vector<GameObject*> *pObjects,
-                    std::vector<std::string> *pTextureIDs);
+    bool parseState(const char* pStateFile, const std::string& pStateID, std::vector<GameObject*>* pObjects,
+                    std::vector<std::string>* pTextureIDs);
 
 private:
-    void parseObjects(xmlNodePtr objectRoot, std::vector<GameObject *> *pObjects);
-    void parseTextures(xmlNodePtr textureRoot, std::vector<std::string> *pTextureIDs);
+    void parseObjects(xmlNodePtr pObjectRoot, std::vector<GameObject*>* pObjects);
+    void parseTextures(xmlNodePtr pTextureRoot, std::vector<std::string>* pTextureIDs);
 };

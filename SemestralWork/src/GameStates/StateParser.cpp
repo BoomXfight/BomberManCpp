@@ -4,13 +4,21 @@
 #include "../Singletons/GameObjectFactory.hpp"
 #include "../LoaderParams.hpp"
 
-bool StateParser::parseState(const char* stateFile, std::string stateID,
-                             std::vector<GameObject*> *pObjects, std::vector<std::string> *pTextureIDs)
+/**
+ * This method parses the xml file and loads a game state from it
+ * @param[in] pStateFile
+ * @param[in] pStateID
+ * @param[in] pObjects
+ * @param[in] pTextureIDs
+ * @return true -> success, false -> failure
+ */
+bool StateParser::parseState(const char* pStateFile, const std::string& pStateID,
+                             std::vector<GameObject*>* pObjects, std::vector<std::string>* pTextureIDs)
 {
-    xmlDocPtr doc = xmlReadFile(stateFile, nullptr, 0);
+    xmlDocPtr doc = xmlReadFile(pStateFile, nullptr, 0);
     if (doc == nullptr)
     {
-        std::cerr << "Failed to load state file: " << stateFile << std::endl;
+        std::cerr << "Failed to load state file: " << pStateFile << std::endl;
         return false;
     }
 
@@ -19,7 +27,7 @@ bool StateParser::parseState(const char* stateFile, std::string stateID,
     xmlNodePtr stateRoot = nullptr;
     for (xmlNodePtr node = rootNode->children; node != nullptr; node = node->next)
     {
-        if (xmlStrcmp(node->name, (const xmlChar*)stateID.c_str()) == 0)
+        if (xmlStrcmp(node->name, (const xmlChar*)pStateID.c_str()) == 0)
         {
             stateRoot = node;
             break;
@@ -55,30 +63,14 @@ bool StateParser::parseState(const char* stateFile, std::string stateID,
     return true;
 }
 
-void StateParser::parseTextures(xmlNodePtr textureRoot, std::vector<std::string> *pTextureIDs)
+/**
+ * This method parses and loads the game objects of a game state from the xml file
+ * @param[in] pObjectRoot
+ * @param[in] pObjects
+ */
+void StateParser::parseObjects(xmlNodePtr pObjectRoot, std::vector<GameObject*>* pObjects)
 {
-    for (xmlNodePtr node = textureRoot->children; node != nullptr; node = node->next)
-    {
-        if (node->type == XML_ELEMENT_NODE)
-        {
-            xmlChar* filenameAttr = xmlGetProp(node, (const xmlChar*)"filename");
-            xmlChar* idAttr = xmlGetProp(node, (const xmlChar*)"ID");
-            if (filenameAttr && idAttr)
-            {
-                std::string filename((const char*)filenameAttr);
-                std::string id((const char*)idAttr);
-                pTextureIDs->push_back(id); // push into list
-                TheTextureManager::Instance()->load(filename, id, TheGame::Instance()->getRenderer());
-            }
-            xmlFree(filenameAttr);
-            xmlFree(idAttr);
-        }
-    }
-}
-
-void StateParser::parseObjects(xmlNodePtr objectRoot, std::vector<GameObject *> *pObjects)
-{
-    for (xmlNodePtr node = objectRoot->children; node != nullptr; node = node->next)
+    for (xmlNodePtr node = pObjectRoot->children; node != nullptr; node = node->next)
     {
         if (node->type == XML_ELEMENT_NODE)
         {
@@ -122,3 +114,28 @@ void StateParser::parseObjects(xmlNodePtr objectRoot, std::vector<GameObject *> 
     }
 }
 
+/**
+ * This method parses and loads textures of a game state from an xml file
+ * @param[in] pTextureRoot
+ * @param[in] pTextureIDs
+ */
+void StateParser::parseTextures(xmlNodePtr pTextureRoot, std::vector<std::string>* pTextureIDs)
+{
+    for (xmlNodePtr node = pTextureRoot->children; node != nullptr; node = node->next)
+    {
+        if (node->type == XML_ELEMENT_NODE)
+        {
+            xmlChar* filenameAttr = xmlGetProp(node, (const xmlChar*)"filename");
+            xmlChar* idAttr = xmlGetProp(node, (const xmlChar*)"ID");
+            if (filenameAttr && idAttr)
+            {
+                std::string filename((const char*)filenameAttr);
+                std::string id((const char*)idAttr);
+                pTextureIDs->push_back(id); // push into list
+                TheTextureManager::Instance()->load(filename, id, TheGame::Instance()->getRenderer());
+            }
+            xmlFree(filenameAttr);
+            xmlFree(idAttr);
+        }
+    }
+}
