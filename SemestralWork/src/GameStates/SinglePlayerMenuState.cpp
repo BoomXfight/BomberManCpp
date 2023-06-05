@@ -9,25 +9,22 @@
 #include "StateParser.hpp"
 #include <iostream>
 
-// a unique ID for this state used in the xml file
-const std::string SinglePlayerMenuState::s_menuID = "SINGLE_PLAYER_MENU";
-
 /**
- * This method updates the gameObjects of the MainMenuState
+ * This method updates the gameObjects of the SinglePlayerMenuState
  */
 void SinglePlayerMenuState::update()
 {
-    for(size_t i = 0; i < m_gameObjects.size(); i++)
-        m_gameObjects[i]->update();
+    for(size_t i = 0; i < mGameObjects.size(); i++)
+        mGameObjects[i]->update();
 }
 
 /**
- * This method renders the gameObject of the MainMenuState
+ * This method renders the gameObject of the SinglePlayerMenuState
  */
 void SinglePlayerMenuState::render()
 {
-    for(size_t i = 0; i < m_gameObjects.size(); i++)
-        m_gameObjects[i]->draw();
+    for(size_t i = 0; i < mGameObjects.size(); i++)
+        mGameObjects[i]->draw();
 }
 
 /**
@@ -37,46 +34,46 @@ void SinglePlayerMenuState::render()
 bool SinglePlayerMenuState::onEnter()
 {
     StateParser stateParser;
-    if(! stateParser.parseState("../src/GameStates.xml", s_menuID, &m_gameObjects,&m_textureIDList))
+    if(! stateParser.parseState("../src/GameStates.xml", mMenuID, &mGameObjects,&mTextureIDList))
         return false;
 
-    m_callbacks.push_back(0);
-    m_callbacks.push_back(menuToQuit);
-    m_callbacks.push_back(spMenuToMainMenu);
-    m_callbacks.push_back(spMenuToSpPlay);
+    mCallbacks.push_back(nullptr);
+    mCallbacks.push_back(menuToQuit);
+    mCallbacks.push_back(spMenuToMainMenu);
+    mCallbacks.push_back(spMenuToSpPlay);
 
-    setCallbacks(m_callbacks);
-    std::cout << "entering SinglePlayerMenu state\n";
+    setCallbacks(mCallbacks);
+    std::cout << "Entering SinglePlayerMenu state" << std::endl;
     return true;
 }
 
 /**
- * This method cleans up at the end of gameState and initializes an active player
+ * This method cleans up at the end of SinglePlayerMenuState and initializes an active player
  * @return true
  */
 bool SinglePlayerMenuState::onExit()
 {
-    if(TextSquare* a = dynamic_cast<TextSquare*>(m_gameObjects[0]))
+    if(TextSquare* a = dynamic_cast<TextSquare*>(mGameObjects[0]))
     {
         TheGame::Instance()->setP1(a->getText());
         std::cout << "P1 set" << std::endl;
     }
 
-    for(int i = 0; i < m_gameObjects.size(); i++)
-        m_gameObjects[i]->clean();
+    for(int i = 0; i < mGameObjects.size(); i++)
+        mGameObjects[i]->clean();
 
-    m_gameObjects.clear();
+    mGameObjects.clear();
 
-    for(int i = 0; i < m_textureIDList.size(); i++)
-        TheTextureManager::Instance()->clearFromTextureMap(m_textureIDList[i]);
+    for(int i = 0; i < mTextureIDList.size(); i++)
+        TheTextureManager::Instance()->clearFromTextureMap(mTextureIDList[i]);
 
-    std::cout << "exiting SinglePlayerMenuState\n";
+    std::cout << "Exiting SinglePlayerMenuState" << std::endl;
     return true;
 }
 
 std::string SinglePlayerMenuState::getStateID() const
 {
-    return s_menuID;
+    return mMenuID;
 }
 
 /**
@@ -85,12 +82,12 @@ std::string SinglePlayerMenuState::getStateID() const
  */
 void SinglePlayerMenuState::setCallbacks(const std::vector<Callback> &callbacks)
 {
-    for(int i = 0; i < m_gameObjects.size(); i++)
+    for(int i = 0; i < mGameObjects.size(); i++)
     {
         // if they are of type MenuButton then assign a callback based on the id passed in from the file
-        if(dynamic_cast<MenuButton*>(m_gameObjects[i]))
+        if(dynamic_cast<MenuButton*>(mGameObjects[i]))
         {
-            MenuButton* pButton = dynamic_cast<MenuButton*>(m_gameObjects[i]);
+            MenuButton* pButton = dynamic_cast<MenuButton*>(mGameObjects[i]);
             pButton->setCallback(callbacks[pButton->getCallbackID()]);
         }
     }
@@ -113,7 +110,7 @@ void SinglePlayerMenuState::spMenuToMainMenu()
 }
 
 /**
- * This callback function switches the current game state to the SinglePlayerPlayState
+ * This callback function switches from SinglePlayerMenuState to the SinglePlayerPlayState
  */
 void SinglePlayerMenuState::spMenuToSpPlay()
 {
@@ -124,3 +121,6 @@ void SinglePlayerMenuState::spMenuToSpPlay()
     else
         std::cout << "Playing as : guest" << std::endl;
 }
+
+// a unique ID for SinglePlayerPlayState used in the xml file
+const std::string SinglePlayerMenuState::mMenuID = "SINGLE_PLAYER_MENU";
