@@ -13,7 +13,7 @@ public:
     virtual std::string getStateID() const;
 
 private:
-    Level* mLevel;
     static const std::string mMenuID;
     std::vector<GameObject*> mGameObjects;
+    Level* mLevel;
 };
