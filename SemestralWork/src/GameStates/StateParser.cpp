@@ -2,7 +2,6 @@
 #include "../Singletons/TextureManager.hpp"
 #include "../Singletons/Game.hpp"
 #include "../Singletons/GameObjectFactory.hpp"
-#include "../LoaderParams.hpp"
 
 /**
  * This method parses the xml file and loads a game state from it
