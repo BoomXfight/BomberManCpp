@@ -1,20 +1,19 @@
 #pragma once
-#include "GameState.hpp"
+#include "../Levels/Level.hpp"
 #include "../GameObjects/GameObject.hpp"
 #include <vector>
 
-
 class SinglePlayerPlayState : public GameState
 {
-
 public:
     virtual void update();
     virtual void render();
     virtual bool onEnter();
     virtual bool onExit();
-    virtual std::string getStateID() const {return s_menuID;};
+    virtual std::string getStateID() const;
 
 private:
-    static const std::string s_menuID;
-    std::vector<GameObject*> m_gameObjects;
+    Level* mLevel;
+    static const std::string mMenuID;
+    std::vector<GameObject*> mGameObjects;
 };

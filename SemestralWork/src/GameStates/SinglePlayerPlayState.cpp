@@ -1,52 +1,46 @@
 #include "../Singletons/InputHandler.hpp"
 #include "../Singletons/Game.hpp"
 #include "../Singletons/TextureManager.hpp"
-#include "StateParser.hpp"
+#include "../Levels/LevelParser.hpp"
 #include "SinglePlayerPlayState.hpp"
 #include "GameState.hpp"
 #include "PauseMenuState.hpp"
 #include <iostream>
 
-const std::string SinglePlayerPlayState::s_menuID = "SINGLE_PLAYER_PLAY_STATE";
-
 void SinglePlayerPlayState::update()
 {
-    for(size_t i = 0; i < m_gameObjects.size(); i++)
-        m_gameObjects[i]->update();
+    mLevel->update();
+    mLevel->getLayers();
 
     if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_ESCAPE))
-    {
         TheGame::Instance()->getStateMachine()->pushState(new PauseMenuState());
-    }
 }
 
 void SinglePlayerPlayState::render()
 {
-    for(size_t i = 0; i < m_gameObjects.size(); i++)
-        m_gameObjects[i]->draw();
+    mLevel->render();
 }
 
 bool SinglePlayerPlayState::onEnter()
 {
-    StateParser stateParser;
-    stateParser.parseState("../src/GameStates.xml", s_menuID, &m_gameObjects,&m_textureIDList);
+    LevelParser levelParser;
+    levelParser.parseLevel("../Assets/Maps/map1.tmx");
     std::cout << "Entering SinglePLayerPlayState" << std::endl;
+    return true;
 }
 
 bool SinglePlayerPlayState::onExit()
 {
-    for(int i = 0; i < m_gameObjects.size(); i++)
-    {
-        m_gameObjects[i]->clean();
-    }
-    m_gameObjects.clear();
+    for(int i = 0; i < mGameObjects.size(); i++)
+        mGameObjects[i]->clean();
 
-    for(int i = 0; i < m_textureIDList.size(); i++)
-    {
-        TheTextureManager::Instance()->clearFromTextureMap(m_textureIDList[i]);
-    }
+    mGameObjects.clear();
 
-    std::cout << "exiting SinglePlayerPlayState\n";
+    for(int i = 0; i < mTextureIDList.size(); i++)
+        TheTextureManager::Instance()->clearFromTextureMap(mTextureIDList[i]);
+
+    std::cout << "Exiting SinglePlayerPlayState" << std::endl;
     return true;
 }
 
+const std::string SinglePlayerPlayState::mMenuID = "SINGLE_PLAYER_PLAY_STATE";
