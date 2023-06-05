@@ -7,16 +7,13 @@
 #include "StateParser.hpp"
 #include <iostream>
 
-// a unique ID for this state used in the xml file
-const std::string PauseMenuState::s_pauseID = "PAUSE_STATE";
-
 /**
  * This method updates the gameObjects of the PauseMenuState
  */
 void PauseMenuState::update()
 {
-    for(int i = 0; i < m_gameObjects.size(); i++)
-        m_gameObjects[i]->update();
+    for(int i = 0; i < mGameObjects.size(); i++)
+        mGameObjects[i]->update();
 }
 
 /**
@@ -24,8 +21,8 @@ void PauseMenuState::update()
  */
 void PauseMenuState::render()
 {
-    for(int i = 0; i < m_gameObjects.size(); i++)
-        m_gameObjects[i]->draw();
+    for(int i = 0; i < mGameObjects.size(); i++)
+        mGameObjects[i]->draw();
 }
 
 /**
@@ -35,59 +32,57 @@ void PauseMenuState::render()
 bool PauseMenuState::onEnter()
 {
     StateParser stateParser;
-    if(! stateParser.parseState("../src/GameStates.xml", s_pauseID, &m_gameObjects,&m_textureIDList))
+    if(! stateParser.parseState("../src/GameStates.xml", mPauseID, &mGameObjects,&mTextureIDList))
         return false;
 
-    m_callbacks.push_back(0);
-    m_callbacks.push_back(resumePlay);
-    m_callbacks.push_back(pauseToMainMenu);
-    m_callbacks.push_back(exit);
+    mCallbacks.push_back(nullptr);
+    mCallbacks.push_back(resumePlay);
+    mCallbacks.push_back(pauseToMainMenu);
+    mCallbacks.push_back(exit);
 
-    setCallbacks(m_callbacks);
-    std::cout << "entering PauseState\n";
+    setCallbacks(mCallbacks);
+    std::cout << "Entering PauseMenuState" << std::endl;
     return true;
 }
 
 /**
- * This method cleans up at the end of gameState and sets the active players
+ * This method cleans up at the end of PauseMenuState
  * @return true
  */
 bool PauseMenuState::onExit()
 {
-    for(int i = 0; i < m_gameObjects.size(); i++)
-        m_gameObjects[i]->clean();
+    for(int i = 0; i < mGameObjects.size(); i++)
+        mGameObjects[i]->clean();
 
-    m_gameObjects.clear();
+    mGameObjects.clear();
 
-    TheTextureManager::Instance()->clearFromTextureMap("resumeButton");
-    TheTextureManager::Instance()->clearFromTextureMap("mainButton");
-    TheTextureManager::Instance()->clearFromTextureMap("paused");
-    TheTextureManager::Instance()->clearFromTextureMap("exitButton");
+    for(int i = 0; i < mTextureIDList.size(); i++)
+        TheTextureManager::Instance()->clearFromTextureMap(mTextureIDList[i]);
 
     // reset the mouse button states to false
     TheInputHandler::Instance()->reset();
-    std::cout << "exiting PauseState\n";
+    std::cout << "Exiting PauseMenuState" << std::endl;
     return true;
 }
 
 std::string PauseMenuState::getStateID() const
 {
-    return s_pauseID;
+    return mPauseID;
 }
 
 /**
  * This method assigns a callback function to gameObjects that require it
- * @param callbacks
+ * @param pCallbacks
  */
-void PauseMenuState::setCallbacks(const std::vector<Callback> &callbacks)
+void PauseMenuState::setCallbacks(const std::vector<Callback> &pCallbacks)
 {
-    for(int i = 0; i < m_gameObjects.size(); i++)
+    for(int i = 0; i < mGameObjects.size(); i++)
     {
         // if they are of type MenuButton then assign a callback based on the id passed in from the file
-        if(dynamic_cast<MenuButton*>(m_gameObjects[i]))
+        if(dynamic_cast<MenuButton*>(mGameObjects[i]))
         {
-            MenuButton* pButton = dynamic_cast<MenuButton*>(m_gameObjects[i]);
-            pButton->setCallback(callbacks[pButton->getCallbackID()]);
+            MenuButton* pButton = dynamic_cast<MenuButton*>(mGameObjects[i]);
+            pButton->setCallback(pCallbacks[pButton->getCallbackID()]);
         }
     }
 }
@@ -101,7 +96,7 @@ void PauseMenuState::pauseToMainMenu()
 }
 
 /**
- * Callback function that resumes the PlayState
+ * Callback function that resumes the MultiPlayerPlayState
  */
 void PauseMenuState::resumePlay()
 {
@@ -115,3 +110,6 @@ void PauseMenuState::exit()
 {
     TheGame::Instance()->quit();
 }
+
+// a unique ID for this state used in the xml file
+const std::string PauseMenuState::mPauseID = "PAUSE_STATE";
