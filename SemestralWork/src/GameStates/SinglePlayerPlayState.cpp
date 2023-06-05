@@ -57,4 +57,9 @@ bool SinglePlayerPlayState::onExit()
     return true;
 }
 
+std::string SinglePlayerPlayState::getStateID() const
+{
+    return mMenuID;
+}
+
 const std::string SinglePlayerPlayState::mMenuID = "SINGLE_PLAYER_PLAY_STATE";
