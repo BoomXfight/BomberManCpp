@@ -52,7 +52,7 @@ void TextSquare::handleInput()
     if(active)
     {
         if (!TheInputHandler::Instance()->showInput().empty()) {
-            m_text += TheInputHandler::Instance()->getInput();
+            m_text += TheInputHandler::Instance()->getResetInput();
             std::cout << m_text << std::endl;
         }
 

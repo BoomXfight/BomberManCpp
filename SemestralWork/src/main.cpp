@@ -20,9 +20,9 @@ int main(int argc, char* argv[])
             TheGame::Instance()->update();
             TheGame::Instance()->render();
 
-            if(TheGame::Instance()->getStateMachine()->m_gameStates.back()->getStateID() == "MAIN_MENU"
-            || TheGame::Instance()->getStateMachine()->m_gameStates.back()->getStateID() == "SINGLE_PLAYER_MENU"
-            || TheGame::Instance()->getStateMachine()->m_gameStates.back()->getStateID() == "MULTI_PLAYER_MENU" )
+            if(TheGame::Instance()->getStateMachine()->mGameStates.back()->getStateID() == "MAIN_MENU"
+            || TheGame::Instance()->getStateMachine()->mGameStates.back()->getStateID() == "SINGLE_PLAYER_MENU"
+            || TheGame::Instance()->getStateMachine()->mGameStates.back()->getStateID() == "MULTI_PLAYER_MENU" )
             {
                 FPS = 20;
                 DELAY_TIME = 1000.0f / FPS;

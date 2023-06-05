@@ -37,12 +37,12 @@ bool MainMenuState::onEnter()
         return false;
 
     // Initialize the callback functions
-    m_callbacks.push_back(nullptr); // TO DO REMOVE AND REPAIR
-    m_callbacks.push_back(menuToSinglePlayer);
-    m_callbacks.push_back(menuToMultiPlayer);
-    m_callbacks.push_back(menuToQuit);
+    mCallbacks.push_back(nullptr); // TO DO REMOVE AND REPAIR
+    mCallbacks.push_back(menuToSinglePlayer);
+    mCallbacks.push_back(menuToMultiPlayer);
+    mCallbacks.push_back(menuToQuit);
 
-    setCallbacks(m_callbacks);
+    setCallbacks(mCallbacks);
     std::cout << "Entering MainMenuState" << std::endl;
     return true;
 }
