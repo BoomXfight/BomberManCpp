@@ -2,6 +2,7 @@
 #include "../Singletons/Game.hpp"
 #include "../Singletons/TextureManager.hpp"
 #include "../Singletons/GameObjectFactory.hpp"
+#include "../Singletons/CollisionManager.hpp"
 #include "TileLayer.hpp"
 #include "ObjectLayer.hpp"
 #include "../LoaderParams.hpp"
@@ -179,6 +180,7 @@ void LevelParser::parseTileLayer(xmlNodePtr pTileElement, std::vector<Layer*> *p
             data[rows][cols] = ids[rows * mWidth + cols];
 
     pTileLayer->setTileIDs(data);
+    TheCollisionManager::Instance()->setTileLayer(pTileLayer);
     pLayers->push_back(pTileLayer);
 }
 
@@ -245,6 +247,7 @@ void LevelParser::parseObjectLayer(xmlNodePtr pObjectElement, std::vector<Layer*
             pObjectLayer->getGameObjects()->push_back(pGameObject);
         }
     }
+    TheCollisionManager::Instance()->setObjectLayer(pObjectLayer);
     pLayers->push_back(pObjectLayer);
 }
 

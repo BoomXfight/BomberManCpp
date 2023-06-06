@@ -1,6 +1,7 @@
 #include "../Singletons/InputHandler.hpp"
 #include "../Singletons/Game.hpp"
 #include "../Singletons/TextureManager.hpp"
+#include "../Singletons/CollisionManager.hpp"
 #include "../Levels/LevelParser.hpp"
 #include "MultiPlayerPlayState.hpp"
 #include "../GameStates/GameState.hpp"
@@ -13,7 +14,6 @@
 void MultiPlayerPlayState::update()
 {
     mLevel->update();
-    mLevel->getLayers();
 
     if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_ESCAPE))
         TheGame::Instance()->getStateMachine()->pushState(new PauseMenuState());

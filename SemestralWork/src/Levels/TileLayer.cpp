@@ -5,6 +5,7 @@
 TileLayer::TileLayer(int pTileSize, const std::vector<TileSet>& pTileSets)
     : mTileSize(pTileSize), mTileSets(pTileSets), mPosition(0, 0), mVelocity(0, 0)
 {
+    mType = "Tile";
     mNumColumns = (TheGame::Instance()->getGameWidth() / mTileSize);
     mNumRows = (TheGame::Instance()->getGameHeight() / mTileSize);
 }
@@ -71,4 +72,9 @@ TileSet TileLayer::getTileSetByID(int pTileID)
     std::cout << "Did not find the TileSet, returning empty TileSet" << std::endl;
     TileSet t;
     return t;
+}
+
+std::vector<std::vector<int>> TileLayer::getTileIDs()
+{
+    return mTileIDs;
 }

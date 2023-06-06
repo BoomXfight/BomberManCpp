@@ -12,6 +12,7 @@ public:
     void clean() override;
 
 private:
+    void placeBomb();
     void handleInput();
     bool mMoving;
 };

@@ -1,5 +1,8 @@
 #pragma once
 #include "../LoaderParams.hpp"
+#include "../Levels/TileLayer.hpp"
+#include <vector>
+
 
 class GameObject
 {

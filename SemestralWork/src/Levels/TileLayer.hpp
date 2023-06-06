@@ -4,18 +4,20 @@
 #include "../Vector2D.hpp"
 #include <iostream>
 #include <vector>
+#include <memory>
 
 class TileLayer : public Layer
 {
 public:
     TileLayer(int pTileSize, const std::vector<TileSet>& pTileSets);
 
-    virtual void update();
-    virtual void render();
+    void update() override;
+    void render() override;
 
     void setTileIDs(const std::vector<std::vector<int>>& pData);
     void setTileSize(int pTileSize);
     TileSet getTileSetByID(int pTileID);
+    std::vector<std::vector<int>> getTileIDs();
 
 private:
     int mNumColumns;

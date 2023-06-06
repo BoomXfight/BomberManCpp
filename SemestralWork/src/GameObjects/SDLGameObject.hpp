@@ -11,6 +11,10 @@ public:
     void update() override;
     void clean() override;
     void load(const LoaderParams *pParams) override;
+    int getWidth() {return mWidth;};
+    int getHeight() {return mHeight;};
+    Vector2D getPosition() {return mPosition;};
+    Vector2D getVelocity() {return mVelocity;};
 
 protected:
     Vector2D mPosition;

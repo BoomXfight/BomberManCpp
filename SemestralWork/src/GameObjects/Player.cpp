@@ -1,5 +1,6 @@
 #include "Player.hpp"
 #include "../Singletons/InputHandler.hpp"
+#include "../Singletons/CollisionManager.hpp"
 
 Player::Player() : SDLGameObject(), mMoving(false)
 {}
@@ -29,32 +30,80 @@ void Player::update()
 void Player::clean()
 {}
 
+void Player::placeBomb()
+{
+    TheCollisionManager::Instance()->placeBomb(mPosition);
+}
+
 void Player::handleInput()
 {
-    if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT))
+    Vector2D newPos = mPosition;
+
+    if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT)) //Texture adjustment
     {
         mCurrentRow = 3;
-        mPosition += Vector2D(4,0);
-        mMoving = true;
+        newPos.setX(mPosition.getX() + 3 + 18);
+        newPos.setY(mPosition.getY());
+
+        if(TheCollisionManager::Instance()->tileCollision(newPos))
+            mMoving = false;
+
+        else
+        {
+            newPos.setX(newPos.getX()-18);
+            mPosition = newPos;
+            mMoving = true;
+        }
     }
-    else if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_LEFT))
+    else if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_LEFT)) //Fine
     {
         mCurrentRow = 4;
-        mPosition += Vector2D(-4,0);
-        mMoving = true;
+        newPos.setX(mPosition.getX() - 3);
+        newPos.setY(mPosition.getY());
+
+        if(TheCollisionManager::Instance()->tileCollision(newPos))
+            mMoving = false;
+
+        else
+        {
+            mPosition = newPos;
+            mMoving = true;
+        }
     }
-    else if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_UP))
+    else if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_UP)) //Fine
     {
         mCurrentRow = 2;
-        mPosition += Vector2D(0,-4);
-        mMoving = true;
+        newPos.setX(mPosition.getX());
+        newPos.setY(mPosition.getY() - 3);
+
+        if(TheCollisionManager::Instance()->tileCollision(newPos))
+            mMoving = false;
+
+        else
+        {
+            mPosition = newPos;
+            mMoving = true;
+        }
     }
-    else if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_DOWN))
+    else if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_DOWN)) //Texture adjustment
     {
         mCurrentRow = 1;
-        mPosition += Vector2D(0,4);
-        mMoving = true;
+        newPos.setX(mPosition.getX());
+        newPos.setY(mPosition.getY() + 3 + 24);
+
+        if(TheCollisionManager::Instance()->tileCollision(newPos))
+            mMoving = false;
+
+        else
+        {
+            newPos.setY(newPos.getY() - 24);
+            mPosition = newPos;
+            mMoving = true;
+        }
     }
     else
         mMoving = false;
+
+    if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_SPACE))
+        placeBomb();
 }
