@@ -252,13 +252,6 @@ build CMakeFiles/a.dir/src/Singletons/CollisionManager.cpp.o: CXX_COMPILER__a_De
   OBJECT_DIR = CMakeFiles/a.dir
   OBJECT_FILE_DIR = CMakeFiles/a.dir/src/Singletons
 
-build CMakeFiles/a.dir/src/GameObjects/Bomb.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/GameObjects/Bomb.cpp || cmake_object_order_depends_target_a
-  DEP_FILE = CMakeFiles/a.dir/src/GameObjects/Bomb.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
-  INCLUDES = -I/usr/include/libxml2
-  OBJECT_DIR = CMakeFiles/a.dir
-  OBJECT_FILE_DIR = CMakeFiles/a.dir/src/GameObjects
-
 
 # =============================================================================
 # Link build statements for EXECUTABLE target a
@@ -267,9 +260,9 @@ build CMakeFiles/a.dir/src/GameObjects/Bomb.cpp.o: CXX_COMPILER__a_Debug /home/b
 #############################################
 # Link the executable a
 
-build a: CXX_EXECUTABLE_LINKER__a_Debug CMakeFiles/a.dir/src/main.cpp.o CMakeFiles/a.dir/src/Singletons/Game.cpp.o CMakeFiles/a.dir/src/GameObjects/GameObject.cpp.o CMakeFiles/a.dir/src/GameStates/GameState.cpp.o CMakeFiles/a.dir/src/GameStates/GameStateMachine.cpp.o CMakeFiles/a.dir/src/Singletons/InputHandler.cpp.o CMakeFiles/a.dir/src/LoaderParams.cpp.o CMakeFiles/a.dir/src/GameObjects/MenuButton.cpp.o CMakeFiles/a.dir/src/GameStates/MainMenuState.cpp.o CMakeFiles/a.dir/src/GameObjects/Player.cpp.o CMakeFiles/a.dir/src/GameObjects/SDLGameObject.cpp.o CMakeFiles/a.dir/src/Singletons/TextureManager.cpp.o CMakeFiles/a.dir/src/Vector2D.cpp.o CMakeFiles/a.dir/src/GameObjects/StaticObject.cpp.o CMakeFiles/a.dir/src/GameStates/SinglePlayerMenuState.cpp.o CMakeFiles/a.dir/src/GameStates/MultiPlayerMenuState.cpp.o CMakeFiles/a.dir/src/GameObjects/TextSquare.cpp.o CMakeFiles/a.dir/src/GameStates/PauseMenuState.cpp.o CMakeFiles/a.dir/src/Singletons/GameObjectFactory.cpp.o CMakeFiles/a.dir/src/GameStates/StateParser.cpp.o CMakeFiles/a.dir/src/GameStates/MenuState.cpp.o CMakeFiles/a.dir/src/Levels/Level.cpp.o CMakeFiles/a.dir/src/Levels/Layer.cpp.o CMakeFiles/a.dir/src/Levels/LevelParser.cpp.o CMakeFiles/a.dir/src/Levels/TileLayer.cpp.o CMakeFiles/a.dir/src/Levels/ObjectLayer.cpp.o CMakeFiles/a.dir/src/GameStates/MultiPlayerPlayState.cpp.o CMakeFiles/a.dir/src/GameStates/SinglePlayerPlayState.cpp.o CMakeFiles/a.dir/src/Singletons/CollisionManager.cpp.o CMakeFiles/a.dir/src/GameObjects/Bomb.cpp.o | /usr/lib/x86_64-linux-gnu/libxml2.so
+build a: CXX_EXECUTABLE_LINKER__a_Debug CMakeFiles/a.dir/src/main.cpp.o CMakeFiles/a.dir/src/Singletons/Game.cpp.o CMakeFiles/a.dir/src/GameObjects/GameObject.cpp.o CMakeFiles/a.dir/src/GameStates/GameState.cpp.o CMakeFiles/a.dir/src/GameStates/GameStateMachine.cpp.o CMakeFiles/a.dir/src/Singletons/InputHandler.cpp.o CMakeFiles/a.dir/src/LoaderParams.cpp.o CMakeFiles/a.dir/src/GameObjects/MenuButton.cpp.o CMakeFiles/a.dir/src/GameStates/MainMenuState.cpp.o CMakeFiles/a.dir/src/GameObjects/Player.cpp.o CMakeFiles/a.dir/src/GameObjects/SDLGameObject.cpp.o CMakeFiles/a.dir/src/Singletons/TextureManager.cpp.o CMakeFiles/a.dir/src/Vector2D.cpp.o CMakeFiles/a.dir/src/GameObjects/StaticObject.cpp.o CMakeFiles/a.dir/src/GameStates/SinglePlayerMenuState.cpp.o CMakeFiles/a.dir/src/GameStates/MultiPlayerMenuState.cpp.o CMakeFiles/a.dir/src/GameObjects/TextSquare.cpp.o CMakeFiles/a.dir/src/GameStates/PauseMenuState.cpp.o CMakeFiles/a.dir/src/Singletons/GameObjectFactory.cpp.o CMakeFiles/a.dir/src/GameStates/StateParser.cpp.o CMakeFiles/a.dir/src/GameStates/MenuState.cpp.o CMakeFiles/a.dir/src/Levels/Level.cpp.o CMakeFiles/a.dir/src/Levels/Layer.cpp.o CMakeFiles/a.dir/src/Levels/LevelParser.cpp.o CMakeFiles/a.dir/src/Levels/TileLayer.cpp.o CMakeFiles/a.dir/src/Levels/ObjectLayer.cpp.o CMakeFiles/a.dir/src/GameStates/MultiPlayerPlayState.cpp.o CMakeFiles/a.dir/src/GameStates/SinglePlayerPlayState.cpp.o CMakeFiles/a.dir/src/Singletons/CollisionManager.cpp.o | /usr/lib/x86_64-linux-gnu/libxml2.so
   FLAGS = -g
-  LINK_LIBRARIES = /usr/lib/x86_64-linux-gnu/libxml2.so  -lSDL2main  -lSDL2  -lSDL2_image  -ltinyxml
+  LINK_LIBRARIES = /usr/lib/x86_64-linux-gnu/libxml2.so  -lSDL2main  -lSDL2  -lSDL2_image
   OBJECT_DIR = CMakeFiles/a.dir
   POST_BUILD = :
   PRE_LINK = :
