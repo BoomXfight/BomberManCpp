@@ -14,6 +14,14 @@ public:
 private:
     void placeBomb();
     void handleInput();
+
+    bool mBombReady;
+    bool mExplosion;
+    Vector2D mBombPosition;
+    int mRadius;
+
+    Uint32 mTimer;
+    Uint32 mNow;
     bool mMoving;
 };
 
