@@ -1,0 +1,3 @@
+/home/beckaand/CLionProjects/beckaand/SemestralWork/cmake-build-debug/CMakeFiles/a.dir
+/home/beckaand/CLionProjects/beckaand/SemestralWork/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/beckaand/CLionProjects/beckaand/SemestralWork/cmake-build-debug/CMakeFiles/rebuild_cache.dir
