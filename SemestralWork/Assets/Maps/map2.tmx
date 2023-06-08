@@ -26,7 +26,7 @@
 </data>
  </layer>
  <objectgroup id="2" name="Object Layer 1">
-     <object id="1" name="BomberMan1" type="Player" x="40" y="160">
+     <object id="1" name="BomberMan1" type="Player1" x="40" y="280">
        <properties>
          <property name="numFrames" type="int" value="3"/>
          <property name="textureHeight" type="int" value="24"/>
@@ -34,8 +34,17 @@
          <property name="textureID" value="Bomber1"/>
        </properties>
      </object>
+     <object id="2" name="BomberMan2" type="Player2" x="900" y="280">
+       <properties>
+         <property name="numFrames" type="int" value="3"/>
+         <property name="textureHeight" type="int" value="24"/>
+         <property name="textureWidth" type="int" value="18"/>
+         <property name="textureID" value="Bomber2"/>
+       </properties>
+     </object>
    </objectgroup>
    <objectProperties>
-     <property name="Bomber1" value="../Assets/BomberManAnimation.png"/>
+     <property name="Bomber1" value="../Assets/BomberMan1Animation.png"/>
+     <property name="Bomber2" value="../Assets/BomberMan2Animation.png"/>
    </objectProperties>
 </map>

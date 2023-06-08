@@ -1,5 +1,5 @@
 #pragma once
-#include "../GameObjects/Player.hpp"
+#include "../GameObjects/Player1.hpp"
 #include "../Levels/TileLayer.hpp"
 #include "../Levels/ObjectLayer.hpp"
 #include "../Levels/Level.hpp"

@@ -7,7 +7,7 @@
             <texture filename = "../Assets/MainMenuState/SinglePlayerButton.png" ID = "SinglePlayer"/>
             <texture filename = "../Assets/MainMenuState/MultiPlayerButton.png" ID = "MultiPlayer"/>
             <texture filename = "../Assets/MainMenuState/ScoreBoard.png" ID = "ScoreBoard"/>
-            <texture filename = "../Assets/MainMenuState/Exit.png" ID = "Exit"/>
+            <texture filename = "../Assets/MainMenuState/Exit1.png" ID = "Exit"/>
             <texture filename = "../Assets/MainMenuState/Bomber.png" ID = "Bomber"/>
         </TEXTURES>
 

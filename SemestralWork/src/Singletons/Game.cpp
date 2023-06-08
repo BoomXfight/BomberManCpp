@@ -3,7 +3,8 @@
 #include "InputHandler.hpp"
 #include "GameObjectFactory.hpp"
 #include "../GameObjects/MenuButton.hpp"
-#include "../GameObjects/Player.hpp"
+#include "../GameObjects/Player1.hpp"
+#include "../GameObjects/Player2.hpp"
 #include "../GameObjects/StaticObject.hpp"
 #include "../GameObjects/TextSquare.hpp"
 #include "../GameStates/MainMenuState.hpp"
@@ -69,7 +70,8 @@ bool Game::init(const char* pTitle, int pX_WindowPos, int pY_WindowPos, int pWin
 
     //Register game objects for TheGameObjectFactory
     TheGameObjectFactory ::Instance()->registerType("MenuButton", new MenuButtonCreator());
-    TheGameObjectFactory ::Instance()->registerType("Player", new PlayerCreator());
+    TheGameObjectFactory ::Instance()->registerType("Player1", new Player1Creator());
+    TheGameObjectFactory ::Instance()->registerType("Player2", new Player2Creator());
     TheGameObjectFactory ::Instance()->registerType("StaticObject", new StaticObjectCreator());
     TheGameObjectFactory ::Instance()->registerType("TextSquare", new TextSquareCreator());
 

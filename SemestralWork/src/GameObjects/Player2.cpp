@@ -1,22 +1,22 @@
-#include "Player.hpp"
+#include "Player2.hpp"
 #include "../Singletons/InputHandler.hpp"
 #include "../Singletons/CollisionManager.hpp"
 
-Player::Player() : SDLGameObject(), mMoving(false), mTimer(SDL_GetTicks()), mNow(SDL_GetTicks()), mBombReady(true),
-                   mRadius(2), mExplosion(false)
+Player2::Player2() : SDLGameObject(), mMoving(false), mTimer(SDL_GetTicks()), mNow(SDL_GetTicks()), mBombReady(true),
+                     mRadius(2), mExplosion(false)
 {}
 
-void Player::load(const LoaderParams *pParams)
+void Player2::load(const LoaderParams *pParams)
 {
     SDLGameObject::load(pParams);
 }
 
-void Player::draw()
+void Player2::draw()
 {
     SDLGameObject::draw();
 }
 
-void Player::update()
+void Player2::update()
 {
     handleInput();
     mNow = SDL_GetTicks();
@@ -44,10 +44,10 @@ void Player::update()
     SDLGameObject::update();
 }
 
-void Player::clean()
+void Player2::clean()
 {}
 
-void Player::placeBomb()
+void Player2::placeBomb()
 {
     if(mBombReady) {
         mTimer = SDL_GetTicks();
@@ -57,7 +57,7 @@ void Player::placeBomb()
     }
 }
 
-void Player::handleInput()
+void Player2::handleInput()
 {
     Vector2D newPos1 = mPosition;
     Vector2D newPos2 = mPosition;
@@ -138,6 +138,6 @@ void Player::handleInput()
     else
         mMoving = false;
 
-    if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_SPACE))
+    if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RSHIFT))
         placeBomb();
 }

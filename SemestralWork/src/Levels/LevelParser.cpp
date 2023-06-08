@@ -266,10 +266,10 @@ void LevelParser::parseTextures(xmlNodePtr pTextureRoot)
         {
             valueAttr = xmlGetProp(e, (const xmlChar*)"value");
             nameAttr = xmlGetProp(e, (const xmlChar*)"name");
+            TheTextureManager::Instance()->load((const char*)valueAttr, (const char*)nameAttr,
+                                                TheGame::Instance()->getRenderer());
         }
     }
-    TheTextureManager::Instance()->load((const char*)valueAttr, (const char*)nameAttr,
-                                        TheGame::Instance()->getRenderer());
 
     xmlFree(valueAttr);
     xmlFree(nameAttr);

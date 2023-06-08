@@ -2,10 +2,10 @@
 #include "SDLGameObject.hpp"
 #include "../Singletons/GameObjectFactory.hpp"
 
-class Player : public SDLGameObject
+class Player2 : public SDLGameObject
 {
 public:
-    Player();
+    Player2();
     void load(const LoaderParams* pParams) override;
     void draw() override;
     void update() override;
@@ -25,7 +25,7 @@ private:
     bool mMoving;
 };
 
-class PlayerCreator : public BaseCreator
+class Player2Creator : public BaseCreator
 {
-    GameObject* createGameObject() const {return new Player();}
+    GameObject* createGameObject() const {return new Player2();}
 };
