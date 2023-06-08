@@ -32,6 +32,17 @@ bool CollisionManager::tileCollision(Vector2D vec)
     return true;
 }
 
+bool CollisionManager::isDamaged(Vector2D pVec)
+{
+    int tileX = pVec.getX() / mTileSet.mTileWidth;
+    int tileY = pVec.getY() / mTileSet.mTileWidth;
+
+    if(mMap[tileY][tileX] == 6)
+        return true;
+
+    return false;
+}
+
 void CollisionManager::placeBomb(Vector2D vec)
 {
     int tileX = vec.getX() / mTileSet.mTileWidth;

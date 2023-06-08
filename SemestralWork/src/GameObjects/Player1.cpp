@@ -1,9 +1,11 @@
 #include "Player1.hpp"
 #include "../Singletons/InputHandler.hpp"
 #include "../Singletons/CollisionManager.hpp"
+#include "../Singletons/Game.hpp"
 
-Player1::Player1() : SDLGameObject(), mMoving(false), mTimer(SDL_GetTicks()), mNow(SDL_GetTicks()), mBombReady(true),
-                     mRadius(2), mExplosion(false)
+Player1::Player1() : SDLGameObject(), mMoving(false), mTimer(SDL_GetTicks()), mNow(SDL_GetTicks()),
+                    mDamageTimer(SDL_GetTicks()), mBombReady(true),mRadius(2), mExplosion(false), mLives(3),
+                    mLivesCooldown(false)
 {}
 
 void Player1::load(const LoaderParams *pParams)
@@ -19,10 +21,11 @@ void Player1::draw()
 void Player1::update()
 {
     handleInput();
-    mNow = SDL_GetTicks();
-    std::cout << (mNow - mTimer) / 1000 << std::endl;
 
-    if(!mBombReady && ((mNow - mTimer) / 1000 > 4))
+    mNow = SDL_GetTicks();
+    //std::cout << (mNow - mTimer) / 1000 << std::endl;
+
+    if(!mBombReady && ((mNow - mTimer) / 1000 > 3))
     {
         TheCollisionManager::Instance()->explodeBomb(mBombPosition, mRadius);
         mTimer = SDL_GetTicks();
@@ -41,11 +44,29 @@ void Player1::update()
     else
         mCurrentFrame = 1;
 
+    if(TheCollisionManager::Instance()->isDamaged(mPosition) && !mLivesCooldown)
+    {
+        mLivesCooldown = true;
+        mDamageTimer = SDL_GetTicks();
+        mLives--;
+
+        std::cout << "LIVES P1: " << mLives << std::endl;
+    }
+
+    if((mNow - mDamageTimer) / 1000 > 5)
+        mLivesCooldown = false;
+
     SDLGameObject::update();
 }
 
 void Player1::clean()
 {}
+
+int Player1::getLives() const
+{
+    return mLives;
+}
+
 
 void Player1::placeBomb()
 {

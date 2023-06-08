@@ -14,7 +14,9 @@ public:
     std::string getStateID() const override;
 
 private:
+    int mP1Lives;
+    int mP2Lives;
+
     static const std::string mPlayID;
-    std::vector<GameObject*> mGameObjects;
     Level* mLevel;
 };

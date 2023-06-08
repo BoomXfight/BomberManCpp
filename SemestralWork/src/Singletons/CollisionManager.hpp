@@ -13,6 +13,7 @@ public:
     void setTileLayer(TileLayer* pObjectLayer);
     void setObjectLayer(ObjectLayer* pObjectLayer);
     bool tileCollision(Vector2D vec);
+    bool isDamaged(Vector2D pVec);
     void placeBomb(Vector2D vec);
     void explodeBomb(Vector2D pVec, int pRadius);
     void afterExplosion(Vector2D pVec, int pRadius);

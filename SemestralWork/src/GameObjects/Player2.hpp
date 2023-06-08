@@ -10,6 +10,7 @@ public:
     void draw() override;
     void update() override;
     void clean() override;
+    int getLives() const;
 
 private:
     void placeBomb();
@@ -20,9 +21,13 @@ private:
     Vector2D mBombPosition;
     int mRadius;
 
-    Uint32 mTimer;
-    Uint32 mNow;
+    short mLives;
     bool mMoving;
+    bool mLivesCooldown;
+
+    Uint32 mTimer;
+    Uint32 mDamageTimer;
+    Uint32 mNow;
 };
 
 class Player2Creator : public BaseCreator
