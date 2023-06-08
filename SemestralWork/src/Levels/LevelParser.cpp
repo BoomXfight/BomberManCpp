@@ -5,6 +5,8 @@
 #include "../Singletons/CollisionManager.hpp"
 #include "TileLayer.hpp"
 #include "ObjectLayer.hpp"
+#include <iostream>
+#include <sstream>
 #include "../LoaderParams.hpp"
 
 /**
@@ -66,6 +68,17 @@ Level* LevelParser::parseLevel(const char* pLevelFile)
             xmlNodePtr firstChild = e->children;
             if (firstChild != nullptr)
                 parseTextures(firstChild);
+        }
+    }
+
+    // parse bonuses
+    for (xmlNodePtr e = root->children; e != nullptr; e = e->next)
+    {
+        if (xmlStrcmp(e->name, (const xmlChar*)"bonuses") == 0)
+        {
+            xmlNodePtr firstChild = e->children;
+            if (firstChild != nullptr)
+                parseBonuses(e, level->getBonuses());
         }
     }
 
@@ -273,4 +286,38 @@ void LevelParser::parseTextures(xmlNodePtr pTextureRoot)
 
     xmlFree(valueAttr);
     xmlFree(nameAttr);
+}
+
+void LevelParser::parseBonuses(xmlNodePtr pBonusRoot, std::vector<Bonus*>* pBonuses)
+{
+    xmlChar* nameAttr = nullptr;
+    xmlChar* valueAttr = nullptr;
+
+    for (xmlNodePtr e = pBonusRoot->children; e != nullptr; e = e->next)
+    {
+        if(xmlStrcmp(e->name, (const xmlChar*)"property") == 0)
+        {
+            nameAttr = xmlGetProp(e, (const xmlChar*)"name");
+            valueAttr = xmlGetProp(e, (const xmlChar*)"values");
+
+            std::string sValues = (const char*)valueAttr;
+            std::stringstream stream(sValues);
+            std::string numberStr;
+            std::vector<int> vValues;
+
+            while(std::getline(stream, numberStr, ','))
+            {
+                int number = std::stoi(numberStr);
+                vValues.push_back(number);
+            }
+
+            Bonus* b = new Bonus((const char*)nameAttr);
+            b->setProbability(vValues);
+            pBonuses->push_back(b);
+        }
+    }
+
+    TheCollisionManager::Instance()->setBonuses(*pBonuses);
+    xmlFree(nameAttr);
+    xmlFree(valueAttr);
 }

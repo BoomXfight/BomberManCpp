@@ -21,6 +21,16 @@ void CollisionManager::setObjectLayer(ObjectLayer *pObjectLayer)
     mGameObjects = mObjectLayer->getGameObjects();
 }
 
+void CollisionManager::setBonuses(std::vector<Bonus*> pBonuses)
+{
+    mBonuses = pBonuses;
+}
+
+std::vector<Bonus*> CollisionManager::getBonuses()
+{
+    return mBonuses;
+}
+
 bool CollisionManager::tileCollision(Vector2D vec)
 {
     int tileX = vec.getX() / mTileSet.mTileWidth;
@@ -68,6 +78,8 @@ void CollisionManager::explodeBomb(Vector2D pVec, int pRadius)
         {
             if(mMap[tileY + i][tileX] == 1)
                 downAllowed = false;
+            else if(mMap[tileY + i][tileX] == 5 && downAllowed)
+                mExplodedWalls += 1;
 
             if((mMap[tileY + i][tileX] == 3 || mMap[tileY + i][tileX] == 5) && downAllowed)
                 mMap[tileY + i][tileX] = 6;
@@ -76,6 +88,8 @@ void CollisionManager::explodeBomb(Vector2D pVec, int pRadius)
         {
             if(mMap[tileY - i][tileX] == 1)
                 upAllowed = false;
+            else if(mMap[tileY - i][tileX] == 5 && upAllowed)
+                mExplodedWalls += 1;
 
             if((mMap[tileY - i][tileX] == 3 || mMap[tileY - i][tileX] == 5) && upAllowed)
                 mMap[tileY - i][tileX] = 6;
@@ -84,6 +98,8 @@ void CollisionManager::explodeBomb(Vector2D pVec, int pRadius)
         {
             if(mMap[tileY][tileX + i] == 1)
                 rightAllowed = false;
+            else if(mMap[tileY][tileX + i] == 5 && rightAllowed)
+                mExplodedWalls += 1;
 
             if((mMap[tileY][tileX + i] == 3 || mMap[tileY][tileX + i] == 5) && rightAllowed)
                 mMap[tileY][tileX + i] = 6;
@@ -92,6 +108,8 @@ void CollisionManager::explodeBomb(Vector2D pVec, int pRadius)
         {
             if(mMap[tileY][tileX - i] == 1)
                 leftAllowed = false;
+            else if(mMap[tileY][tileX - i] == 5 && leftAllowed)
+                mExplodedWalls += 1;
 
             if((mMap[tileY][tileX - i] == 3 || mMap[tileY][tileX - i] == 5) && leftAllowed)
                 mMap[tileY][tileX - i] = 6;
@@ -132,6 +150,14 @@ void CollisionManager::afterExplosion(Vector2D pVec, int pRadius)
     mTileLayer->setTileIDs(mMap);
 }
 
-CollisionManager::CollisionManager() {}
+int CollisionManager::getResetExplodedWalls()
+{
+    int tmp = mExplodedWalls;
+    mExplodedWalls = 0;
+    return tmp;
+}
+
+CollisionManager::CollisionManager() : mExplodedWalls(0)
+{}
 
 CollisionManager* CollisionManager::mInstance = nullptr;

@@ -29,3 +29,8 @@ std::vector<Layer*>* Level::getLayers()
 {
     return &mLayers;
 }
+
+std::vector<Bonus*>* Level::getBonuses()
+{
+    return &mBonuses;
+}

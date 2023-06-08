@@ -1,5 +1,6 @@
 #pragma once
 #include "Layer.hpp"
+#include "../Bonus.hpp"
 #include <string>
 #include <vector>
 
@@ -24,6 +25,7 @@ public:
     void render();
     std::vector<TileSet>* getTileSets();
     std::vector<Layer*>* getLayers();
+    std::vector<Bonus*>* getBonuses();
 
 private:
     friend class LevelParser;
@@ -31,4 +33,5 @@ private:
 
     std::vector<TileSet> mTileSets;
     std::vector<Layer*> mLayers;
+    std::vector<Bonus*> mBonuses;
 };

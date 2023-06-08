@@ -12,15 +12,20 @@ public:
     static CollisionManager* Instance();
     void setTileLayer(TileLayer* pObjectLayer);
     void setObjectLayer(ObjectLayer* pObjectLayer);
+    void setBonuses(std::vector<Bonus*> pBonuses);
+    std::vector<Bonus*> getBonuses();
     bool tileCollision(Vector2D vec);
     bool isDamaged(Vector2D pVec);
     void placeBomb(Vector2D vec);
     void explodeBomb(Vector2D pVec, int pRadius);
     void afterExplosion(Vector2D pVec, int pRadius);
+    int getResetExplodedWalls();
 
 private:
     CollisionManager();
     static CollisionManager* mInstance;
+
+    int mExplodedWalls;
 
     TileLayer* mTileLayer;
     TileSet mTileSet;
@@ -28,6 +33,8 @@ private:
 
     ObjectLayer* mObjectLayer;
     std::vector<GameObject*>* mGameObjects;
+
+    std::vector<Bonus*> mBonuses;
 };
 
 typedef CollisionManager TheCollisionManager;
