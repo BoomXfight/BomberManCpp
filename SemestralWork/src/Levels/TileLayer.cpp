@@ -56,6 +56,16 @@ void TileLayer::setTileSize(int pTileSize)
     mTileSize = pTileSize;
 }
 
+int TileLayer::getNumRows()
+{
+    return mNumRows;
+}
+
+int TileLayer::getNumCols()
+{
+    return mNumColumns;
+}
+
 TileSet TileLayer::getTileSetByID(int pTileID)
 {
     for (int i = 0; i < mTileSets.size(); i++)

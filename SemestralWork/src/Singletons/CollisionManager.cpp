@@ -74,7 +74,7 @@ void CollisionManager::explodeBomb(Vector2D pVec, int pRadius)
 
     for(int i = 1; i <= pRadius; i++)
     {
-        if(tileY + i <= mTileSet.mTileHeight && tileY + i >= 0) // explosion down
+        if(tileY + i <= mTileLayer->getNumRows() - 1 && tileY + i >= 0) // explosion down
         {
             if(mMap[tileY + i][tileX] == 1)
                 downAllowed = false;
@@ -84,7 +84,7 @@ void CollisionManager::explodeBomb(Vector2D pVec, int pRadius)
             if((mMap[tileY + i][tileX] == 3 || mMap[tileY + i][tileX] == 5) && downAllowed)
                 mMap[tileY + i][tileX] = 6;
         }
-        if(tileY - i <= mTileSet.mTileHeight && tileY - i >= 0) // explosion up
+        if(tileY - i <= mTileLayer->getNumRows() - 1 && tileY - i >= 0) // explosion up
         {
             if(mMap[tileY - i][tileX] == 1)
                 upAllowed = false;
@@ -94,7 +94,7 @@ void CollisionManager::explodeBomb(Vector2D pVec, int pRadius)
             if((mMap[tileY - i][tileX] == 3 || mMap[tileY - i][tileX] == 5) && upAllowed)
                 mMap[tileY - i][tileX] = 6;
         }
-        if(tileX + i <= mTileSet.mTileHeight && tileX + i >= 0) // explosion right
+        if(tileX + i <= mTileLayer->getNumCols() - 1 && tileX + i >= 0) // explosion right
         {
             if(mMap[tileY][tileX + i] == 1)
                 rightAllowed = false;
@@ -104,7 +104,7 @@ void CollisionManager::explodeBomb(Vector2D pVec, int pRadius)
             if((mMap[tileY][tileX + i] == 3 || mMap[tileY][tileX + i] == 5) && rightAllowed)
                 mMap[tileY][tileX + i] = 6;
         }
-        if(tileX - i <= mTileSet.mTileHeight && tileX - i >= 0) // explosion left
+        if(tileX - i <= mTileLayer->getNumCols() - 1 && tileX - i >= 0) // explosion left
         {
             if(mMap[tileY][tileX - i] == 1)
                 leftAllowed = false;
@@ -126,22 +126,22 @@ void CollisionManager::afterExplosion(Vector2D pVec, int pRadius)
 
     for(int i = 1; i <= pRadius; i++)
     {
-        if (tileY + i <= mTileSet.mTileHeight && tileY + i >= 0) // explosion down
+        if (tileY + i <= mTileLayer->getNumRows() - 1 && tileY + i >= 0) // explosion down
         {
             if (mMap[tileY + i][tileX] == 6)
                 mMap[tileY + i][tileX] = 3;
         }
-        if (tileY - i <= mTileSet.mTileHeight && tileY - i >= 0) // explosion up
+        if (tileY - i <= mTileLayer->getNumRows() - 1 && tileY - i >= 0) // explosion up
         {
             if (mMap[tileY - i][tileX] == 6)
                 mMap[tileY - i][tileX] = 3;
         }
-        if (tileX + i <= mTileSet.mTileHeight && tileX + i >= 0) // explosion right
+        if (tileX + i <= mTileLayer->getNumCols() - 1 && tileX + i >= 0) // explosion right
         {
             if (mMap[tileY][tileX + i] == 6)
                 mMap[tileY][tileX + i] = 3;
         }
-        if (tileX - i <= mTileSet.mTileHeight && tileX - i >= 0) // explosion left
+        if (tileX - i <= mTileLayer->getNumCols() - 1 && tileX - i >= 0) // explosion left
         {
             if (mMap[tileY][tileX - i] == 6)
                 mMap[tileY][tileX - i] = 3;

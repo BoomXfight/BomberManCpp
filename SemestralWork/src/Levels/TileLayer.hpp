@@ -16,6 +16,8 @@ public:
 
     void setTileIDs(const std::vector<std::vector<int>>& pData);
     void setTileSize(int pTileSize);
+    int getNumRows();
+    int getNumCols();
     TileSet getTileSetByID(int pTileID);
     std::vector<std::vector<int>> getTileIDs();
 

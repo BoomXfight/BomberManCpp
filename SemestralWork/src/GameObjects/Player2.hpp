@@ -1,33 +1,20 @@
 #pragma once
-#include "SDLGameObject.hpp"
+#include "Player.hpp"
 #include "../Singletons/GameObjectFactory.hpp"
 
-class Player2 : public SDLGameObject
+class Player2 : public Player
 {
 public:
     Player2();
-    void load(const LoaderParams* pParams) override;
-    void draw() override;
-    void update() override;
-    void clean() override;
-    int getLives() const;
-
-private:
-    void placeBomb();
     void handleInput();
 
-    bool mBombReady;
-    bool mExplosion;
-    Vector2D mBombPosition;
-    int mRadius;
-
-    short mLives;
-    bool mMoving;
-    bool mLivesCooldown;
-
-    Uint32 mTimer;
-    Uint32 mDamageTimer;
-    Uint32 mNow;
+    enum
+    {
+        RIGHT_MOVEMENT = 3,
+        LEFT_MOVEMENT = 4,
+        UP_MOVEMENT = 2,
+        DOWN_MOVEMENT = 1
+    };
 };
 
 class Player2Creator : public BaseCreator

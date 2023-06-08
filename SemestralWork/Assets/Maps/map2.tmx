@@ -25,7 +25,7 @@
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 </data>
  </layer>
- <objectgroup id="2" name="Object Layer 1">
+   <objectgroup id="2" name="Object Layer 1">
      <object id="1" name="BomberMan1" type="Player1" x="40" y="280">
        <properties>
          <property name="numFrames" type="int" value="3"/>
@@ -47,4 +47,11 @@
      <property name="Bomber1" value="../Assets/BomberMan1Animation.png"/>
      <property name="Bomber2" value="../Assets/BomberMan2Animation.png"/>
    </objectProperties>
+   <bonuses>
+     <property name="speed" values="1,2,3,4,5,6,7,8,9,10"/>
+     <property name="radius" values="11,12,13,14,15,16,17,18,19,20"/>
+     <property name="health" values="21,22,23,24,25,26,27,28,29,30"/>
+     <property name="time" values="31,32,33,34,35,36,37,38,39,40"/>
+     <property name="dmg" values="41,42,43,44,45,46,47,48,49,50"/>
+   </bonuses>
 </map>

@@ -1,155 +1,91 @@
-#include "Player2.hpp"
 #include "../Singletons/InputHandler.hpp"
 #include "../Singletons/CollisionManager.hpp"
+#include "Player2.hpp"
 
-Player2::Player2() : SDLGameObject(), mMoving(false), mTimer(SDL_GetTicks()), mNow(SDL_GetTicks()), mBombReady(true),
-                     mRadius(2), mExplosion(false), mLives(3)
+Player2::Player2() : Player()
 {}
-
-void Player2::load(const LoaderParams *pParams)
-{
-    SDLGameObject::load(pParams);
-}
-
-void Player2::draw()
-{
-    SDLGameObject::draw();
-}
-
-void Player2::update()
-{
-    handleInput();
-
-    mNow = SDL_GetTicks();
-    //std::cout << (mNow - mTimer) / 1000 << std::endl;
-
-    if(!mBombReady && ((mNow - mTimer) / 1000 > 3))
-    {
-        TheCollisionManager::Instance()->explodeBomb(mBombPosition, mRadius);
-        mTimer = SDL_GetTicks();
-        mExplosion = true;
-    }
-
-    if(mExplosion && ((mNow - mTimer) / 1000 > 1))
-    {
-        TheCollisionManager::Instance()->afterExplosion(mBombPosition, mRadius);
-        mExplosion = false;
-        mBombReady = true;
-    }
-
-    if(mMoving)
-        mCurrentFrame = int(((SDL_GetTicks() / 200) % mNumFrames));
-    else
-        mCurrentFrame = 1;
-
-    if(TheCollisionManager::Instance()->isDamaged(mPosition) && !mLivesCooldown)
-    {
-        mLivesCooldown = true;
-        mDamageTimer = SDL_GetTicks();
-        mLives--;
-
-        std::cout << "LIVES P2: " << mLives << std::endl;
-    }
-
-    if((mNow - mDamageTimer) / 1000 > 5)
-        mLivesCooldown = false;
-
-    SDLGameObject::update();
-}
-
-void Player2::clean()
-{}
-
-int Player2::getLives() const
-{
-    return mLives;
-}
-
-
-void Player2::placeBomb()
-{
-    if(mBombReady) {
-        mTimer = SDL_GetTicks();
-        mBombPosition = mPosition;
-        TheCollisionManager::Instance()->placeBomb(mPosition);
-        mBombReady = false;
-    }
-}
 
 void Player2::handleInput()
 {
     Vector2D newPos1 = mPosition;
     Vector2D newPos2 = mPosition;
+    float buffer = 0.5;
 
-    if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT)) //Texture adjustment
+    if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RIGHT)) // right
     {
-        mCurrentRow = 3;
-        newPos1.setX(mPosition.getX() + 3 + 18);
-        newPos1.setY(mPosition.getY());
-        newPos2.setX(mPosition.getX() + 3 + 18);
-        newPos2.setY(mPosition.getY() + 24);
+        mCurrentRow = RIGHT_MOVEMENT;
+        newPos1.setX(mPosition.getX() + mSpeed + mWidth - buffer);
+        newPos1.setY(mPosition.getY() + buffer);
+        newPos2.setX(mPosition.getX() + mSpeed + mWidth - buffer);
+        newPos2.setY(mPosition.getY() + mHeight - buffer);
 
-        if(TheCollisionManager::Instance()->tileCollision(newPos1) || TheCollisionManager::Instance()->tileCollision(newPos2))
+        if(TheCollisionManager::Instance()->tileCollision(newPos1)
+           || TheCollisionManager::Instance()->tileCollision(newPos2))
             mMoving = false;
-
         else
         {
-            newPos1.setX(newPos1.getX()-18);
+            newPos1.setX(newPos1.getX() - mWidth + buffer);
+            newPos1.setY(newPos1.getY() - buffer);
             mPosition = newPos1;
             mMoving = true;
         }
     }
 
-    else if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_LEFT))
+    else if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_LEFT)) // left
     {
-        mCurrentRow = 4;
-        newPos1.setX(mPosition.getX() - 3);
-        newPos1.setY(mPosition.getY());
-        newPos2.setX(mPosition.getX() - 3);
-        newPos2.setY(mPosition.getY() + 24);
+        mCurrentRow = LEFT_MOVEMENT;
+        newPos1.setX(mPosition.getX() - mSpeed + buffer);
+        newPos1.setY(mPosition.getY() + buffer);
+        newPos2.setX(mPosition.getX() - mSpeed + buffer);
+        newPos2.setY(mPosition.getY() + mHeight - buffer);
 
-        if(TheCollisionManager::Instance()->tileCollision(newPos1) || TheCollisionManager::Instance()->tileCollision(newPos2))
+        if(TheCollisionManager::Instance()->tileCollision(newPos1)
+           || TheCollisionManager::Instance()->tileCollision(newPos2))
             mMoving = false;
-
         else
         {
+            newPos1.setX(newPos1.getX() - buffer);
+            newPos1.setY(newPos1.getY() - buffer);
             mPosition = newPos1;
             mMoving = true;
         }
     }
 
-    else if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_UP))
+    else if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_UP)) // up
     {
-        mCurrentRow = 2;
-        newPos1.setX(mPosition.getX());
-        newPos1.setY(mPosition.getY() - 3);
-        newPos2.setX(mPosition.getX() + 18);
-        newPos2.setY(mPosition.getY() - 3);
+        mCurrentRow = UP_MOVEMENT;
+        newPos1.setX(mPosition.getX() + buffer);
+        newPos1.setY(mPosition.getY() - mSpeed + buffer);
+        newPos2.setX(mPosition.getX() + mWidth - buffer);
+        newPos2.setY(mPosition.getY() - mSpeed + buffer);
 
-        if(TheCollisionManager::Instance()->tileCollision(newPos1) || TheCollisionManager::Instance()->tileCollision(newPos2))
+        if(TheCollisionManager::Instance()->tileCollision(newPos1)
+           || TheCollisionManager::Instance()->tileCollision(newPos2))
             mMoving = false;
-
         else
         {
+            newPos1.setX(newPos1.getX() - buffer);
+            newPos1.setY(newPos1.getY() - buffer);
             mPosition = newPos1;
             mMoving = true;
         }
     }
 
-    else if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_DOWN)) //Texture adjustment
+    else if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_DOWN)) // down
     {
-        mCurrentRow = 1;
-        newPos1.setX(mPosition.getX());
-        newPos1.setY(mPosition.getY() + 3 + 24);
-        newPos2.setX(mPosition.getX() + 18);
-        newPos2.setY(mPosition.getY() + 3 + 24);
+        mCurrentRow = DOWN_MOVEMENT;
+        newPos1.setX(mPosition.getX() + buffer);
+        newPos1.setY(mPosition.getY() + mSpeed + mHeight - buffer);
+        newPos2.setX(mPosition.getX() + mWidth - buffer);
+        newPos2.setY(mPosition.getY() + mSpeed + mHeight - buffer);
 
-        if(TheCollisionManager::Instance()->tileCollision(newPos1) || TheCollisionManager::Instance()->tileCollision(newPos2))
+        if(TheCollisionManager::Instance()->tileCollision(newPos1)
+           || TheCollisionManager::Instance()->tileCollision(newPos2))
             mMoving = false;
-
         else
         {
-            newPos1.setY(newPos1.getY() - 24);
+            newPos1.setX(newPos1.getX() - buffer);
+            newPos1.setY(newPos1.getY() - mHeight + buffer);
             mPosition = newPos1;
             mMoving = true;
         }
