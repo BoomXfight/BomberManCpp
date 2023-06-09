@@ -1,5 +1,6 @@
 #pragma once
 #include "SDL2/SDL.h"
+#include "SDL2/SDL_ttf.h"
 #include "../GameObjects/GameObject.hpp"
 #include "../GameStates/GameStateMachine.hpp"
 #include <vector>
@@ -27,6 +28,7 @@ public:
     GameStateMachine* getStateMachine() const;
     int getGameWidth() const;
     int getGameHeight() const;
+    TTF_Font* getFont() const;
 
 private:
     Game();
@@ -43,6 +45,8 @@ private:
 
     std::string mPlayer1;
     std::string mPlayer2;
+
+    TTF_Font* mFont;
 
     std::vector<GameObject*> mGameObjects;
     GameStateMachine* mGameStateMachine;

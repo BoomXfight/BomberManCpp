@@ -17,6 +17,7 @@ private:
 
     static void menuToSinglePlayer();
     static void menuToMultiPlayer();
+    static void menuToScoreboard();
     static void menuToQuit();
 
     static const std::string mMenuID;

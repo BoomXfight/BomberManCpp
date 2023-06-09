@@ -7,6 +7,7 @@
 #include "../GameStates/GameState.hpp"
 #include "../GameStates/PauseMenuState.hpp"
 #include "../GameStates/MainMenuState.hpp"
+#include "ScoreboardState.hpp"
 #include "MultiPlayerPlayState.hpp"
 #include "MultiPlayer1WinState.hpp"
 #include "MultiPlayer2WinState.hpp"
@@ -14,17 +15,6 @@
 #include <fstream>
 #include <sstream>
 #include <algorithm>
-
-struct PlayerScore
-{
-    std::string name;
-    int score;
-};
-
-bool comparePlayers(const PlayerScore& p1, const PlayerScore& p2)
-{
-    return p1.score > p2.score;
-}
 
 /**
  * This method updates the current level as well as checks for a game pause

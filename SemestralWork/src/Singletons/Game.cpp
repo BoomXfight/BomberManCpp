@@ -32,6 +32,20 @@ bool Game::init(const char* pTitle, int pX_WindowPos, int pY_WindowPos, int pWin
 {
     if(SDL_Init(SDL_INIT_VIDEO) == 0) // SDL_INIT_EVERYTHING
     {
+        if(TTF_Init() == 0)
+        {
+            mFont = TTF_OpenFont("../Assets/Fonts/RodchenkoBTT.ttf", 50);
+            if (!mFont) {
+                std::cout << "Failed to load font." << std::endl;
+                return false;
+            }
+        }
+        else
+        {
+            std::cout << "TTF init failed." << std::endl;
+            return false;
+        }
+
         int flags = 0;
         if(pFullscreen)
             flags = SDL_WINDOW_FULLSCREEN;
@@ -108,6 +122,7 @@ void Game::clean()
     TheGame::Instance()->mIsRunning = false;
     SDL_DestroyWindow(mWindow);
     SDL_DestroyRenderer(mRenderer);
+    TTF_Quit();
     SDL_Quit();
 }
 
@@ -169,6 +184,11 @@ int Game::getGameWidth() const
 int Game::getGameHeight() const
 {
     return mGameHeight;
+}
+
+TTF_Font* Game::getFont() const
+{
+    return mFont;
 }
 
 Game::~Game() {}

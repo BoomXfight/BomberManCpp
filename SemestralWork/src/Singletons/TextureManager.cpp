@@ -1,4 +1,5 @@
 #include "TextureManager.hpp"
+#include "Game.hpp"
 #include <iostream>
 
 TextureManager* TextureManager::Instance()
@@ -117,6 +118,20 @@ void TextureManager::drawTile(const std::string& pIdentifier, int pMargin, int p
                      nullptr, SDL_FLIP_NONE);
 }
 
+void TextureManager::drawText(std::string str, int pX, int pY, SDL_Color clr, SDL_Renderer *pRenderer)
+{
+    SDL_Surface* textSurface = TTF_RenderText_Solid(TheGame::Instance()->getFont(), str.c_str(), clr);
+    SDL_Texture* textTexture = SDL_CreateTextureFromSurface(pRenderer, textSurface);
+    SDL_Rect srcRect;
+    SDL_Rect destRect;
+    srcRect.x = 0;
+    srcRect.y = 0;
+    srcRect.w = destRect.w = textSurface->w;
+    srcRect.h = destRect.h = textSurface->h;
+    destRect.x = pX;
+    destRect.y = pY;
+    SDL_RenderCopyEx(pRenderer, textTexture, &srcRect,&destRect, 0, nullptr, SDL_FLIP_NONE);
+}
 
 void TextureManager::clearFromTextureMap(const std::string& pIdentifier)
 {

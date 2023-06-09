@@ -5,6 +5,7 @@
 #include "StateParser.hpp"
 #include "SinglePlayerMenuState.hpp"
 #include "MultiPlayerMenuState.hpp"
+#include "ScoreboardState.hpp"
 #include <iostream>
 
 
@@ -40,6 +41,7 @@ bool MainMenuState::onEnter()
     mCallbacks.push_back(nullptr); // TO DO REMOVE AND REPAIR
     mCallbacks.push_back(menuToSinglePlayer);
     mCallbacks.push_back(menuToMultiPlayer);
+    mCallbacks.push_back(menuToScoreboard);
     mCallbacks.push_back(menuToQuit);
 
     setCallbacks(mCallbacks);
@@ -105,6 +107,11 @@ void MainMenuState::menuToMultiPlayer()
 {
     TheGame::Instance()->getStateMachine()->changeState(new MultiPlayerMenuState());
 };
+
+void MainMenuState::menuToScoreboard()
+{
+    TheGame::Instance()->getStateMachine()->changeState(new ScoreboardState);
+}
 
 /**
  * Callback function that ends the game
