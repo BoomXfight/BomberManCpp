@@ -1,0 +1,4 @@
+Andrej 140
+Samuel 120
+Jozef 60
+Peter 40

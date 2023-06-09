@@ -5,7 +5,7 @@
 #include <ctime>
 
 Player::Player() : SDLGameObject(), mRadius(2), mSpeed(4), mLives(3), mBombTickingTime(3), mBombReady(true),
-                 mExplosion(false), mMoving(false), mInvisible(false), mTimer(SDL_GetTicks()), mDamageTimer(SDL_GetTicks()),
+                 mExplosion(false), mMoving(false), mImmortal(false), mInvisible(false), mTimer(SDL_GetTicks()), mDamageTimer(SDL_GetTicks()),
                  mNow(SDL_GetTicks()), mBonuses(TheCollisionManager::Instance()->getBonuses())
 {}
 
@@ -38,6 +38,11 @@ void Player::load(const LoaderParams *pParams)
 int Player::getLives() const
 {
     return mLives;
+}
+
+bool Player::isDamaged() const
+{
+    return mImmortal;
 }
 
 void Player::placeBomb()

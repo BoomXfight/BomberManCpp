@@ -10,7 +10,8 @@ add_executable(a src/main.cpp src/Singletons/Game.cpp src/GameObjects/GameObject
         src/GameObjects/SDLGameObject.cpp src/Singletons/TextureManager.cpp src/Vector2D.cpp src/GameObjects/StaticObject.cpp src/GameStates/SinglePlayerMenuState.cpp
         src/GameStates/MultiPlayerMenuState.cpp src/GameObjects/TextSquare.cpp src/GameStates/PauseMenuState.cpp src/Singletons/GameObjectFactory.cpp src/GameStates/StateParser.cpp
         src/GameStates/MenuState.cpp src/Levels/Level.cpp src/Levels/Layer.cpp src/Levels/LevelParser.cpp src/Levels/TileLayer.cpp src/Levels/ObjectLayer.cpp
-        src/GameStates/MultiPlayerPlayState.cpp src/GameStates/SinglePlayerPlayState.cpp src/Singletons/CollisionManager.cpp)
+        src/GameStates/MultiPlayerPlayState.cpp src/GameStates/SinglePlayerPlayState.cpp src/Singletons/CollisionManager.cpp src/GameStates/MultiPlayer1WinState.cpp
+        src/GameStates/MultiPlayer2WinState.cpp src/Bonus.cpp src/GameObjects/Player.cpp)
 
 target_include_directories(a PRIVATE ${LIBXML2_INCLUDE_DIR})
 target_link_libraries(${PROJECT_NAME} PRIVATE ${LIBXML2_LIBRARIES} SDL2main SDL2 SDL2_image)

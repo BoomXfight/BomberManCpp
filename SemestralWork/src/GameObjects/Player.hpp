@@ -10,6 +10,7 @@ public:
     void clean() override;
     void load(const LoaderParams* pParams) override;
     int getLives() const;
+    bool isDamaged() const;
 
 protected:
     void placeBomb();
