@@ -141,4 +141,4 @@ void ScoreboardState::exit()
 }
 
 // a unique ID for this state used in the xml file
-const std::string ScoreboardState::mMenuID = "SCOREBOARD";
+const std::string ScoreboardState::mMenuID = "SCOREBOARD_MENU_STATE";

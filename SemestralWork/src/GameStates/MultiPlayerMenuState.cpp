@@ -131,4 +131,4 @@ void MultiPlayerMenuState::mpMenuToMpPlay()
 }
 
 // a unique ID for the MultiPlayerMenuState state used in the xml file
-const std::string MultiPlayerMenuState::mMenuID = "MULTI_PLAYER_MENU";
+const std::string MultiPlayerMenuState::mMenuID = "MULTI_PLAYER_MENU_STATE";

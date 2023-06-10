@@ -123,4 +123,4 @@ void SinglePlayerMenuState::spMenuToSpPlay()
 }
 
 // a unique ID for SinglePlayerPlayState used in the xml file
-const std::string SinglePlayerMenuState::mMenuID = "SINGLE_PLAYER_MENU";
+const std::string SinglePlayerMenuState::mMenuID = "SINGLE_PLAYER_MENU_STATE";

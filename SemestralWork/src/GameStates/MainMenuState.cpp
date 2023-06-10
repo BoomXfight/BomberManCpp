@@ -122,4 +122,4 @@ void MainMenuState::menuToQuit()
 }
 
 // a unique ID for the MainMenuState used in the xml load file
-const std::string MainMenuState::mMenuID = "MAIN_MENU";
+const std::string MainMenuState::mMenuID = "MAIN_MENU_STATE";

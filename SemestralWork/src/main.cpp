@@ -1,6 +1,6 @@
+#include "Singletons/Game.hpp"
 #include <SDL2/SDL.h>
 #include <iostream>
-#include "Singletons/Game.hpp"
 
 int main(int argc, char* argv[])
 {
@@ -21,17 +21,22 @@ int main(int argc, char* argv[])
             TheGame::Instance()->render();
 
             // Fewer FPS during menu states to prevent double clicks
-            if(TheGame::Instance()->getStateMachine()->mGameStates.back()->getStateID() == "MAIN_MENU"
-            || TheGame::Instance()->getStateMachine()->mGameStates.back()->getStateID() == "SINGLE_PLAYER_MENU"
-            || TheGame::Instance()->getStateMachine()->mGameStates.back()->getStateID() == "MULTI_PLAYER_MENU"
-            || TheGame::Instance()->getStateMachine()->mGameStates.back()->getStateID() == "PAUSE_STATE")
+            if(TheGame::Instance()->getStateMachine()->mGameStates.back()->getStateID() == "MAIN_MENU_STATE"
+            || TheGame::Instance()->getStateMachine()->mGameStates.back()->getStateID() == "SCOREBOARD_MENU_STATE"
+            || TheGame::Instance()->getStateMachine()->mGameStates.back()->getStateID() == "SINGLE_PLAYER_MENU_STATE"
+            || TheGame::Instance()->getStateMachine()->mGameStates.back()->getStateID() == "MULTI_PLAYER_MENU_STATE"
+            || TheGame::Instance()->getStateMachine()->mGameStates.back()->getStateID() == "PAUSE_MENU_STATE"
+            || TheGame::Instance()->getStateMachine()->mGameStates.back()->getStateID() == "SINGLE_PLAYER_WON_STATE"
+            || TheGame::Instance()->getStateMachine()->mGameStates.back()->getStateID() == "SINGLE_PLAYER_LOST_STATE"
+            || TheGame::Instance()->getStateMachine()->mGameStates.back()->getStateID() == "MULTI_PLAYER1_WIN_STATE"
+            || TheGame::Instance()->getStateMachine()->mGameStates.back()->getStateID() == "MULTI_PLAYER2_WIN_STATE")
             {
                 FPS = 20;
                 DELAY_TIME = 1000.0f / FPS;
             }
 
             frameTime = SDL_GetTicks() - frameStart;
-            if(frameTime < DELAY_TIME) // Takes care of a 60 FPS
+            if(frameTime < DELAY_TIME) // Takes care of a stable framerate
                 SDL_Delay((int)(DELAY_TIME - frameTime));
         }
     }

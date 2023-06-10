@@ -112,4 +112,4 @@ void PauseMenuState::exit()
 }
 
 // a unique ID for this state used in the xml file
-const std::string PauseMenuState::mPauseID = "PAUSE_STATE";
+const std::string PauseMenuState::mPauseID = "PAUSE_MENU_STATE";
