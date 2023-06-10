@@ -1,7 +1,6 @@
 #pragma once
 #include "GameState.hpp"
 #include <vector>
-#include <memory>
 
 class GameStateMachine
 {

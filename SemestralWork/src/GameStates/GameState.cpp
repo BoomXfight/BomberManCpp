@@ -1,5 +1,5 @@
 #include "GameState.hpp"
 
-GameState::GameState() {};
+GameState::GameState() = default;
 
-GameState::~GameState() {};
+GameState::~GameState() = default;
