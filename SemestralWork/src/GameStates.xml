@@ -98,9 +98,9 @@
 
         <OBJECTS>
             <object type = "StaticObject" x = "200" y = "50" width = "560" height = "100" textureID = "paused"/>
-            <object type = "MenuButton" x = "370" y = "200" width = "200" height = "80" textureID = "resumeButton" callbackID = "1"/>
-            <object type = "MenuButton" x = "270" y = "300" width = "400" height = "80" textureID = "mainButton" callbackID = "2"/>
-            <object type = "MenuButton" x = "410" y = "400" width = "110" height = "80" textureID = "exitButton" callbackID = "3"/>
+            <object type = "MenuButton" x = "370" y = "200" width = "200" height = "80" textureID = "resumeButton" callbackID = "0"/>
+            <object type = "MenuButton" x = "270" y = "300" width = "400" height = "80" textureID = "mainButton" callbackID = "1"/>
+            <object type = "MenuButton" x = "410" y = "400" width = "110" height = "80" textureID = "exitButton" callbackID = "2"/>
         </OBJECTS>
     </PAUSE_MENU_STATE>
 
