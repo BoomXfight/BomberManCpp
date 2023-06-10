@@ -54,17 +54,11 @@ std::string MainMenuState::getStateID() const
     return mStateID;
 }
 
-/**
- * Callback function that switches gameState to SinglePlayerMenuState
- */
 void MainMenuState::menuToSinglePlayer()
 {
     TheGame::Instance()->getStateMachine()->changeState(new SinglePlayerMenuState());
 }
 
-/**
- * Callback function that switches gameState to MultiPlayerMenuState
- */
 void MainMenuState::menuToMultiPlayer()
 {
     TheGame::Instance()->getStateMachine()->changeState(new MultiPlayerMenuState());
@@ -75,9 +69,6 @@ void MainMenuState::menuToScoreboard()
     TheGame::Instance()->getStateMachine()->changeState(new ScoreboardState);
 }
 
-/**
- * Callback function that ends the game
- */
 void MainMenuState::menuToQuit()
 {
     TheGame::Instance()->quit();
