@@ -16,6 +16,7 @@ public:
 private:
     int mLives;
     int mNoOfEnemies;
+    int mPoints;
 
     static const std::string mPlayID;
     ObjectLayer* mObjectLayer;

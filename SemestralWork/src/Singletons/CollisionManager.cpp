@@ -81,7 +81,7 @@ bool CollisionManager::tileCollisionEnemy(Vector2D pVec)
     return true;
 }
 
-bool CollisionManager::isDamaged(Vector2D pVec)
+bool CollisionManager::isPlayerDamaged(Vector2D pVec)
 {
     int tileX = pVec.getX() / mTileSet.mTileWidth;
     int tileY = pVec.getY() / mTileSet.mTileWidth;
@@ -89,6 +89,30 @@ bool CollisionManager::isDamaged(Vector2D pVec)
     if(mMap[tileY][tileX] == EXPLOSION)
         return true;
 
+    return false;
+}
+
+bool CollisionManager::isEnemyHit(Vector2D pVec)
+{
+    int tileX = pVec.getX() / mTileSet.mTileWidth;
+    int tileY = pVec.getY() / mTileSet.mTileWidth;
+
+    if(mMap[tileY][tileX] == EXPLOSION)
+    {
+        for (auto it = mGameObjects->begin(); it != mGameObjects->end(); it++) {
+            if (dynamic_cast<Enemy *>(*it))
+            {
+                Enemy* enemy = dynamic_cast<Enemy*>(*it);
+                if(enemy->getPosition().getX() == pVec.getX()
+                && enemy->getPosition().getY() == pVec.getY()) {
+                    mGameObjects->erase(it);
+                    break;
+                }
+            }
+        }
+        mObjectLayer->setGameObjects(*mGameObjects);
+        return true;
+    }
     return false;
 }
 

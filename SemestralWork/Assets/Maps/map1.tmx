@@ -42,6 +42,14 @@
     <property name="textureID" value="Enemy1"/>
    </properties>
   </object>
+  <object id="3" name="enemy2" type="Enemy" x="400" y="200">
+     <properties>
+      <property name="numFrames" type="int" value="3"/>
+      <property name="textureHeight" type="int" value="17"/>
+      <property name="textureWidth" type="int" value="17"/>
+      <property name="textureID" value="Enemy1"/>
+     </properties>
+    </object>
  </objectgroup>
  <objectProperties>
   <property name="Bomber1" value="../Assets/BomberMan1Animation.png"/>

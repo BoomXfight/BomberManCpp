@@ -134,7 +134,7 @@ void Player::handleBomb()
 
 void Player::handleDamage()
 {
-    if(TheCollisionManager::Instance()->isDamaged(mPosition) && !mImmortal && !mInvisible
+    if(TheCollisionManager::Instance()->isPlayerDamaged(mPosition) && !mImmortal && !mInvisible
     || TheCollisionManager::Instance()->enemyCollisionPlayer(this) && !mImmortal && !mInvisible)
     {
         mImmortal = true;

@@ -16,3 +16,8 @@ std::vector<GameObject*>* ObjectLayer::getGameObjects()
 {
     return &mGameObjects;
 }
+
+void ObjectLayer::setGameObjects(std::vector<GameObject *> pGameObjects)
+{
+    mGameObjects = pGameObjects;
+}
