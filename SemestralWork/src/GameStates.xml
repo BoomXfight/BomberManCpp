@@ -43,9 +43,9 @@
             <object type = "StaticObject" x = "720" y = "220" width = "197" height = "300" textureID = "BomberWoman"/>
             <object type = "StaticObject" x = "320" y = "190" width = "160" height = "30" textureID = "Player1"/>
             <object type = "StaticObject" x = "320" y = "280" width = "160" height = "30" textureID = "Player2"/>
-            <object type = "MenuButton" x = "840" y = "40" width = "90" height = "50" textureID = "Exit" callbackID = "1"/>
-            <object type = "MenuButton" x = "30" y = "40" width = "90" height = "50" textureID = "Back" callbackID = "2"/>
-            <object type = "MenuButton" x = "380" y = "360" width = "200" height = "160" textureID = "Play" callbackID = "3"/>
+            <object type = "MenuButton" x = "840" y = "40" width = "90" height = "50" textureID = "Exit" callbackID = "0"/>
+            <object type = "MenuButton" x = "30" y = "40" width = "90" height = "50" textureID = "Back" callbackID = "1"/>
+            <object type = "MenuButton" x = "380" y = "360" width = "200" height = "160" textureID = "Play" callbackID = "2"/>
         </OBJECTS>
     </MULTI_PLAYER_MENU_STATE>
 

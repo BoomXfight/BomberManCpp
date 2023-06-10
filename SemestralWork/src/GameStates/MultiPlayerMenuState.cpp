@@ -18,7 +18,6 @@ bool MultiPlayerMenuState::onEnter()
                                 &mTextureIDList))
         return false;
 
-    mCallbacks.push_back(nullptr);
     mCallbacks.push_back(menuToQuit);
     mCallbacks.push_back(mpMenuToMainMenu);
     mCallbacks.push_back(mpMenuToMpPlay);
