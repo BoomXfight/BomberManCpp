@@ -1,30 +1,10 @@
 #include "../Singletons/Game.hpp"
 #include "../Singletons/TextureManager.hpp"
 #include "../Singletons/InputHandler.hpp"
-#include "../GameObjects/MenuButton.hpp"
 #include "SinglePlayerLostState.hpp"
 #include "SinglePlayerPlayState.hpp"
 #include "MainMenuState.hpp"
 #include "StateParser.hpp"
-#include <iostream>
-
-/**
- * This method updates the gameObjects of the SinglePlayerLostState
- */
-void SinglePlayerLostState::update()
-{
-    for(int i = 0; i < mGameObjects.size(); i++)
-        mGameObjects[i]->update();
-}
-
-/**
- * This method renders the gameObjects of the SinglePlayerLostState
- */
-void SinglePlayerLostState::render()
-{
-    for(int i = 0; i < mGameObjects.size(); i++)
-        mGameObjects[i]->draw();
-}
 
 /**
  * This method initializes the SinglePlayerLostState from an xml file
@@ -33,21 +13,21 @@ void SinglePlayerLostState::render()
 bool SinglePlayerLostState::onEnter()
 {
     StateParser stateParser;
-    if(! stateParser.parseState("../src/GameStates.xml", mMenuID, &mGameObjects,&mTextureIDList))
+    if(! stateParser.parseState("../src/GameStates.xml", mStateID, &mGameObjects,
+                                &mTextureIDList))
         return false;
 
-    mCallbacks.push_back(nullptr);
     mCallbacks.push_back(playAgain);
     mCallbacks.push_back(returnToMainMenu);
     mCallbacks.push_back(exit);
 
     setCallbacks(mCallbacks);
-    std::cout << "Entering MultiPlayer1WinState" << std::endl;
+    std::cout << "Entering SinglePlayerLostState." << std::endl;
     return true;
 }
 
 /**
- * This method cleans up at the end of PauseMenuState
+ * This method cleans up at the end of SinglePlayerLostState
  * @return true
  */
 bool SinglePlayerLostState::onExit()
@@ -62,38 +42,29 @@ bool SinglePlayerLostState::onExit()
 
     // reset the mouse button states to false
     TheInputHandler::Instance()->reset();
-    std::cout << "Exiting MultiPlayer1WinState" << std::endl;
+    std::cout << "SinglePlayerLostState." << std::endl;
     return true;
 }
 
 std::string SinglePlayerLostState::getStateID() const
 {
-    return mMenuID;
+    return mStateID;
 }
 
-/**
- * Callback function that switches to MainMenuState
- */
 void SinglePlayerLostState::playAgain()
 {
     TheGame::Instance()->getStateMachine()->changeState(new SinglePlayerPlayState());
 }
 
-/**
- * Callback function that resumes the MultiPlayerPlayState
- */
 void SinglePlayerLostState::returnToMainMenu()
 {
     TheGame::Instance()->getStateMachine()->changeState(new MainMenuState);
 }
 
-/**
- * Callback function that ends the game
- */
 void SinglePlayerLostState::exit()
 {
     TheGame::Instance()->quit();
 }
 
 // a unique ID for this state used in the xml file
-const std::string SinglePlayerLostState::mMenuID = "SINGLE_PLAYER_LOST_STATE";
+const std::string SinglePlayerLostState::mStateID = "SINGLE_PLAYER_LOST_STATE";
