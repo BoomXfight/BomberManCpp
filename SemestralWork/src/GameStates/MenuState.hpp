@@ -1,6 +1,5 @@
 #pragma once
 #include "GameState.hpp"
-#include <vector>
 
 class MenuState : public GameState
 {
