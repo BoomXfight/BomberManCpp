@@ -36,7 +36,7 @@ bool SinglePlayerMenuState::onExit()
     if(TextSquare* a = dynamic_cast<TextSquare*>(mGameObjects[0]))
     {
         TheGame::Instance()->setP1(a->getText());
-        std::cout << "P1 set" << std::endl;
+        std::cout << "P1 set." << std::endl;
     }
 
     for(int i = 0; i < mGameObjects.size(); i++)
@@ -71,9 +71,9 @@ void SinglePlayerMenuState::spMenuToSpPlay()
     TheGame::Instance()->getStateMachine()->changeState(new SinglePlayerPlayState);
 
     if(TheGame::Instance()->P1Ready())
-        std::cout << "Playing as : " << TheGame::Instance()->getP1() << std::endl;
+        std::cout << "Playing as : " << TheGame::Instance()->getP1() << "." << std::endl;
     else
-        std::cout << "Playing as : guest" << std::endl;
+        std::cout << "Playing as : guest." << std::endl;
 }
 
 // a unique ID for SinglePlayerPlayState used in the xml file
