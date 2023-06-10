@@ -139,6 +139,40 @@
     	</OBJECTS>
     </MULTI_PLAYER2_WIN_STATE>
 
+    <!--SinglePlayerLostState-->
+    <SINGLE_PLAYER_LOST_STATE>
+        <TEXTURES>
+            <texture filename = "../Assets/SinglePlayerLostState/YouLost.png" ID = "loss"/>
+            <texture filename = "../Assets/SinglePlayerLostState/PlayAgain.png" ID = "playAgainButton"/>
+            <texture filename = "../Assets/SinglePlayerLostState/ReturnToMainMenu.png" ID = "returnToMainMenuButton"/>
+            <texture filename = "../Assets/SinglePlayerLostState/Exit2.png" ID = "exitButton"/>
+        </TEXTURES>>
+
+        <OBJECTS>
+            <object type = "StaticObject" x = "255" y = "50" width = "450" height = "100" textureID = "loss"/>
+            <object type = "MenuButton" x = "370" y = "200" width = "220" height = "80" textureID = "playAgainButton" callbackID = "1"/>
+            <object type = "MenuButton" x = "280" y = "300" width = "400" height = "80" textureID = "returnToMainMenuButton" callbackID = "2"/>
+            <object type = "MenuButton" x = "425" y = "400" width = "110" height = "80" textureID = "exitButton" callbackID = "3"/>
+        </OBJECTS>
+    </SINGLE_PLAYER_LOST_STATE>
+
+    <!--SinglePlayerWonState-->
+    <SINGLE_PLAYER_WON_STATE>
+        <TEXTURES>
+            <texture filename = "../Assets/SinglePlayerWonState/YouWon.png" ID = "win"/>
+            <texture filename = "../Assets/SinglePlayerWonState/PlayAgain.png" ID = "playAgainButton"/>
+            <texture filename = "../Assets/SinglePlayerWonState/ReturnToMainMenu.png" ID = "returnToMainMenuButton"/>
+            <texture filename = "../Assets/SinglePlayerWonState/Exit2.png" ID = "exitButton"/>
+        </TEXTURES>>
+
+        <OBJECTS>
+            <object type = "StaticObject" x = "255" y = "50" width = "450" height = "100" textureID = "win"/>
+            <object type = "MenuButton" x = "370" y = "200" width = "220" height = "80" textureID = "playAgainButton" callbackID = "1"/>
+            <object type = "MenuButton" x = "280" y = "300" width = "400" height = "80" textureID = "returnToMainMenuButton" callbackID = "2"/>
+            <object type = "MenuButton" x = "425" y = "400" width = "110" height = "80" textureID = "exitButton" callbackID = "3"/>
+        </OBJECTS>
+    </SINGLE_PLAYER_WON_STATE>
+
     <!--Play State-->
     <PLAY_STATE>
         <TEXTURES>

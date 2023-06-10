@@ -19,8 +19,8 @@ void Player1::handleInput()
         newPos2.setX(mPosition.getX() + mSpeed + mWidth - buffer);
         newPos2.setY(mPosition.getY() + mHeight - buffer);
 
-        if(TheCollisionManager::Instance()->tileCollision(newPos1)
-        || TheCollisionManager::Instance()->tileCollision(newPos2))
+        if(TheCollisionManager::Instance()->tileCollisionPlayer((newPos1))
+        || TheCollisionManager::Instance()->tileCollisionPlayer(newPos2))
             mMoving = false;
         else
         {
@@ -39,8 +39,8 @@ void Player1::handleInput()
         newPos2.setX(mPosition.getX() - mSpeed + buffer);
         newPos2.setY(mPosition.getY() + mHeight - buffer);
 
-        if(TheCollisionManager::Instance()->tileCollision(newPos1)
-           || TheCollisionManager::Instance()->tileCollision(newPos2))
+        if(TheCollisionManager::Instance()->tileCollisionPlayer(newPos1)
+           || TheCollisionManager::Instance()->tileCollisionPlayer(newPos2))
             mMoving = false;
         else
         {
@@ -59,8 +59,8 @@ void Player1::handleInput()
         newPos2.setX(mPosition.getX() + mWidth - buffer);
         newPos2.setY(mPosition.getY() - mSpeed + buffer);
 
-        if(TheCollisionManager::Instance()->tileCollision(newPos1)
-           || TheCollisionManager::Instance()->tileCollision(newPos2))
+        if(TheCollisionManager::Instance()->tileCollisionPlayer(newPos1)
+           || TheCollisionManager::Instance()->tileCollisionPlayer(newPos2))
             mMoving = false;
         else
         {
@@ -79,8 +79,8 @@ void Player1::handleInput()
         newPos2.setX(mPosition.getX() + mWidth - buffer);
         newPos2.setY(mPosition.getY() + mSpeed + mHeight - buffer);
 
-        if(TheCollisionManager::Instance()->tileCollision(newPos1)
-           || TheCollisionManager::Instance()->tileCollision(newPos2))
+        if(TheCollisionManager::Instance()->tileCollisionPlayer(newPos1)
+           || TheCollisionManager::Instance()->tileCollisionPlayer(newPos2))
             mMoving = false;
         else
         {

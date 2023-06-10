@@ -2,8 +2,12 @@
 #include "../Singletons/Game.hpp"
 #include "../Singletons/TextureManager.hpp"
 #include "../Levels/LevelParser.hpp"
+#include "../Levels/ObjectLayer.hpp"
+#include "../GameObjects/Player1.hpp"
+#include "../GameObjects/Enemy.hpp"
 #include "SinglePlayerPlayState.hpp"
-#include "../GameStates/PauseMenuState.hpp"
+#include "SinglePlayerLostState.hpp"
+#include "PauseMenuState.hpp"
 #include <iostream>
 
 /**
@@ -12,6 +16,15 @@
 void SinglePlayerPlayState::update()
 {
     mLevel->update();
+
+    for (GameObject *obj: *mObjectLayer->getGameObjects())
+    {
+        if (Player1* player1 = dynamic_cast<Player1 *>(obj))
+            mLives = player1->getLives();
+    }
+
+    if(mLives == 0)
+        TheGame::Instance()->getStateMachine()->changeState(new SinglePlayerLostState);
 
     if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_ESCAPE))
         TheGame::Instance()->getStateMachine()->pushState(new PauseMenuState());
@@ -33,6 +46,27 @@ bool SinglePlayerPlayState::onEnter()
 {
     LevelParser levelParser;
     mLevel = levelParser.parseLevel("../Assets/Maps/map1.tmx");
+
+
+    mNoOfEnemies = 0;
+    for (Layer* layer : *mLevel->getLayers())
+    {
+        if (ObjectLayer* objLayer = dynamic_cast<ObjectLayer*>(layer))
+        {
+            mObjectLayer = objLayer;
+            break;
+        }
+    }
+
+    if (mObjectLayer != nullptr)
+    {
+        for (GameObject *obj: *mObjectLayer->getGameObjects())
+        {
+            if (Enemy* enemy = dynamic_cast<Enemy *>(obj))
+                mNoOfEnemies ++;
+        }
+    }
+
     std::cout << "Entering SinglePLayerPlayState" << std::endl;
     return true;
 }

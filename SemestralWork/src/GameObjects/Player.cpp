@@ -134,7 +134,8 @@ void Player::handleBomb()
 
 void Player::handleDamage()
 {
-    if(TheCollisionManager::Instance()->isDamaged(mPosition) && !mImmortal && !mInvisible)
+    if(TheCollisionManager::Instance()->isDamaged(mPosition) && !mImmortal && !mInvisible
+    || TheCollisionManager::Instance()->enemyCollisionPlayer(this) && !mImmortal && !mInvisible)
     {
         mImmortal = true;
         mDamageTimer = SDL_GetTicks();

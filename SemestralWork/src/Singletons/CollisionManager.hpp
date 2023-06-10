@@ -23,7 +23,9 @@ public:
     void setObjectLayer(ObjectLayer* pObjectLayer);
     void setBonuses(std::vector<Bonus*> pBonuses);
     std::vector<Bonus*> getBonuses();
-    bool tileCollision(Vector2D vec);
+    bool tileCollisionPlayer(Vector2D pVec);
+    bool enemyCollisionPlayer(Player* pPlayer);
+    bool tileCollisionEnemy(Vector2D pVec);
     bool isDamaged(Vector2D pVec);
     void placeBomb(Vector2D vec);
     void explodeBomb(Vector2D pVec, int pRadius);

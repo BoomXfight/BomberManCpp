@@ -1,5 +1,6 @@
 #pragma once
 #include "../Levels/Level.hpp"
+#include "../Levels/ObjectLayer.hpp"
 #include "../GameObjects/GameObject.hpp"
 #include <vector>
 
@@ -13,7 +14,11 @@ public:
     virtual std::string getStateID() const;
 
 private:
+    int mLives;
+    int mNoOfEnemies;
+
     static const std::string mPlayID;
+    ObjectLayer* mObjectLayer;
     std::vector<GameObject*> mGameObjects;
     Level* mLevel;
 };

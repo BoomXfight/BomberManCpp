@@ -1,3 +1,4 @@
+#include "../GameObjects/Enemy.hpp"
 #include "CollisionManager.hpp"
 
 CollisionManager* CollisionManager::Instance()
@@ -31,12 +32,50 @@ std::vector<Bonus*> CollisionManager::getBonuses()
     return mBonuses;
 }
 
-bool CollisionManager::tileCollision(Vector2D vec)
+bool CollisionManager::tileCollisionPlayer(Vector2D pVec)
 {
-    int tileX = vec.getX() / mTileSet.mTileWidth;
-    int tileY = vec.getY() / mTileSet.mTileWidth;
+    int tileX = pVec.getX() / mTileSet.mTileWidth;
+    int tileY = pVec.getY() / mTileSet.mTileWidth;
 
     if(mMap[tileY][tileX] == FREE || mMap[tileY][tileX] == BOMB)
+        return false;
+
+    return true;
+}
+
+bool CollisionManager::enemyCollisionPlayer(Player* pPlayer)
+{
+    for(auto it = mGameObjects->begin(); it != mGameObjects->end(); it++)
+    {
+        //dynamic_cast<MenuButton*>(mGameObjects[i])
+        if(dynamic_cast<Enemy*>(*it))
+        {
+            Enemy* enemy = dynamic_cast<Enemy*>(*it);
+            if (pPlayer->getPosition().getY() + pPlayer->getHeight() < enemy->getPosition().getY()) // vertical
+                return false;
+
+            else if(pPlayer->getPosition().getY() > enemy->getPosition().getY() + enemy->getHeight()) // vertical
+                return false;
+
+            else if(pPlayer->getPosition().getX() + pPlayer->getWidth() < enemy->getPosition().getX()) // horizontal
+                return false;
+
+            else if(pPlayer->getPosition().getX() > enemy->getPosition().getX() + enemy->getWidth())
+                return false;
+
+            else
+                return true;
+        }
+    }
+
+}
+
+bool CollisionManager::tileCollisionEnemy(Vector2D pVec)
+{
+    int tileX = pVec.getX() / mTileSet.mTileWidth;
+    int tileY = pVec.getY() / mTileSet.mTileWidth;
+
+    if(mMap[tileY][tileX] == FREE)
         return false;
 
     return true;

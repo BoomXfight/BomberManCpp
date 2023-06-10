@@ -25,7 +25,7 @@
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
   </data>
  </layer>
- <objectgroup id="2" name="Object Layer 1">
+ <objectgroup id="1" name="Object Layer 1">
   <object id="1" name="BomberMan1" type="Player1" x="315" y="345.833">
    <properties>
     <property name="numFrames" type="int" value="3"/>
@@ -34,8 +34,17 @@
     <property name="textureID" value="Bomber1"/>
    </properties>
   </object>
+  <object id="2" name="enemy1" type="Enemy" x="200" y="200">
+   <properties>
+    <property name="numFrames" type="int" value="3"/>
+    <property name="textureHeight" type="int" value="17"/>
+    <property name="textureWidth" type="int" value="17"/>
+    <property name="textureID" value="Enemy1"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectProperties>
   <property name="Bomber1" value="../Assets/BomberMan1Animation.png"/>
+  <property name="Enemy1" value="../Assets/Enemy1Animation.png"/>
  </objectProperties>
 </map>
