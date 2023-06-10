@@ -20,7 +20,6 @@ public:
     std::string getStateID() const override;
 
 private:
-    virtual void setCallbacks(const std::vector<Callback>& pCallbacks);
     static void scoreboardToMainMenu();
     static void exit();
     static const std::string mMenuID;

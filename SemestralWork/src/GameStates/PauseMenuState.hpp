@@ -13,7 +13,6 @@ public:
     std::string getStateID() const override;
 
 private:
-    virtual void setCallbacks(const std::vector<Callback>& pCallbacks);
     static void pauseToMainMenu();
     static void resumePlay();
     static void exit();

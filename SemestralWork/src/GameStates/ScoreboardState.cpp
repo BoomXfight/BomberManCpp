@@ -108,23 +108,6 @@ std::string ScoreboardState::getStateID() const
 }
 
 /**
- * This method assigns a callback function to gameObjects that require it
- * @param pCallbacks
- */
-void ScoreboardState::setCallbacks(const std::vector<Callback> &pCallbacks)
-{
-    for(int i = 0; i < mGameObjects.size(); i++)
-    {
-        // if they are of type MenuButton then assign a callback based on the id passed in from the file
-        if(dynamic_cast<MenuButton*>(mGameObjects[i]))
-        {
-            MenuButton* pButton = dynamic_cast<MenuButton*>(mGameObjects[i]);
-            pButton->setCallback(pCallbacks[pButton->getCallbackID()]);
-        }
-    }
-}
-
-/**
  * Callback function that switches to MainMenuState
  */
 void ScoreboardState::scoreboardToMainMenu()

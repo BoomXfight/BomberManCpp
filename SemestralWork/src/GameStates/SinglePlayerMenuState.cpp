@@ -77,23 +77,6 @@ std::string SinglePlayerMenuState::getStateID() const
 }
 
 /**
- * This method assigns a callback function to gameObjects that require it
- * @param callbacks
- */
-void SinglePlayerMenuState::setCallbacks(const std::vector<Callback> &callbacks)
-{
-    for(int i = 0; i < mGameObjects.size(); i++)
-    {
-        // if they are of type MenuButton then assign a callback based on the id passed in from the file
-        if(dynamic_cast<MenuButton*>(mGameObjects[i]))
-        {
-            MenuButton* pButton = dynamic_cast<MenuButton*>(mGameObjects[i]);
-            pButton->setCallback(callbacks[pButton->getCallbackID()]);
-        }
-    }
-}
-
-/**
  * This callback function quits the game
  */
 void SinglePlayerMenuState::menuToQuit()

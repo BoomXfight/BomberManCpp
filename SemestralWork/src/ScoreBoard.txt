@@ -1,5 +1,6 @@
-Andrej 200
+Andrej 420
 Samuel 120
+Robo 100
 Jozef 60
 Juraj 60
 Tomas 60
@@ -7,5 +8,7 @@ Max 50
 Alfonz 40
 Peter 40
 Tera 20
+Adam 20
 Luna 10
 Monika 0
+Milan 0

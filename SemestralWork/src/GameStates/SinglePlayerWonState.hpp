@@ -11,7 +11,6 @@ class SinglePlayerWonState : public  MenuState
     std::string getStateID() const override;
 
 private:
-    virtual void setCallbacks(const std::vector<Callback>& pCallbacks);
     static void playAgain();
     static void returnToMainMenu();
     static void exit();

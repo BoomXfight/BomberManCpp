@@ -10,31 +10,13 @@
 #include <iostream>
 
 /**
- * This method updates the gameObjects of the MultiPlayerMenuState
- */
-void MultiPlayerMenuState::update()
-{
-    for(size_t i = 0; i < mGameObjects.size(); i++)
-        mGameObjects[i]->update();
-}
-
-/**
- * This method renders the gameObjects of the MultiPlayerMenuState
- */
-void MultiPlayerMenuState::render()
-{
-    for(size_t i = 0; i < mGameObjects.size(); i++)
-        mGameObjects[i]->draw();
-}
-
-/**
  * This method initializes the MultiPlayerMenuState from an xml file
  * @return true -> success, false -> failed to parse a gameState file
  */
 bool MultiPlayerMenuState::onEnter()
 {
     StateParser stateParser;
-    if(! stateParser.parseState("../src/GameStates.xml", mMenuID, &mGameObjects,&mTextureIDList))
+    if(! stateParser.parseState("../src/GameStates.xml", mStateID, &mGameObjects,&mTextureIDList))
         return false;
 
     mCallbacks.push_back(nullptr);
@@ -79,24 +61,7 @@ bool MultiPlayerMenuState::onExit()
 
 std::string MultiPlayerMenuState::getStateID() const
 {
-    return mMenuID;
-}
-
-/**
- * This method assigns a callback function to gameObjects that require it
- * @param callbacks
- */
-void MultiPlayerMenuState::setCallbacks(const std::vector<Callback> &callbacks)
-{
-    for(int i = 0; i < mGameObjects.size(); i++)
-    {
-        // if they are of type MenuButton then assign a callback based on the id passed in from the file
-        if(dynamic_cast<MenuButton*>(mGameObjects[i]))
-        {
-            MenuButton* pButton = dynamic_cast<MenuButton*>(mGameObjects[i]);
-            pButton->setCallback(callbacks[pButton->getCallbackID()]);
-        }
-    }
+    return mStateID;
 }
 
 void MultiPlayerMenuState::menuToQuit()
@@ -131,4 +96,4 @@ void MultiPlayerMenuState::mpMenuToMpPlay()
 }
 
 // a unique ID for the MultiPlayerMenuState state used in the xml file
-const std::string MultiPlayerMenuState::mMenuID = "MULTI_PLAYER_MENU_STATE";
+const std::string MultiPlayerMenuState::mStateID = "MULTI_PLAYER_MENU_STATE";

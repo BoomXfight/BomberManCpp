@@ -14,8 +14,6 @@ public:
     std::string getStateID() const override;
 
 private:
-    void setCallbacks(const std::vector<Callback>& pCallbacks) override;
-
     static void menuToQuit();
     static void spMenuToMainMenu();
     static void spMenuToSpPlay();
