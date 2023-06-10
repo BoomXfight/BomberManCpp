@@ -33,47 +33,49 @@ bool Game::init(const char* pTitle, int pX_WindowPos, int pY_WindowPos, int pWin
 {
     if(SDL_Init(SDL_INIT_VIDEO) == 0) // SDL_INIT_EVERYTHING
     {
+        int flags = 0;
+        if(pFullscreen)
+            flags = SDL_WINDOW_FULLSCREEN;
+
+        mGameWidth = pWindowWidth;
+        mGameHeight = pWindowHeight;
+        std::cout << "SDL init success." << std::endl;
+
         if(TTF_Init() == 0)
         {
             mFont = TTF_OpenFont("../Assets/Fonts/RodchenkoBTT.ttf", 50);
-            if (!mFont) {
+            if (!mFont)
+            {
                 std::cout << "Failed to load font." << std::endl;
+                return false;
+            }
+            std::cout << "TTF init success." << std::endl;
+
+            mWindow = SDL_CreateWindow(pTitle, pX_WindowPos, pY_WindowPos,mGameWidth, mGameHeight, flags);
+            if(mWindow != nullptr)
+            {
+                std::cout << "Window creation success." << std::endl;
+                mRenderer = SDL_CreateRenderer(mWindow, -1, 0);
+                if(mRenderer != nullptr)
+                {
+                    std::cout << "Renderer creation success." << std::endl;
+                    SDL_SetRenderDrawColor(mRenderer,0,0,0,255);
+                }
+                else
+                {
+                    std::cout << "Renderer init fail: " << SDL_GetError() << std::endl;
+                    return false;
+                }
+            }
+            else
+            {
+                std::cout << "Window init fail: " << SDL_GetError() << std::endl;
                 return false;
             }
         }
         else
         {
             std::cout << "TTF init failed." << std::endl;
-            return false;
-        }
-
-        int flags = 0;
-        if(pFullscreen)
-            flags = SDL_WINDOW_FULLSCREEN;
-
-        std::cout << "SDL init success." << std::endl;
-
-        mGameWidth = pWindowWidth;
-        mGameHeight = pWindowHeight;
-        mWindow = SDL_CreateWindow(pTitle, pX_WindowPos, pY_WindowPos,mGameWidth, mGameHeight, flags);
-        if(mWindow != nullptr)
-        {
-            std::cout << "Window creation success." << std::endl;
-            mRenderer = SDL_CreateRenderer(mWindow, -1, 0);
-            if(mRenderer != nullptr)
-            {
-                std::cout << "Renderer creation success." << std::endl;
-                SDL_SetRenderDrawColor(mRenderer,0,0,0,255);
-            }
-            else
-            {
-                std::cout << "Renderer init fail: " << SDL_GetError() << std::endl;
-                return false;
-            }
-        }
-        else
-        {
-            std::cout << "Window init fail: " << SDL_GetError() << std::endl;
             return false;
         }
     }
@@ -100,28 +102,40 @@ bool Game::init(const char* pTitle, int pX_WindowPos, int pY_WindowPos, int pWin
     return true;
 }
 
+/**
+ * This method renders the current game state to the screen
+ */
 void Game::render()
 {
     SDL_RenderClear(mRenderer);
-    mGameStateMachine->render(); // rendering current game state
-    SDL_RenderPresent(mRenderer); // draw to the screen
+    mGameStateMachine->render();
+    SDL_RenderPresent(mRenderer);
 }
 
+/**
+ * This method updates the current game state
+ */
 void Game::update()
 {
-    mGameStateMachine->update(); // updating current game state
+    mGameStateMachine->update();
 }
 
+/**
+ * This method handles the user interaction with the game
+ */
 void Game::handleEvents()
 {
-    TheInputHandler::Instance()->update(); // event handling current game state
+    TheInputHandler::Instance()->update();
 }
 
+/**
+ * This method cleans after the game
+ */
 void Game::clean()
 {
-    std::cout << "Cleaning the game" << std::endl;
+    std::cout << "Cleaning the game." << std::endl;
+    mIsRunning = false;
     TheInputHandler::Instance()->clean();
-    TheGame::Instance()->mIsRunning = false;
     SDL_DestroyWindow(mWindow);
     SDL_DestroyRenderer(mRenderer);
     TTF_Quit();
@@ -158,6 +172,16 @@ bool Game::isRunning()
     return mIsRunning;
 }
 
+int Game::getGameWidth() const
+{
+    return mGameWidth;
+}
+
+int Game::getGameHeight() const
+{
+    return mGameHeight;
+}
+
 std::string Game::getP1() const
 {
     return mPlayer1;
@@ -173,27 +197,15 @@ SDL_Renderer* Game::getRenderer() const
     return mRenderer;
 }
 
-GameStateMachine* Game::getStateMachine() const
-{
-    return mGameStateMachine;
-}
-
-int Game::getGameWidth() const
-{
-    return mGameWidth;
-}
-
-int Game::getGameHeight() const
-{
-    return mGameHeight;
-}
-
 TTF_Font* Game::getFont() const
 {
     return mFont;
 }
 
-Game::~Game() {}
+GameStateMachine* Game::getStateMachine() const
+{
+    return mGameStateMachine;
+}
 
 Game::Game() {}
 

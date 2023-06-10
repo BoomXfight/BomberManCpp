@@ -1,8 +1,8 @@
 #pragma once
-#include "SDL2/SDL.h"
-#include "SDL2/SDL_ttf.h"
 #include "../GameObjects/GameObject.hpp"
 #include "../GameStates/GameStateMachine.hpp"
+#include "SDL2/SDL.h"
+#include "SDL2/SDL_ttf.h"
 #include <vector>
 #include <memory>
 
@@ -22,23 +22,22 @@ public:
     bool P1Ready();
     bool P2Ready();
     bool isRunning();
+    int getGameWidth() const;
+    int getGameHeight() const;
     std::string getP1() const;
     std::string getP2() const;
     SDL_Renderer* getRenderer() const;
     GameStateMachine* getStateMachine() const;
-    int getGameWidth() const;
-    int getGameHeight() const;
     TTF_Font* getFont() const;
 
 private:
     Game();
-    ~Game();
-    static Game* mInstance;
 
+    static Game* mInstance;
     SDL_Window* mWindow;
     SDL_Renderer* mRenderer;
+    TTF_Font* mFont;
 
-    int mCurrentFrame; // ??
     int mGameWidth;
     int mGameHeight;
     bool mIsRunning;
@@ -46,9 +45,6 @@ private:
     std::string mPlayer1;
     std::string mPlayer2;
 
-    TTF_Font* mFont;
-
-    std::vector<GameObject*> mGameObjects;
     GameStateMachine* mGameStateMachine;
 };
 
