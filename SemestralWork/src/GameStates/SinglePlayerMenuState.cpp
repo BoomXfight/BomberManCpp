@@ -1,31 +1,11 @@
-#include "SinglePlayerMenuState.hpp"
-#include "MainMenuState.hpp"
-#include "SinglePlayerPlayState.hpp"
 #include "../Singletons/TextureManager.hpp"
 #include "../Singletons/Game.hpp"
 #include "../GameObjects/StaticObject.hpp"
-#include "../GameObjects/MenuButton.hpp"
 #include "../GameObjects/TextSquare.hpp"
+#include "SinglePlayerMenuState.hpp"
+#include "MainMenuState.hpp"
+#include "SinglePlayerPlayState.hpp"
 #include "StateParser.hpp"
-#include <iostream>
-
-/**
- * This method updates the gameObjects of the SinglePlayerMenuState
- */
-void SinglePlayerMenuState::update()
-{
-    for(size_t i = 0; i < mGameObjects.size(); i++)
-        mGameObjects[i]->update();
-}
-
-/**
- * This method renders the gameObject of the SinglePlayerMenuState
- */
-void SinglePlayerMenuState::render()
-{
-    for(size_t i = 0; i < mGameObjects.size(); i++)
-        mGameObjects[i]->draw();
-}
 
 /**
  * This method initializes the SinglePlayerMenuState from an xml file
@@ -34,16 +14,16 @@ void SinglePlayerMenuState::render()
 bool SinglePlayerMenuState::onEnter()
 {
     StateParser stateParser;
-    if(! stateParser.parseState("../src/GameStates.xml", mMenuID, &mGameObjects,&mTextureIDList))
+    if(! stateParser.parseState("../src/GameStates.xml", mStateID, &mGameObjects,
+                                &mTextureIDList))
         return false;
 
-    mCallbacks.push_back(nullptr);
     mCallbacks.push_back(menuToQuit);
     mCallbacks.push_back(spMenuToMainMenu);
     mCallbacks.push_back(spMenuToSpPlay);
 
     setCallbacks(mCallbacks);
-    std::cout << "Entering SinglePlayerMenu state" << std::endl;
+    std::cout << "Entering SinglePlayerMenuState." << std::endl;
     return true;
 }
 
@@ -67,34 +47,25 @@ bool SinglePlayerMenuState::onExit()
     for(int i = 0; i < mTextureIDList.size(); i++)
         TheTextureManager::Instance()->clearFromTextureMap(mTextureIDList[i]);
 
-    std::cout << "Exiting SinglePlayerMenuState" << std::endl;
+    std::cout << "Exiting SinglePlayerMenuState." << std::endl;
     return true;
 }
 
 std::string SinglePlayerMenuState::getStateID() const
 {
-    return mMenuID;
+    return mStateID;
 }
 
-/**
- * This callback function quits the game
- */
 void SinglePlayerMenuState::menuToQuit()
 {
     TheGame::Instance()->quit();
 }
 
-/**
- * This callback function returns to the MainMenuState
- */
 void SinglePlayerMenuState::spMenuToMainMenu()
 {
     TheGame::Instance()->getStateMachine()->changeState(new MainMenuState);
 }
 
-/**
- * This callback function switches from SinglePlayerMenuState to the SinglePlayerPlayState
- */
 void SinglePlayerMenuState::spMenuToSpPlay()
 {
     TheGame::Instance()->getStateMachine()->changeState(new SinglePlayerPlayState);
@@ -106,4 +77,4 @@ void SinglePlayerMenuState::spMenuToSpPlay()
 }
 
 // a unique ID for SinglePlayerPlayState used in the xml file
-const std::string SinglePlayerMenuState::mMenuID = "SINGLE_PLAYER_MENU_STATE";
+const std::string SinglePlayerMenuState::mStateID = "SINGLE_PLAYER_MENU_STATE";
