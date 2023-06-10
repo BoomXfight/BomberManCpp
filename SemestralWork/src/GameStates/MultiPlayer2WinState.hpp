@@ -1,7 +1,5 @@
 #pragma once
 #include "MenuState.hpp"
-#include "../GameObjects/GameObject.hpp"
-#include <vector>
 
 class MultiPlayer2WinState : public MenuState
 {
