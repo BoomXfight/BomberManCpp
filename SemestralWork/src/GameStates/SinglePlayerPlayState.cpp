@@ -12,7 +12,6 @@
 void SinglePlayerPlayState::update()
 {
     mLevel->update();
-    mLevel->getLayers();
 
     if(TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_ESCAPE))
         TheGame::Instance()->getStateMachine()->pushState(new PauseMenuState());
@@ -33,7 +32,7 @@ void SinglePlayerPlayState::render()
 bool SinglePlayerPlayState::onEnter()
 {
     LevelParser levelParser;
-    levelParser.parseLevel("../Assets/Maps/map1.tmx");
+    mLevel = levelParser.parseLevel("../Assets/Maps/map1.tmx");
     std::cout << "Entering SinglePLayerPlayState" << std::endl;
     return true;
 }
@@ -58,7 +57,7 @@ bool SinglePlayerPlayState::onExit()
 
 std::string SinglePlayerPlayState::getStateID() const
 {
-    return mMenuID;
+    return mPlayID;
 }
 
-const std::string SinglePlayerPlayState::mMenuID = "SINGLE_PLAYER_PLAY_STATE";
+const std::string SinglePlayerPlayState::mPlayID = "SINGLE_PLAYER_PLAY_STATE";

@@ -6,6 +6,15 @@
 #include "../Vector2D.hpp"
 #include <vector>
 
+enum
+{
+    HARD = 1,
+    FREE = 2,
+    BREAKABLE = 3,
+    EXPLOSION = 4,
+    BOMB = 5
+};
+
 class CollisionManager
 {
 public:
