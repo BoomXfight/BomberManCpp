@@ -5,7 +5,6 @@
 #include "SinglePlayerMenuState.hpp"
 #include "MultiPlayerMenuState.hpp"
 #include "ScoreboardState.hpp"
-#include <iostream>
 
 /**
  * This method initializes the MainMenuState from an xml load file
