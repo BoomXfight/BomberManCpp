@@ -1,7 +1,3 @@
-#include <iostream>
-#include "Game.hpp"
-#include "InputHandler.hpp"
-#include "GameObjectFactory.hpp"
 #include "../GameObjects/MenuButton.hpp"
 #include "../GameObjects/Player1.hpp"
 #include "../GameObjects/Player2.hpp"
@@ -9,6 +5,9 @@
 #include "../GameObjects/StaticObject.hpp"
 #include "../GameObjects/TextSquare.hpp"
 #include "../GameStates/MainMenuState.hpp"
+#include "GameObjectFactory.hpp"
+#include "InputHandler.hpp"
+#include "Game.hpp"
 
 Game* Game::Instance()
 {
