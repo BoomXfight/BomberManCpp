@@ -1,7 +1,6 @@
 #include "../Singletons/TextureManager.hpp"
 #include "../Singletons/InputHandler.hpp"
 #include "../Singletons/Game.hpp"
-#include "../GameObjects/MenuButton.hpp"
 #include "MainMenuState.hpp"
 #include "ScoreboardState.hpp"
 #include "StateParser.hpp"
@@ -14,12 +13,28 @@ bool comparePlayers(const PlayerScore& p1, const PlayerScore& p2)
 }
 
 /**
- * This method updates the gameObjects of the ScoreboardState
+ * This function loads the score board into the program
+ * @param[in] pFilename
+ * @param[in,out] pPlayers
  */
-void ScoreboardState::update()
+void loadPlayers(const std::string& pFilename, std::vector<PlayerScore>& pPlayers)
 {
-    for(int i = 0; i < mGameObjects.size(); i++)
-        mGameObjects[i]->update();
+    std::ifstream fileIn(pFilename);
+    if (!fileIn)
+        std::cout << "Failed to open the score file." << std::endl;
+
+    std::string line;
+
+    // Load from file
+    while(getline(fileIn, line))
+    {
+        std::string name;
+        int score;
+        std::istringstream iss(line);
+        if(iss >> name >> score)
+            pPlayers.push_back({name,score});
+    }
+    fileIn.close();
 }
 
 /**
@@ -31,13 +46,11 @@ void ScoreboardState::render()
         mGameObjects[i]->draw();
 
     int cnt = 1;
-    int x = 200;
-    int y = 105;
     for(auto it = mPlayers.begin(); it != mPlayers.end(); it++)
     {
         SDL_Color textColor = {255, 255, 255};
         std::string playerInfo = std::to_string(cnt) + ". " + it->name + " " + std::to_string(it->score);
-        TheTextureManager::Instance()->drawText(playerInfo, x, y + cnt * 55, textColor,
+        TheTextureManager::Instance()->drawText(playerInfo, 200, 105 + cnt * 55, textColor,
                                                 TheGame::Instance()->getRenderer());
         cnt ++;
         if(cnt == 6)
@@ -55,30 +68,12 @@ bool ScoreboardState::onEnter()
     if(! stateParser.parseState("../src/GameStates.xml", mMenuID, &mGameObjects,&mTextureIDList))
         return false;
 
-    mCallbacks.push_back(nullptr);
     mCallbacks.push_back(exit);
     mCallbacks.push_back(scoreboardToMainMenu);
     setCallbacks(mCallbacks);
+    loadPlayers("../src/Scoreboard.txt", mPlayers);
 
-    // getting the players
-    std::ifstream fileIn("../src/ScoreBoard.txt");
-    if (!fileIn)
-        std::cout << "Failed to open the score file." << std::endl;
-
-    std::string line;
-
-    // Load from file
-    while(getline(fileIn, line))
-    {
-        std::string name;
-        int score;
-        std::istringstream iss(line);
-        if(iss >> name >> score)
-            mPlayers.push_back({name,score});
-    }
-    fileIn.close();
-
-    std::cout << "Entering ScoreboardState" << std::endl;
+    std::cout << "Entering ScoreboardState." << std::endl;
     return true;
 }
 
@@ -96,9 +91,8 @@ bool ScoreboardState::onExit()
     for(int i = 0; i < mTextureIDList.size(); i++)
         TheTextureManager::Instance()->clearFromTextureMap(mTextureIDList[i]);
 
-    // reset the mouse button states to false
     TheInputHandler::Instance()->reset();
-    std::cout << "Exiting ScoreboardState" << std::endl;
+    std::cout << "Exiting ScoreboardState." << std::endl;
     return true;
 }
 
@@ -107,17 +101,11 @@ std::string ScoreboardState::getStateID() const
     return mMenuID;
 }
 
-/**
- * Callback function that switches to MainMenuState
- */
 void ScoreboardState::scoreboardToMainMenu()
 {
     TheGame::Instance()->getStateMachine()->changeState(new MainMenuState());
 }
 
-/**
- * Callback function that ends the game
- */
 void ScoreboardState::exit()
 {
     TheGame::Instance()->quit();

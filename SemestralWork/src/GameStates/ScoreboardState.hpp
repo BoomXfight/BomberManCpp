@@ -10,10 +10,11 @@ struct PlayerScore
 
 bool comparePlayers(const PlayerScore& p1, const PlayerScore& p2);
 
+void loadPlayers(const std::string& pFilename, std::vector<PlayerScore>& pPlayers);
+
 class ScoreboardState : public MenuState
 {
 public:
-    void update() override;
     void render() override;
     bool onEnter() override;
     bool onExit() override;
@@ -23,6 +24,5 @@ private:
     static void scoreboardToMainMenu();
     static void exit();
     static const std::string mMenuID;
-    std::vector<GameObject*> mGameObjects;
     std::vector<PlayerScore> mPlayers;
 };

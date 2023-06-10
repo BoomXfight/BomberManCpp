@@ -82,8 +82,8 @@
 
         <OBJECTS>
             <object type = "StaticObject" x = "200" y = "20" width = "560" height = "100" textureID = "Scoreboard"/>
-            <object type = "MenuButton" x = "840" y = "20" width = "90" height = "50" textureID = "Exit" callbackID = "1"/>
-            <object type = "MenuButton" x = "30" y = "20" width = "90" height = "50" textureID = "Back" callbackID = "2"/>
+            <object type = "MenuButton" x = "840" y = "20" width = "90" height = "50" textureID = "Exit" callbackID = "0"/>
+            <object type = "MenuButton" x = "30" y = "20" width = "90" height = "50" textureID = "Back" callbackID = "1"/>
         </OBJECTS>
     </SCOREBOARD_MENU_STATE>
 
