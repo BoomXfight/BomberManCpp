@@ -13,11 +13,11 @@ bool comparePlayers(const PlayerScore& p1, const PlayerScore& p2)
 }
 
 /**
- * This function loads the score board into the program
+ * This function loads the scoreboard into the program
  * @param[in] pFilename
  * @param[in,out] pPlayers
  */
-void loadPlayers(const std::string& pFilename, std::vector<PlayerScore>& pPlayers)
+void loadPlayerScores(const std::string& pFilename, std::vector<PlayerScore>& pPlayers)
 {
     std::ifstream fileIn(pFilename);
     if (!fileIn)
@@ -38,6 +38,24 @@ void loadPlayers(const std::string& pFilename, std::vector<PlayerScore>& pPlayer
 }
 
 /**
+ * This function updates the scoreboard file
+ * @param pFilename
+ * @param pPlayers
+ */
+void modifyPlayerScores(const std::string& pFilename, const std::vector<PlayerScore>& pPlayers)
+{
+    std::ofstream fileOut(pFilename);
+    if (!fileOut)
+        std::cout << "Failed to open the scores file for writing." << std::endl;
+
+    for (const auto& it : pPlayers) {
+        fileOut << it.name << " " << it.score << std::endl;
+    }
+
+    fileOut.close();
+}
+
+/**
  * This method renders the gameObjects of the ScoreboardState
  */
 void ScoreboardState::render()
@@ -49,9 +67,11 @@ void ScoreboardState::render()
     for(auto it = mPlayers.begin(); it != mPlayers.end(); it++)
     {
         SDL_Color textColor = {255, 255, 255};
+        TTF_Font* font = TheGame::Instance()->getFont();
+        TTF_SetFontSize(font,50);
         std::string playerInfo = std::to_string(cnt) + ". " + it->name + " " + std::to_string(it->score);
         TheTextureManager::Instance()->drawText(playerInfo, 200, 105 + cnt * 55, textColor,
-                                                TheGame::Instance()->getRenderer());
+                                                TheGame::Instance()->getRenderer(), font);
         cnt ++;
         if(cnt == 6)
             break;
@@ -71,7 +91,7 @@ bool ScoreboardState::onEnter()
     mCallbacks.push_back(exit);
     mCallbacks.push_back(scoreboardToMainMenu);
     setCallbacks(mCallbacks);
-    loadPlayers("../src/Scoreboard.txt", mPlayers);
+    loadPlayerScores("../src/Scoreboard.txt", mPlayers);
 
     std::cout << "Entering ScoreboardState." << std::endl;
     return true;

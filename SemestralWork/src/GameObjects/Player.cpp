@@ -40,6 +40,25 @@ int Player::getLives() const
     return mLives;
 }
 
+int Player::getSpeed() const
+{
+    return mSpeed;
+}
+
+int Player::getRadius() const
+{
+    return mRadius;
+}
+
+bool Player::isImmortal() const
+{
+    return (mImmortal || mInvisible);
+}
+bool Player::fastBomb() const
+{
+    return mBombTickingTime == 1.5;
+}
+
 bool Player::isDamaged() const
 {
     return mImmortal;
@@ -157,9 +176,9 @@ void Player::handleAnimation()
  */
 void Player::updateBonus()
 {
-    if(mBombTickingTime == 1.5 && ((mNow - mBombTickingTimer) / 1000 > 30))
+    if(mBombTickingTime == 1.5 && ((mNow - mBombTickingTimer) / 1000 > 15))
         mBombTickingTime = 2.5;
 
-    if(mInvisible && ((mNow - mInvisibleTimer) / 1000 > 15))
+    if(mInvisible && ((mNow - mInvisibleTimer) / 1000 > 10))
         mInvisible = false;
 }

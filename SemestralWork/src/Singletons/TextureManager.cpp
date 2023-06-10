@@ -118,9 +118,9 @@ void TextureManager::drawTile(const std::string& pIdentifier, int pMargin, int p
                      nullptr, SDL_FLIP_NONE);
 }
 
-void TextureManager::drawText(std::string str, int pX, int pY, SDL_Color clr, SDL_Renderer *pRenderer)
+void TextureManager::drawText(std::string str, int pX, int pY, SDL_Color clr, SDL_Renderer *pRenderer, TTF_Font* pFont)
 {
-    SDL_Surface* textSurface = TTF_RenderText_Solid(TheGame::Instance()->getFont(), str.c_str(), clr);
+    SDL_Surface* textSurface = TTF_RenderText_Solid(pFont, str.c_str(), clr);
     SDL_Texture* textTexture = SDL_CreateTextureFromSurface(pRenderer, textSurface);
     SDL_Rect srcRect;
     SDL_Rect destRect;

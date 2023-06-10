@@ -10,7 +10,9 @@ struct PlayerScore
 
 bool comparePlayers(const PlayerScore& p1, const PlayerScore& p2);
 
-void loadPlayers(const std::string& pFilename, std::vector<PlayerScore>& pPlayers);
+void loadPlayerScores(const std::string& pFilename, std::vector<PlayerScore>& pPlayers);
+
+void modifyPlayerScores(const std::string& pFilename, const std::vector<PlayerScore>& pPlayers);
 
 class ScoreboardState : public MenuState
 {

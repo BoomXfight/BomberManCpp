@@ -10,6 +10,10 @@ public:
     void clean() override;
     void load(const LoaderParams* pParams) override;
     int getLives() const;
+    int getSpeed() const;
+    int getRadius() const;
+    bool isImmortal() const;
+    bool fastBomb() const;
     bool isDamaged() const;
 
 protected:
