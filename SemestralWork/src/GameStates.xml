@@ -115,9 +115,9 @@
     	
     	<OBJECTS>
     	    <object type = "StaticObject" x = "180" y = "50" width = "600" height = "100" textureID = "player1Wins"/>
-    	    <object type = "MenuButton" x = "370" y = "200" width = "220" height = "80" textureID = "playAgainButton" callbackID = "1"/>
-    	    <object type = "MenuButton" x = "280" y = "300" width = "400" height = "80" textureID = "returnToMainMenuButton" callbackID = "2"/>
-    	    <object type = "MenuButton" x = "425" y = "400" width = "110" height = "80" textureID = "exitButton" callbackID = "3"/>
+    	    <object type = "MenuButton" x = "370" y = "200" width = "220" height = "80" textureID = "playAgainButton" callbackID = "0"/>
+    	    <object type = "MenuButton" x = "280" y = "300" width = "400" height = "80" textureID = "returnToMainMenuButton" callbackID = "1"/>
+    	    <object type = "MenuButton" x = "425" y = "400" width = "110" height = "80" textureID = "exitButton" callbackID = "2"/>
     	</OBJECTS>
     </MULTI_PLAYER1_WIN_STATE>
     
