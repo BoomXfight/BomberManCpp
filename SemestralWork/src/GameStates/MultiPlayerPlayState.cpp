@@ -6,11 +6,9 @@
 #include "../GameObjects/Player2.hpp"
 #include "../GameStates/PauseMenuState.hpp"
 #include "../GameStates/MainMenuState.hpp"
-#include "ScoreboardState.hpp"
 #include "MultiPlayerPlayState.hpp"
 #include "MultiPlayer1WinState.hpp"
 #include "MultiPlayer2WinState.hpp"
-#include <iostream>
 #include <algorithm>
 
 /**

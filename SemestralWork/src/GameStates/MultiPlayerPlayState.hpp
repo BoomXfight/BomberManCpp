@@ -1,10 +1,7 @@
 #pragma once
-#include "../GameObjects/GameObject.hpp"
 #include "../Levels/Level.hpp"
 #include "ScoreboardState.hpp"
 #include "GameState.hpp"
-#include "SDL2/SDL.h"
-#include <vector>
 
 class MultiPlayerPlayState : public GameState
 {
