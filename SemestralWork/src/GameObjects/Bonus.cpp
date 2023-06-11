@@ -4,9 +4,9 @@
 Bonus::Bonus(const char* pName) : mName(pName)
 {}
 
-void Bonus::setProbability(std::vector<int> v)
+void Bonus::setProbability(std::vector<int> pProbability)
 {
-    mProbability = v;
+    mProbability = pProbability;
 }
 
 std::string Bonus::getName()

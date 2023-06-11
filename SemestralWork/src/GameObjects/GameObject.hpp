@@ -1,6 +1,6 @@
 #pragma once
-#include "../LoaderParams.hpp"
 #include "../Levels/TileLayer.hpp"
+#include "LoaderParams.hpp"
 #include <vector>
 
 /**

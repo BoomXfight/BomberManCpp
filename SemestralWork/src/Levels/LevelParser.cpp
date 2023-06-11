@@ -1,13 +1,11 @@
-#include "LevelParser.hpp"
 #include "../Singletons/Game.hpp"
 #include "../Singletons/TextureManager.hpp"
 #include "../Singletons/GameObjectFactory.hpp"
 #include "../Singletons/CollisionManager.hpp"
+#include "LevelParser.hpp"
 #include "TileLayer.hpp"
 #include "ObjectLayer.hpp"
-#include <iostream>
 #include <sstream>
-#include "../LoaderParams.hpp"
 
 /**
  * This method is used to parse a level from an xml file : map, as well as objects

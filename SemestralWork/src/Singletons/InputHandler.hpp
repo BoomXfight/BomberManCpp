@@ -1,7 +1,7 @@
 #pragma once
+#include "../GameObjects/Vector2D.hpp"
 #include "SDL2/SDL.h"
 #include <vector>
-#include "../Vector2D.hpp"
 
 enum mouse_buttons
 {

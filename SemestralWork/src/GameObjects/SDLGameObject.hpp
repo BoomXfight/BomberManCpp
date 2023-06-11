@@ -1,6 +1,6 @@
 #pragma once
 #include "../Singletons/TextureManager.hpp"
-#include "../Vector2D.hpp"
+#include "Vector2D.hpp"
 #include "GameObject.hpp"
 
 /**

@@ -2,6 +2,10 @@
 #include <string>
 #include <vector>
 
+/**
+ * @class GameState
+ *
+ */
 class GameState
 {
 public:

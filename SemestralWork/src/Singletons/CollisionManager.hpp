@@ -1,9 +1,9 @@
 #pragma once
 #include "../GameObjects/Player1.hpp"
+#include "../GameObjects/Vector2D.hpp"
 #include "../Levels/TileLayer.hpp"
 #include "../Levels/ObjectLayer.hpp"
 #include "../Levels/Level.hpp"
-#include "../Vector2D.hpp"
 #include <vector>
 
 enum

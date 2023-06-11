@@ -1,6 +1,6 @@
 #pragma once
+#include "../GameObjects/Bonus.hpp"
 #include "Layer.hpp"
-#include "../Bonus.hpp"
 #include <string>
 #include <vector>
 
