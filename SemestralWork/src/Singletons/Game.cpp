@@ -42,10 +42,15 @@ bool Game::init(const char* pTitle, int pX_WindowPos, int pY_WindowPos, int pWin
 
         if(TTF_Init() == 0)
         {
-            mFont = TTF_OpenFont("../Assets/Fonts/RodchenkoBTT.ttf", 50);
-            if (!mFont)
+            try
             {
-                std::cout << "Failed to load font." << std::endl;
+                mFont = TTF_OpenFont("../Assets/Fonts/RodchenkoBTT.ttf", 50);
+                if (!mFont)
+                    throw std::runtime_error("Failed to load font.");
+            }
+            catch (const std::exception& e)
+            {
+                std::cout << e.what() << std::endl;
                 return false;
             }
             std::cout << "TTF init success." << std::endl;
