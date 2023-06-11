@@ -2,6 +2,7 @@
 #include "../Levels/Level.hpp"
 #include "../Levels/ObjectLayer.hpp"
 #include "../GameObjects/GameObject.hpp"
+#include "ScoreboardState.hpp"
 #include <vector>
 
 class SinglePlayerPlayState : public GameState
@@ -16,6 +17,7 @@ public:
 private:
     void updatePlayer();
     void handleGameInformation();
+    void updatePlayersScore(std::vector<PlayerScore>& pScores);
 
     int mLives;
     int mSpeed;

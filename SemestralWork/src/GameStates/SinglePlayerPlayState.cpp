@@ -8,6 +8,7 @@
 #include "SinglePlayerLostState.hpp"
 #include "SinglePlayerWonState.hpp"
 #include "PauseMenuState.hpp"
+#include <algorithm>
 
 /**
  * This method updates the current level as well as checks for a game pause
@@ -75,6 +76,16 @@ bool SinglePlayerPlayState::onEnter()
  */
 bool SinglePlayerPlayState::onExit()
 {
+    if(!TheGame::Instance()->getP1().empty())
+    {
+        std::vector<PlayerScore> players;
+
+        loadPlayerScores("../src/Scoreboard.txt", players);
+        updatePlayersScore(players);
+        std::sort(players.begin(), players.end(), comparePlayers);
+        modifyPlayerScores("../src/Scoreboard.txt", players);
+    }
+
     for(int i = 0; i < mGameObjects.size(); i++)
         mGameObjects[i]->clean();
 
@@ -140,6 +151,24 @@ void SinglePlayerPlayState::handleGameInformation()
     if(mBombTime)
         TheTextureManager::Instance()->drawText(p1FastBomb, 290, 80, white, TheGame::Instance()->getRenderer(),
                                                 font);
+}
+
+void SinglePlayerPlayState::updatePlayersScore(std::vector<PlayerScore>& pScores)
+{
+    std::string p1 = TheGame::Instance()->getP1();
+    bool p1set = false;
+
+    // Modify based on the results
+    for(auto it = pScores.begin(); it != pScores.end(); it++)
+    {
+        if(it->name == p1) {
+            it->score += mScore;
+            p1set = true;
+        }
+    }
+
+    if(!p1set && !p1.empty())
+        pScores.push_back({p1, mScore});
 }
 
 std::string SinglePlayerPlayState::getStateID() const
