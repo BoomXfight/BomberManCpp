@@ -2,11 +2,19 @@
 #include "Player.hpp"
 #include "../Singletons/GameObjectFactory.hpp"
 
+/**
+ * @class Player1
+ * This class implements a Player1 which is controlled by W,S,D,A keys.
+ */
 class Player1 : public Player
 {
 public:
     Player1();
-    void handleInput();
+
+    /**
+     * This method is responsible for input handling and Player1 object movement.
+     */
+    void handleInput() override;
 
     enum
     {
@@ -17,7 +25,15 @@ public:
     };
 };
 
+/**
+ * @class Player1Creator
+ * This class is responsible for creating Player1 object.
+ */
 class Player1Creator : public BaseCreator
 {
-    GameObject* createGameObject() const {return new Player1();}
+    /**
+     * This method creates a new Player1 object
+     * @return Player1
+     */
+    GameObject* createGameObject() const override {return new Player1();}
 };

@@ -46,5 +46,9 @@ private:
  */
 class MenuButtonCreator : public BaseCreator
 {
+    /**
+     * This method creates a new MenuButton object
+     * @return MenuButton
+     */
     GameObject* createGameObject() const override {return new MenuButton();}
 };
