@@ -6,16 +6,20 @@
 #include "MultiPlayerMenuState.hpp"
 #include "ScoreboardState.hpp"
 
-/**
- * This method initializes the MainMenuState from an xml load file
- * @return true -> success, false -> failed to parse a gameState file
- */
 bool MainMenuState::onEnter()
 {
-    StateParser stateParser;
-    if(! stateParser.parseState("../src/GameStates.xml", mStateID, &mGameObjects,
-                                &mTextureIDList))
+    try
+    {
+        StateParser stateParser;
+        if (!stateParser.parseState("../src/GameStates.xml", mStateID, &mGameObjects,
+                                    &mTextureIDList))
+            throw std::runtime_error("Failed to load GameStates load file.");
+    }
+    catch (const std::exception& e)
+    {
+        std::cout << e.what() << std::endl;
         return false;
+    }
 
     // Initialize the callback functions
     mCallbacks.push_back(menuToSinglePlayer);
@@ -28,10 +32,6 @@ bool MainMenuState::onEnter()
     return true;
 }
 
-/**
- * This method cleans up at the end of gameState
- * @return true
- */
 bool MainMenuState::onExit()
 {
     TheGame ::Instance()->setP1(""); // Reset the player names
