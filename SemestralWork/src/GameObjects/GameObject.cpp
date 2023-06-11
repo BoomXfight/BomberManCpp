@@ -1,5 +1,5 @@
 #include "GameObject.hpp"
 
-GameObject::GameObject() {}
+GameObject::GameObject() = default;
 
-GameObject::~GameObject() {}
+GameObject::~GameObject() = default;
