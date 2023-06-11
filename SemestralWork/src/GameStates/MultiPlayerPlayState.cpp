@@ -11,9 +11,6 @@
 #include "MultiPlayer2WinState.hpp"
 #include <algorithm>
 
-/**
- * This method updates the current level as well as checks for a game pause
- */
 void MultiPlayerPlayState::update()
 {
     mLevel->update();
@@ -29,9 +26,6 @@ void MultiPlayerPlayState::update()
         TheGame::Instance()->getStateMachine()->pushState(new PauseMenuState());
 }
 
-/**
- * This method renders the current level
- */
 void MultiPlayerPlayState::render()
 {
     handlePlayer1Information();
@@ -39,10 +33,6 @@ void MultiPlayerPlayState::render()
     mLevel->render();
 }
 
-/**
- * This method initializes the current level from the file
- * @return true
- */
 bool MultiPlayerPlayState::onEnter()
 {
     LevelParser levelParser;
@@ -68,10 +58,6 @@ bool MultiPlayerPlayState::onEnter()
     return true;
 }
 
-/**
- * This method cleans up after the current game state and saves the result scores
- * @return true
- */
 bool MultiPlayerPlayState::onExit()
 {
     //Update scores;
@@ -97,9 +83,6 @@ std::string MultiPlayerPlayState::getStateID() const
     return mStateID;
 }
 
-/**
- * This method gets the necessary player information
- */
 void MultiPlayerPlayState::handlePlayers()
 {
     ObjectLayer* objectLayer = nullptr;
@@ -155,9 +138,6 @@ void MultiPlayerPlayState::handlePlayers()
     }
 }
 
-/**
- * This method handles the rendering of player1 information to the screen
- */
 void MultiPlayerPlayState::handlePlayer1Information() const
 {
     SDL_Color white = {255, 255, 255};
@@ -191,9 +171,6 @@ void MultiPlayerPlayState::handlePlayer1Information() const
                                                 font);
 }
 
-/**
- * This method handles the rendering of player2 information to the screen
- */
 void MultiPlayerPlayState::handlePlayer2Information() const
 {
     SDL_Color white = {255, 255, 255};
@@ -225,10 +202,6 @@ void MultiPlayerPlayState::handlePlayer2Information() const
         TheTextureManager::Instance()->drawText(p2FastBomb, 790, 80, white,TheGame::Instance()->getRenderer(),font);
 }
 
-/**
- * This method updates the player scores at the end of the game
- * @param[in,out] pScores
- */
 void MultiPlayerPlayState::updatePlayersScore(std::vector<PlayerScore>& pScores)
 {
     std::string p1 = TheGame::Instance()->getP1();
