@@ -6,28 +6,6 @@ MenuButton::MenuButton() : SDLGameObject()
 {
 }
 
-/**
- * This method loads the MenuButton
- * @param[in] pParams
- */
-void MenuButton::load(const LoaderParams* pParams)
-{
-    SDLGameObject::load(pParams);
-    mCallbackID = pParams->getCallbackID();
-    mCurrentFrame = MOUSE_OUT;
-}
-
-/**
- * This method draws the MenuButton
- */
-void MenuButton::draw()
-{
-    SDLGameObject::draw();
-}
-
-/**
- * This method implements the dynamics of the button, swapping its states based on the position of the mouse
- */
 void MenuButton::update()
 {
     Vector2D* pMousePos = TheInputHandler::Instance() ->getMousePosition();
@@ -54,12 +32,14 @@ void MenuButton::update()
     }
 }
 
-void MenuButton::clean()
+void MenuButton::load(const LoaderParams* pParams)
 {
-    SDLGameObject::clean();
+    SDLGameObject::load(pParams);
+    mCallbackID = pParams->getCallbackID();
+    mCurrentFrame = MOUSE_OUT;
 }
 
-int MenuButton::getCallbackID()
+int MenuButton::getCallbackID() const
 {
     return mCallbackID;
 }

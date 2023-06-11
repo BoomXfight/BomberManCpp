@@ -2,15 +2,29 @@
 #include "SDLGameObject.hpp"
 #include "../Singletons/GameObjectFactory.hpp"
 
+/**
+ * @class MenuButton
+ * This is a MenuButton class responsible for buttons inside the MenuStates
+ * The button can be clicked, hovered over, not touched by mouse
+ */
 class MenuButton : public SDLGameObject
 {
 public:
     MenuButton();
-    void load(const LoaderParams* pParams) override;
-    void draw() override;
+
+    /**
+     * This method implements the dynamics of the button, swapping its states based on the position of the mouse
+     */
     void update() override;
-    void clean() override;
-    int getCallbackID();
+
+    /**
+     * This method loads the MenuButton object
+     * @param[in] pParams
+     */
+    void load(const LoaderParams* pParams) override;
+
+    int getCallbackID() const;
+
     void setCallback(void(*callback)());
 
 private:
@@ -26,7 +40,11 @@ private:
     bool mReleased;
 };
 
+/**
+ * @class MenuButtonCreator
+ * This class is responsible for the creation of the MenuButton object
+ */
 class MenuButtonCreator : public BaseCreator
 {
-    GameObject* createGameObject() const {return new MenuButton();}
+    GameObject* createGameObject() const override {return new MenuButton();}
 };
