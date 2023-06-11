@@ -18,10 +18,10 @@ public:
 
     enum
     {
-        RIGHT_MOVEMENT = 3,
-        LEFT_MOVEMENT = 4,
+        DOWN_MOVEMENT = 1,
         UP_MOVEMENT = 2,
-        DOWN_MOVEMENT = 1
+        RIGHT_MOVEMENT = 3,
+        LEFT_MOVEMENT = 4
     };
 };
 
