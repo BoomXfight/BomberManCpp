@@ -2,7 +2,7 @@
 #include "Enemy.hpp"
 
 
-Enemy::Enemy() : mMoveUp(true), mSpeed(3)
+Enemy::Enemy() : mMoveUp(true), mSpeed(3), mBuffer(2)
 {}
 
 void Enemy::draw()
