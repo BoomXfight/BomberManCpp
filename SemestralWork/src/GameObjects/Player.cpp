@@ -1,18 +1,12 @@
 #include "../Singletons/CollisionManager.hpp"
-#include "../GameObjects/SDLGameObject.hpp"
 #include "Player.hpp"
 #include <cstdlib>
 #include <ctime>
 
 Player::Player() : SDLGameObject(), mRadius(2), mSpeed(4), mLives(3), mBombTickingTime(3), mBombReady(true),
-                 mExplosion(false), mMoving(false), mImmortal(false), mInvisible(false), mTimer(SDL_GetTicks()), mDamageTimer(SDL_GetTicks()),
-                 mNow(SDL_GetTicks()), mBonuses(TheCollisionManager::Instance()->getBonuses())
+                 mExplosion(false), mMoving(false), mImmortal(false), mInvisible(false), mTimer(SDL_GetTicks()),
+                 mDamageTimer(SDL_GetTicks()), mNow(SDL_GetTicks()), mBonuses(TheCollisionManager::Instance()->getBonuses())
 {}
-
-void Player::draw()
-{
-    SDLGameObject::draw();
-}
 
 void Player::update()
 {
@@ -27,13 +21,6 @@ void Player::update()
         mImmortal = false;
 }
 
-void Player::clean()
-{}
-
-void Player::load(const LoaderParams *pParams)
-{
-    SDLGameObject::load(pParams);
-}
 
 int Player::getLives() const
 {
@@ -148,7 +135,6 @@ void Player::handleDamage()
         mImmortal = true;
         mDamageTimer = SDL_GetTicks();
         mLives --;
-        std::cout << "Lives = " << mLives << std::endl;
     }
 }
 
@@ -160,14 +146,11 @@ void Player::handleAnimation()
         mCurrentFrame = 1;
 }
 
-/**
- * This method cancels time-based bonuses
- */
 void Player::updateBonus()
 {
-    if(mBombTickingTime == 1.5 && ((mNow - mBombTickingTimer) / 1000 > 15))
+    if(mBombTickingTime == 1.5 && ((mNow - mBombTickingTimer) / 1000 > 10))
         mBombTickingTime = 2.5;
 
-    if(mInvisible && ((mNow - mInvisibleTimer) / 1000 > 10))
+    if(mInvisible && ((mNow - mInvisibleTimer) / 1000 > 7))
         mInvisible = false;
 }
