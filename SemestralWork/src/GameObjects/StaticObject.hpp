@@ -1,6 +1,6 @@
 #pragma once
-#include "SDLGameObject.hpp"
 #include "../Singletons/GameObjectFactory.hpp"
+#include "SDLGameObject.hpp"
 
 /**
  * @class StaticObject

@@ -1,23 +1,21 @@
-#include "TextSquare.hpp"
 #include "../Singletons/InputHandler.hpp"
+#include "../Singletons/Game.hpp"
+#include "TextSquare.hpp"
 #include <iostream>
 
-TextSquare::TextSquare() : SDLGameObject()
+TextSquare::TextSquare() : SDLGameObject(), mActive(false), mReleased(true)
 {
-}
-
-void TextSquare::load(const LoaderParams *pParams)
-{
-    SDLGameObject::load(pParams);
-    SDL_StopTextInput();
-    mActive = false;
-    mCurrentFrame = NOT_CLICKED;
-    mReleased = true;
 }
 
 void TextSquare::draw()
 {
     SDLGameObject::draw();
+    SDL_Color white = {255, 255, 255};
+    TTF_Font* font = TheGame::Instance()->getFont();
+    TTF_SetFontSize(font, 30);
+    if(!mText.empty() && mText.size() <= 11)
+        TheTextureManager::Instance()->drawText(mText, mPosition.getX() + 13, mPosition.getY() + 10,
+                                                white,TheGame::Instance()->getRenderer(), font );
 }
 
 void TextSquare::update()
@@ -41,9 +39,13 @@ void TextSquare::update()
     handleInput();
 }
 
-void TextSquare::clean()
+void TextSquare::load(const LoaderParams *pParams)
 {
-    SDLGameObject::clean();
+    SDLGameObject::load(pParams);
+    SDL_StopTextInput();
+    mActive = false;
+    mCurrentFrame = NOT_CLICKED;
+    mReleased = true;
 }
 
 std::string TextSquare::getText()
@@ -51,25 +53,19 @@ std::string TextSquare::getText()
     return mText;
 }
 
-/**
- * This method handles the user input and reactions with the TextSquare gameObject
- */
 void TextSquare::handleInput()
 {
     if(mActive)
     {
         if (!TheInputHandler::Instance()->showInput().empty())
         {
-            mText += TheInputHandler::Instance()->getResetInput();
-            std::cout << mText << std::endl;
+            if(mText.size() <= 10)
+                mText += TheInputHandler::Instance()->getResetInput();
         }
 
         if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_BACKSPACE)) {
             if(!mText.empty())
-            {
                 mText.pop_back();
-                std::cout << mText << std::endl;
-            }
         }
 
         if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_RETURN)
