@@ -7,16 +7,20 @@
 #include "MultiPlayerPlayState.hpp"
 #include "StateParser.hpp"
 
-/**
- * This method initializes the MultiPlayerMenuState from an xml file
- * @return true -> success, false -> failed to parse a gameState file
- */
 bool MultiPlayerMenuState::onEnter()
 {
-    StateParser stateParser;
-    if(! stateParser.parseState("../src/GameStates.xml", mStateID, &mGameObjects,
-                                &mTextureIDList))
+    try
+    {
+        StateParser stateParser;
+        if (!stateParser.parseState("../src/GameStates.xml", mStateID, &mGameObjects,
+                                    &mTextureIDList))
+            throw std::runtime_error("Failed to load GameStates load file.");
+    }
+    catch (const std::exception& e)
+    {
+        std::cout << e.what() << std::endl;
         return false;
+    }
 
     mCallbacks.push_back(menuToQuit);
     mCallbacks.push_back(mpMenuToMainMenu);
@@ -27,10 +31,6 @@ bool MultiPlayerMenuState::onEnter()
     return true;
 }
 
-/**
- * This method cleans up at the end of MultiPlayerMenuState and sets the active players
- * @return true
- */
 bool MultiPlayerMenuState::onExit()
 {
     if(TextSquare* a = dynamic_cast<TextSquare*>(mGameObjects[0]))

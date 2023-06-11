@@ -12,11 +12,6 @@ bool comparePlayers(const PlayerScore& p1, const PlayerScore& p2)
     return p1.score > p2.score;
 }
 
-/**
- * This function loads the scoreboard into the program
- * @param[in] pFilename
- * @param[in,out] pPlayers
- */
 void loadPlayerScores(const std::string& pFilename, std::vector<PlayerScore>& pPlayers)
 {
     std::ifstream fileIn(pFilename);
@@ -37,11 +32,6 @@ void loadPlayerScores(const std::string& pFilename, std::vector<PlayerScore>& pP
     fileIn.close();
 }
 
-/**
- * This function updates the scoreboard file
- * @param pFilename
- * @param pPlayers
- */
 void modifyPlayerScores(const std::string& pFilename, const std::vector<PlayerScore>& pPlayers)
 {
     std::ofstream fileOut(pFilename);
@@ -55,9 +45,6 @@ void modifyPlayerScores(const std::string& pFilename, const std::vector<PlayerSc
     fileOut.close();
 }
 
-/**
- * This method renders the gameObjects of the ScoreboardState
- */
 void ScoreboardState::render()
 {
     for(int i = 0; i < mGameObjects.size(); i++)
@@ -78,15 +65,20 @@ void ScoreboardState::render()
     }
 }
 
-/**
- * This method initializes the ScoreboardState from an xml file
- * @return true -> success, false -> failed to parse a gameState file
- */
 bool ScoreboardState::onEnter()
 {
-    StateParser stateParser;
-    if(! stateParser.parseState("../src/GameStates.xml", mMenuID, &mGameObjects,&mTextureIDList))
+    try
+    {
+        StateParser stateParser;
+        if (!stateParser.parseState("../src/GameStates.xml", mMenuID, &mGameObjects,
+                                    &mTextureIDList))
+            throw std::runtime_error("Failed to load GameStates load file.");
+    }
+    catch (const std::exception& e)
+    {
+        std::cout << e.what() << std::endl;
         return false;
+    }
 
     mCallbacks.push_back(exit);
     mCallbacks.push_back(scoreboardToMainMenu);
@@ -97,10 +89,6 @@ bool ScoreboardState::onEnter()
     return true;
 }
 
-/**
- * This method cleans up at the end of ScoreboardState
- * @return true
- */
 bool ScoreboardState::onExit()
 {
     for(int i = 0; i < mGameObjects.size(); i++)

@@ -7,16 +7,20 @@
 #include "SinglePlayerPlayState.hpp"
 #include "StateParser.hpp"
 
-/**
- * This method initializes the SinglePlayerMenuState from an xml file
- * @return true -> success, false -> failed to parse a gameState file
- */
 bool SinglePlayerMenuState::onEnter()
 {
-    StateParser stateParser;
-    if(! stateParser.parseState("../src/GameStates.xml", mStateID, &mGameObjects,
-                                &mTextureIDList))
+    try
+    {
+        StateParser stateParser;
+        if (!stateParser.parseState("../src/GameStates.xml", mStateID, &mGameObjects,
+                                    &mTextureIDList))
+            throw std::runtime_error("Failed to load GameStates load file.");
+    }
+    catch (const std::exception& e)
+    {
+        std::cout << e.what() << std::endl;
         return false;
+    }
 
     mCallbacks.push_back(menuToQuit);
     mCallbacks.push_back(spMenuToMainMenu);
@@ -27,10 +31,6 @@ bool SinglePlayerMenuState::onEnter()
     return true;
 }
 
-/**
- * This method cleans up at the end of SinglePlayerMenuState and initializes an active player
- * @return true
- */
 bool SinglePlayerMenuState::onExit()
 {
     if(TextSquare* a = dynamic_cast<TextSquare*>(mGameObjects[0]))

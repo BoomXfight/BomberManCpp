@@ -11,10 +11,18 @@
  */
 bool PauseMenuState::onEnter()
 {
-    StateParser stateParser;
-    if(! stateParser.parseState("../src/GameStates.xml", mPauseID, &mGameObjects,
-                                &mTextureIDList))
+    try
+    {
+        StateParser stateParser;
+        if (!stateParser.parseState("../src/GameStates.xml", mPauseID, &mGameObjects,
+                                    &mTextureIDList))
+            throw std::runtime_error("Failed to load GameStates load file.");
+    }
+    catch (const std::exception& e)
+    {
+        std::cout << e.what() << std::endl;
         return false;
+    }
 
     mCallbacks.push_back(resumePlay);
     mCallbacks.push_back(pauseToMainMenu);

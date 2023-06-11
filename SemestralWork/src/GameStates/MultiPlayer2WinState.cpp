@@ -6,15 +6,20 @@
 #include "MainMenuState.hpp"
 #include "StateParser.hpp"
 
-/**
- * This method initializes the MultiPlayer2WinState from an xml file
- * @return true -> success, false -> failed to parse a gameState file
- */
 bool MultiPlayer2WinState::onEnter()
 {
-    StateParser stateParser;
-    if(! stateParser.parseState("../src/GameStates.xml", mStateID, &mGameObjects,&mTextureIDList))
+    try
+    {
+        StateParser stateParser;
+        if (!stateParser.parseState("../src/GameStates.xml", mStateID, &mGameObjects,
+                                    &mTextureIDList))
+            throw std::runtime_error("Failed to load GameStates load file.");
+    }
+    catch (const std::exception& e)
+    {
+        std::cout << e.what() << std::endl;
         return false;
+    }
 
     mCallbacks.push_back(playAgain);
     mCallbacks.push_back(returnToMainMenu);
@@ -25,10 +30,6 @@ bool MultiPlayer2WinState::onEnter()
     return true;
 }
 
-/**
- * This method cleans up at the end of MultiPlayer2WinState
- * @return true
- */
 bool MultiPlayer2WinState::onExit()
 {
     for(int i = 0; i < mGameObjects.size(); i++)

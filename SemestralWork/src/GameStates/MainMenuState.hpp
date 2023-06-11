@@ -12,6 +12,7 @@ public:
     /**
      * This method initializes the MainMenuState
      * @return true-> success, false->failure
+     * @throw std::runtime_error when failed to load the GameStateFile
      */
     bool onEnter() override;
 
