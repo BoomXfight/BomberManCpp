@@ -1,13 +1,10 @@
-#include "SDLGameObject.hpp"
 #include "../Singletons/Game.hpp"
+#include "SDLGameObject.hpp"
 
-SDLGameObject::SDLGameObject() : GameObject()
+SDLGameObject::SDLGameObject() : GameObject(), mWidth(0), mHeight(0), mCurrentRow(0), mCurrentFrame(0), mNumFrames(0)
 {
 }
 
-/**
- * This method draws an SDLGameObject to the screen
- */
 void SDLGameObject::draw()
 {
     TextureManager::Instance()->drawFrame(mTextureID, (int)mPosition.getX(), (int)mPosition.getY(),
@@ -15,9 +12,6 @@ void SDLGameObject::draw()
                                           mCurrentFrame,TheGame::Instance()->getRenderer());
 }
 
-/**
- * This method updates the SDLGameObject
- */
 void SDLGameObject::update()
 {
     mVelocity += mAcceleration;
@@ -26,10 +20,6 @@ void SDLGameObject::update()
 
 void SDLGameObject::clean() {}
 
-/**
- * This method loads the SDLGameObject
- * @param[in] pParams
- */
 void SDLGameObject::load(const LoaderParams *pParams)
 {
     mPosition = Vector2D(pParams->getX(),pParams->getY());
@@ -40,4 +30,3 @@ void SDLGameObject::load(const LoaderParams *pParams)
     mCurrentFrame = 1;
     mNumFrames = pParams->getNumFrames();
 }
-

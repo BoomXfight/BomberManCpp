@@ -1,20 +1,41 @@
 #pragma once
 #include "../Singletons/TextureManager.hpp"
-#include "GameObject.hpp"
 #include "../Vector2D.hpp"
+#include "GameObject.hpp"
 
+/**
+ * @class SDLGameObject
+ * This class is base class for all the other GameObject of the game
+ */
 class SDLGameObject : public GameObject
 {
 public:
     SDLGameObject();
+
+    /**
+     * This method is responsible for rendering the SDLGameObject to the screen
+     */
     void draw() override;
+
+    /**
+     * This method is responsible for updating the SDLGameObject
+     */
     void update() override;
+
+    /**
+     * This method is responsible for cleaning after the SDLGameObject if it contains something to be cleaned
+     */
     void clean() override;
+
+    /**
+     * This method loads the SDLGameObject
+     * @param[in] pParams loading parameters
+     */
     void load(const LoaderParams *pParams) override;
-    int getWidth() {return mWidth;};
-    int getHeight() {return mHeight;};
+
+    int getWidth() const {return mWidth;};
+    int getHeight() const {return mHeight;};
     Vector2D getPosition() {return mPosition;};
-    Vector2D getVelocity() {return mVelocity;};
 
 protected:
     Vector2D mPosition;
