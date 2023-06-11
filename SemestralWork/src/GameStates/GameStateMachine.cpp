@@ -1,19 +1,11 @@
 #include "GameStateMachine.hpp"
 
-/**
- * This method changes the current GameState without removing it
- * @param pState
- */
 void GameStateMachine::pushState(GameState* pState)
 {
     mGameStates.push_back(pState);
     mGameStates.back()->onEnter();
 }
 
-/**
- * This method removes the current GameState and changes to the new one
- * @param pState
- */
 void GameStateMachine::changeState(GameState* pState)
 {
     if(! mGameStates.empty())
@@ -30,9 +22,6 @@ void GameStateMachine::changeState(GameState* pState)
     mGameStates.back()->onEnter();
 }
 
-/**
- * This method removes the current state
- */
 void GameStateMachine::popState()
 {
     if (! mGameStates.empty())
@@ -42,18 +31,12 @@ void GameStateMachine::popState()
     }
 }
 
-/**
- * This method updates the current GameState
- */
 void GameStateMachine::update()
 {
     if(! mGameStates.empty())
        mGameStates.back()->update();
 }
 
-/**
- * This method renders the current GameState
- */
 void GameStateMachine::render()
 {
     if(! mGameStates.empty())
