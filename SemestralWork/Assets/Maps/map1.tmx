@@ -26,7 +26,7 @@
   </data>
  </layer>
  <objectgroup id="1" name="Object Layer 1">
-  <object id="1" name="BomberMan1" type="Player1" x="315" y="345.833">
+  <object id="1" name="BomberMan1" type="Player1" x="315" y="345">
    <properties>
     <property name="numFrames" type="int" value="3"/>
     <property name="textureHeight" type="int" value="24"/>
@@ -42,7 +42,31 @@
     <property name="textureID" value="Enemy1"/>
    </properties>
   </object>
-  <object id="3" name="enemy2" type="Enemy" x="400" y="200">
+  <object id="3" name="enemy2" type="Enemy" x="300" y="300">
+   <properties>
+    <property name="numFrames" type="int" value="3"/>
+    <property name="textureHeight" type="int" value="17"/>
+    <property name="textureWidth" type="int" value="17"/>
+    <property name="textureID" value="Enemy1"/>
+   </properties>
+  </object>
+  <object id="4" name="enemy3" type="Enemy" x="400" y="400">
+   <properties>
+    <property name="numFrames" type="int" value="3"/>
+    <property name="textureHeight" type="int" value="17"/>
+    <property name="textureWidth" type="int" value="17"/>
+    <property name="textureID" value="Enemy1"/>
+   </properties>
+  </object>
+  <object id="5" name="enemy4" type="Enemy" x="480" y="400">
+   <properties>
+    <property name="numFrames" type="int" value="3"/>
+    <property name="textureHeight" type="int" value="17"/>
+    <property name="textureWidth" type="int" value="17"/>
+    <property name="textureID" value="Enemy1"/>
+   </properties>
+  </object>
+  <object id="8" name="enemy5" type="Enemy" x="500" y="300">
      <properties>
       <property name="numFrames" type="int" value="3"/>
       <property name="textureHeight" type="int" value="17"/>
@@ -50,6 +74,38 @@
       <property name="textureID" value="Enemy1"/>
      </properties>
     </object>
+  <object id="6" name="enemy6" type="Enemy" x="550" y="300">
+   <properties>
+    <property name="numFrames" type="int" value="3"/>
+    <property name="textureHeight" type="int" value="17"/>
+    <property name="textureWidth" type="int" value="17"/>
+    <property name="textureID" value="Enemy1"/>
+   </properties>
+  </object>
+  <object id="7" name="enemy7" type="Enemy" x="700" y="400">
+   <properties>
+    <property name="numFrames" type="int" value="3"/>
+    <property name="textureHeight" type="int" value="17"/>
+    <property name="textureWidth" type="int" value="17"/>
+    <property name="textureID" value="Enemy1"/>
+   </properties>
+  </object>
+  <object id="8" name="enemy8" type="Enemy" x="800" y="400">
+   <properties>
+    <property name="numFrames" type="int" value="3"/>
+    <property name="textureHeight" type="int" value="17"/>
+    <property name="textureWidth" type="int" value="17"/>
+    <property name="textureID" value="Enemy1"/>
+   </properties>
+  </object>
+  <object id="9" name="enemy9" type="Enemy" x="900" y="100">
+   <properties>
+    <property name="numFrames" type="int" value="3"/>
+    <property name="textureHeight" type="int" value="17"/>
+    <property name="textureWidth" type="int" value="17"/>
+    <property name="textureID" value="Enemy1"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectProperties>
   <property name="Bomber1" value="../Assets/BomberMan1Animation.png"/>
