@@ -27,7 +27,7 @@ public:
 
 /**
  * @class Player1Creator
- * This class is responsible for creating Player1 object.
+ * This class is responsible for the creation of Player1 object.
  */
 class Player1Creator : public BaseCreator
 {
