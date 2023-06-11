@@ -4,7 +4,7 @@
 
 /**
  * @class GameStateMachine
- * @brief This class is responsible for changing the gameStates throughout the entire game
+ * This class is responsible for changing the gameStates throughout the entire game
  */
 class GameStateMachine
 {
