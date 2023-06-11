@@ -7,18 +7,25 @@
 class SinglePlayerPlayState : public GameState
 {
 public:
-    virtual void update();
-    virtual void render();
-    virtual bool onEnter();
-    virtual bool onExit();
-    virtual std::string getStateID() const;
+    void update() override;
+    void render() override;
+    bool onEnter() override;
+    bool onExit() override;
+    std::string getStateID() const override;
 
 private:
-    int mLives;
-    int mNoOfEnemies;
-    int mPoints;
+    void updatePlayer();
+    void handleGameInformation();
 
-    static const std::string mPlayID;
+    int mLives;
+    int mSpeed;
+    int mRadius;
+    int mNoOfEnemies;
+    int mScore;
+    bool mBombTime;
+    bool mImmortal;
+
+    static const std::string mStateID;
     ObjectLayer* mObjectLayer;
     std::vector<GameObject*> mGameObjects;
     Level* mLevel;

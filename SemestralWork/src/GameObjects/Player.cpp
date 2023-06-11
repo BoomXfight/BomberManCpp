@@ -54,6 +54,7 @@ bool Player::isImmortal() const
 {
     return (mImmortal || mInvisible);
 }
+
 bool Player::fastBomb() const
 {
     return mBombTickingTime == 1.5;
@@ -79,7 +80,6 @@ void Player::handleBonus(int num)
 {
     std::srand(static_cast<unsigned>(std::time(nullptr)) + num);
     int random = std::rand() % 100;
-    std::cout << random << std::endl;
     std::string bonus;
     mBonuses = TheCollisionManager::Instance()->getBonuses();
 
@@ -91,36 +91,25 @@ void Player::handleBonus(int num)
             if(bonus == "speed")
             {
                 if(mSpeed < 7)
-                {
-                    std::cout << "speed" << std::endl;
                     mSpeed++;
-                }
             }
             else if(bonus == "radius")
             {
                 if(mRadius < 8)
-                {
-                    std::cout << "radius" << std::endl;
                     mRadius ++;
-                }
             }
             else if(bonus == "health")
             {
                 if(mLives < 3)
-                {
-                    std::cout << "health" << std::endl;
                     mLives++;
-                }
             }
             else if(bonus == "time")
             {
-                std::cout << "time" << std::endl;
                 mBombTickingTime = 1.5;
                 mBombTickingTimer = SDL_GetTicks();
             }
             else if(bonus == "dmg")
             {
-                std::cout << "dmg" << std::endl;
                 mInvisible = true;
                 mInvisibleTimer = SDL_GetTicks();
             }

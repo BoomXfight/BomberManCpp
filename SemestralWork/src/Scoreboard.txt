@@ -1,2 +1,3 @@
+Andrej 120
 Tomas 60
-Andrej 60
+Peter 20

@@ -52,22 +52,22 @@ bool CollisionManager::enemyCollisionPlayer(Player* pPlayer)
         {
             Enemy* enemy = dynamic_cast<Enemy*>(*it);
             if (pPlayer->getPosition().getY() + pPlayer->getHeight() < enemy->getPosition().getY()) // vertical
-                return false;
+                continue;
 
             else if(pPlayer->getPosition().getY() > enemy->getPosition().getY() + enemy->getHeight()) // vertical
-                return false;
+                continue;
 
             else if(pPlayer->getPosition().getX() + pPlayer->getWidth() < enemy->getPosition().getX()) // horizontal
-                return false;
+                continue;
 
             else if(pPlayer->getPosition().getX() > enemy->getPosition().getX() + enemy->getWidth())
-                return false;
+                continue;
 
             else
                 return true;
         }
     }
-
+    return false;
 }
 
 bool CollisionManager::tileCollisionEnemy(Vector2D pVec)

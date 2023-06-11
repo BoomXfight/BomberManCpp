@@ -3,14 +3,11 @@
 #include "../Singletons/TextureManager.hpp"
 #include "../Singletons/CollisionManager.hpp"
 #include "../Levels/LevelParser.hpp"
-#include "../Levels/ObjectLayer.hpp"
-#include "../GameObjects/Player1.hpp"
 #include "../GameObjects/Enemy.hpp"
 #include "SinglePlayerPlayState.hpp"
 #include "SinglePlayerLostState.hpp"
 #include "SinglePlayerWonState.hpp"
 #include "PauseMenuState.hpp"
-#include <iostream>
 
 /**
  * This method updates the current level as well as checks for a game pause
@@ -18,22 +15,7 @@
 void SinglePlayerPlayState::update()
 {
     mLevel->update();
-
-    for (GameObject *obj: *mObjectLayer->getGameObjects())
-    {
-        if (Player1* player1 = dynamic_cast<Player1 *>(obj))
-            mLives = player1->getLives();
-    }
-
-    for (GameObject *obj: *mObjectLayer->getGameObjects())
-    {
-        if(Enemy* enemy = dynamic_cast<Enemy *>(obj))
-            if(TheCollisionManager::Instance()->isEnemyHit(enemy->getPosition()))
-            {
-                mNoOfEnemies--;
-                mPoints += 10;
-            }
-    }
+    updatePlayer();
 
     if(mLives == 0)
         TheGame::Instance()->getStateMachine()->changeState(new SinglePlayerLostState);
@@ -50,6 +32,7 @@ void SinglePlayerPlayState::update()
 void SinglePlayerPlayState::render()
 {
     mLevel->render();
+    handleGameInformation();
 }
 
 /**
@@ -61,8 +44,9 @@ bool SinglePlayerPlayState::onEnter()
     LevelParser levelParser;
     mLevel = levelParser.parseLevel("../Assets/Maps/map1.tmx");
 
-
     mNoOfEnemies = 0;
+    mScore = 0;
+
     for (Layer* layer : *mLevel->getLayers())
     {
         if (ObjectLayer* objLayer = dynamic_cast<ObjectLayer*>(layer))
@@ -81,8 +65,7 @@ bool SinglePlayerPlayState::onEnter()
         }
     }
 
-    std::cout << mNoOfEnemies << std::endl;
-    std::cout << "Entering SinglePLayerPlayState" << std::endl;
+    std::cout << "Entering SinglePLayerPlayState." << std::endl;
     return true;
 }
 
@@ -100,13 +83,68 @@ bool SinglePlayerPlayState::onExit()
     for(int i = 0; i < mTextureIDList.size(); i++)
         TheTextureManager::Instance()->clearFromTextureMap(mTextureIDList[i]);
 
-    std::cout << "Exiting SinglePlayerPlayState" << std::endl;
+    std::cout << "Exiting SinglePlayerPlayState." << std::endl;
     return true;
+}
+
+void SinglePlayerPlayState::updatePlayer()
+{
+    for (GameObject *obj: *mObjectLayer->getGameObjects())
+    {
+        if (Player1* player1 = dynamic_cast<Player1 *>(obj))
+        {
+            mLives = player1->getLives();
+            mSpeed = player1->getSpeed();
+            mRadius = player1->getRadius();
+            mBombTime = player1->fastBomb();
+            mImmortal = player1->isImmortal();
+        }
+
+        if(Enemy* enemy = dynamic_cast<Enemy *>(obj))
+            if(TheCollisionManager::Instance()->isEnemyHit(enemy->getPosition()))
+            {
+                mNoOfEnemies--;
+                mScore += 10;
+            }
+    }
+}
+
+void SinglePlayerPlayState::handleGameInformation()
+{
+    SDL_Color white = {255, 255, 255};
+    TTF_Font* font = TheGame::Instance()->getFont();
+    TTF_SetFontSize(font, 35);
+
+    std::string p1 = TheGame::Instance()->getP1();
+    std::string p1Lives = "Lives: " + std::to_string(mLives);
+    std::string p1Speed = "Speed: " + std::to_string(mSpeed);
+    std::string p1Radius = "Radius: " + std::to_string(mRadius);
+    std::string p1Score = "Score: " + std::to_string(mScore);
+    std::string p1Immortal = "Immortal";
+    std::string p1FastBomb = "Explosion";
+
+    if(!p1.empty())
+        TheTextureManager::Instance()->drawText(p1, 10, 5, white, TheGame::Instance()->getRenderer(), font);
+    else
+        TheTextureManager::Instance()->drawText("Player1", 10, 5, white, TheGame::Instance()->getRenderer(), font);
+    TheTextureManager::Instance()->drawText(p1Score, 150, 5, white, TheGame::Instance()->getRenderer(), font);
+
+    TTF_SetFontSize(font, 30);
+    TheTextureManager::Instance()->drawText(p1Lives, 10, 45, white, TheGame::Instance()->getRenderer(), font);
+    TheTextureManager::Instance()->drawText(p1Speed, 10, 80, white, TheGame::Instance()->getRenderer(), font);
+    TheTextureManager::Instance()->drawText(p1Radius, 150, 45, white, TheGame::Instance()->getRenderer(), font);
+
+    if(mImmortal)
+        TheTextureManager::Instance()->drawText(p1Immortal, 290, 45, white, TheGame::Instance()->getRenderer(),
+                                                font);
+    if(mBombTime)
+        TheTextureManager::Instance()->drawText(p1FastBomb, 290, 80, white, TheGame::Instance()->getRenderer(),
+                                                font);
 }
 
 std::string SinglePlayerPlayState::getStateID() const
 {
-    return mPlayID;
+    return mStateID;
 }
 
-const std::string SinglePlayerPlayState::mPlayID = "SINGLE_PLAYER_PLAY_STATE";
+const std::string SinglePlayerPlayState::mStateID = "SINGLE_PLAYER_PLAY_STATE";
