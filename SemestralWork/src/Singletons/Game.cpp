@@ -9,6 +9,11 @@
 #include "InputHandler.hpp"
 #include "Game.hpp"
 
+Game::~Game()
+{
+    delete mGameStateMachine;
+}
+
 Game* Game::Instance()
 {
     if(mInstance == nullptr)
@@ -17,16 +22,6 @@ Game* Game::Instance()
     return mInstance;
 }
 
-/**
- * This method initializes the game
- * @param[in] pTitle
- * @param[in] pX_WindowPos
- * @param[in] pY_WindowPos
- * @param[in] pWindowWidth
- * @param[in] pWindowHeight
- * @param[in] pFullscreen
- * @return true -> Game initialization success, false -> Failed to initialize the game
- */
 bool Game::init(const char* pTitle, int pX_WindowPos, int pY_WindowPos, int pWindowWidth, int pWindowHeight,
                 bool pFullscreen)
 {
@@ -106,9 +101,6 @@ bool Game::init(const char* pTitle, int pX_WindowPos, int pY_WindowPos, int pWin
     return true;
 }
 
-/**
- * This method renders the current game state to the screen
- */
 void Game::render()
 {
     SDL_RenderClear(mRenderer);
@@ -116,25 +108,16 @@ void Game::render()
     SDL_RenderPresent(mRenderer);
 }
 
-/**
- * This method updates the current game state
- */
 void Game::update()
 {
     mGameStateMachine->update();
 }
 
-/**
- * This method handles the user interaction with the game
- */
 void Game::handleEvents()
 {
     TheInputHandler::Instance()->update();
 }
 
-/**
- * This method cleans after the game
- */
 void Game::clean()
 {
     std::cout << "Cleaning the game." << std::endl;
@@ -211,6 +194,6 @@ GameStateMachine* Game::getStateMachine() const
     return mGameStateMachine;
 }
 
-Game::Game() {}
+Game::Game() = default;
 
 Game* Game::mInstance = nullptr;
