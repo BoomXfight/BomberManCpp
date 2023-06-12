@@ -56,12 +56,12 @@ void TileLayer::setTileSize(int pTileSize)
     mTileSize = pTileSize;
 }
 
-int TileLayer::getNumRows()
+int TileLayer::getNumRows() const
 {
     return mNumRows;
 }
 
-int TileLayer::getNumCols()
+int TileLayer::getNumCols() const
 {
     return mNumColumns;
 }
