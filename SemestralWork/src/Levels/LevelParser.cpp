@@ -7,12 +7,6 @@
 #include "ObjectLayer.hpp"
 #include <sstream>
 
-/**
- * This method is used to parse a level from an xml file : map, as well as objects
- * and creates a level from the file
- * @param[in] levelFile
- * @return Level* -> created level
- */
 Level* LevelParser::parseLevel(const char* pLevelFile)
 {
     xmlDocPtr levelDocument = xmlParseFile(pLevelFile);
@@ -84,11 +78,6 @@ Level* LevelParser::parseLevel(const char* pLevelFile)
     return level;
 }
 
-/**
- * This method parses a tileSet information required for map rendering
- * @param[in] pTileSetRoot
- * @param[in,out] pTileSets
- */
 void LevelParser::parseTileSets(xmlNodePtr pTileSetRoot, std::vector<TileSet>* pTileSets)
 {
     // add the map sheet into the texture manager
@@ -139,14 +128,8 @@ void LevelParser::parseTileSets(xmlNodePtr pTileSetRoot, std::vector<TileSet>* p
     pTileSets->push_back(tileSet);
 }
 
-/**
- * This method parses the map matrix from an xml file and stores the information in a 2D map array
- * @param[in] pTileElement
- * @param[in,out] pLayers
- * @param[in,out] pTileSets
- */
 void LevelParser::parseTileLayer(xmlNodePtr pTileElement, std::vector<Layer*> *pLayers,
-                                 const std::vector<TileSet>* pTileSets)
+                                 const std::vector<TileSet>* pTileSets) const
 {
     TileLayer* pTileLayer = new TileLayer(mTileSize, *pTileSets);
 
@@ -195,11 +178,6 @@ void LevelParser::parseTileLayer(xmlNodePtr pTileElement, std::vector<Layer*> *p
     pLayers->push_back(pTileLayer);
 }
 
-/**
- * This method finds and creates gameObjects from an xml folder
- * @param[in] pObjectElement
- * @param[in,out] pLayers
- */
 void LevelParser::parseObjectLayer(xmlNodePtr pObjectElement, std::vector<Layer*> *pLayers)
 {
     ObjectLayer* pObjectLayer = new ObjectLayer();
@@ -262,10 +240,6 @@ void LevelParser::parseObjectLayer(xmlNodePtr pObjectElement, std::vector<Layer*
     pLayers->push_back(pObjectLayer);
 }
 
-/**
- * This method loads a required textures by gameObjects to TheTextureManager to be used in the game
- * @param pTextureRoot
- */
 void LevelParser::parseTextures(xmlNodePtr pTextureRoot)
 {
     xmlChar* valueAttr = nullptr;
