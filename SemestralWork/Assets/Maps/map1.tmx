@@ -98,7 +98,7 @@
     <property name="textureID" value="Enemy1"/>
    </properties>
   </object>
-  <object id="9" name="enemy9" type="Enemy" x="900" y="100">
+  <object id="9" name="enemy9" type="Enemy" x="900" y="150">
    <properties>
     <property name="numFrames" type="int" value="3"/>
     <property name="textureHeight" type="int" value="17"/>
