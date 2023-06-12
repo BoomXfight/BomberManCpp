@@ -10,9 +10,6 @@ InputHandler* InputHandler::Instance()
     return mInstance;
 }
 
-/**
- * This method registers and processes the input throughout the game
- */
 void InputHandler::update()
 {
     SDL_Event event;
@@ -56,11 +53,9 @@ void InputHandler::update()
 
 void InputHandler::clean()
 {
+    delete mInstance;
 }
 
-/**
- * This method resets the mouse button states to false
- */
 void InputHandler::reset()
 {
     for(int i = 0; i < 3; i++)
@@ -106,8 +101,6 @@ InputHandler::InputHandler()
     for(int i = 0; i < 3; i++) // mouse buttons = false
         mMouseButtonStates.push_back(false);
 }
-
-InputHandler::~InputHandler() {}
 
 void InputHandler::onKeyDown()
 {

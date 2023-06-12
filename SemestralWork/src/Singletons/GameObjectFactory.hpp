@@ -22,7 +22,7 @@ public:
 
 /**
  * @class GameObjectFactory
- * This class is responsible for storing the known GameObject creators and registering new ones
+ * This singleton class is responsible for storing the known GameObject creators and registering new ones
  */
 class GameObjectFactory
 {
