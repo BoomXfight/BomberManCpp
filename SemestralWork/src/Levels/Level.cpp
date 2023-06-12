@@ -1,19 +1,13 @@
 #include "Level.hpp"
 
-Level::~Level() {};
+Level::~Level() = default;
 
-/**
- * This method updates the layers of a level
- */
 void Level::update()
 {
     for(int i = 0; i < mLayers.size(); i++)
         mLayers[i]->update();
 }
 
-/**
- * This method renders the layers of a level
- */
 void Level::render()
 {
     for(int i = 0; i < mLayers.size(); i++)
@@ -34,3 +28,5 @@ std::vector<Bonus*>* Level::getBonuses()
 {
     return &mBonuses;
 }
+
+Level::Level() = default;
