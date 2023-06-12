@@ -14,7 +14,7 @@ bool PauseMenuState::onEnter()
     try
     {
         StateParser stateParser;
-        if (!stateParser.parseState("../src/GameStates.xml", mPauseID, &mGameObjects,
+        if (!stateParser.parseState("../Assets/GameStates.xml", mPauseID, &mGameObjects,
                                     &mTextureIDList))
             throw std::runtime_error("Failed to load GameStates load file.");
     }

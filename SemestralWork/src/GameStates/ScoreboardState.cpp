@@ -70,7 +70,7 @@ bool ScoreboardState::onEnter()
     try
     {
         StateParser stateParser;
-        if (!stateParser.parseState("../src/GameStates.xml", mMenuID, &mGameObjects,
+        if (!stateParser.parseState("../Assets/GameStates.xml", mMenuID, &mGameObjects,
                                     &mTextureIDList))
             throw std::runtime_error("Failed to load GameStates load file.");
     }
@@ -83,7 +83,7 @@ bool ScoreboardState::onEnter()
     mCallbacks.push_back(exit);
     mCallbacks.push_back(scoreboardToMainMenu);
     setCallbacks(mCallbacks);
-    loadPlayerScores("../src/Scoreboard.txt", mPlayers);
+    loadPlayerScores("../Assets/Scoreboard.txt", mPlayers);
 
     std::cout << "Entering ScoreboardState." << std::endl;
     return true;

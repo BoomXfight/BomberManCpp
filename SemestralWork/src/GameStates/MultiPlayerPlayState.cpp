@@ -76,10 +76,10 @@ bool MultiPlayerPlayState::onExit()
     {
         std::vector<PlayerScore> players;
 
-        loadPlayerScores("../src/Scoreboard.txt", players);
+        loadPlayerScores("../Assets/Scoreboard.txt", players);
         updatePlayersScore(players);
         std::sort(players.begin(), players.end(), comparePlayers);
-        modifyPlayerScores("../src/Scoreboard.txt", players);
+        modifyPlayerScores("../Assets/Scoreboard.txt", players);
     }
 
     for(int i = 0; i < mTextureIDList.size(); i++)

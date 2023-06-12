@@ -16,7 +16,7 @@ bool SinglePlayerWonState::onEnter()
     try
     {
         StateParser stateParser;
-        if (!stateParser.parseState("../src/GameStates.xml", mStateID, &mGameObjects,
+        if (!stateParser.parseState("../Assets/GameStates.xml", mStateID, &mGameObjects,
                                     &mTextureIDList))
             throw std::runtime_error("Failed to load GameStates load file.");
     }
