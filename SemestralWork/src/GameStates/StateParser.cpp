@@ -3,21 +3,18 @@
 #include "../Singletons/Game.hpp"
 #include "../Singletons/GameObjectFactory.hpp"
 
-/**
- * This method parses the xml file and loads a game state from it
- * @param[in] pStateFile
- * @param[in] pStateID
- * @param[in] pObjects
- * @param[in] pTextureIDs
- * @return true -> success, false -> failure
- */
 bool StateParser::parseState(const char* pStateFile, const std::string& pStateID,
                              std::vector<GameObject*>* pObjects, std::vector<std::string>* pTextureIDs)
 {
     xmlDocPtr doc = xmlReadFile(pStateFile, nullptr, 0);
-    if (doc == nullptr)
+    try
     {
-        std::cerr << "Failed to load state file: " << pStateFile << std::endl;
+        if (doc == nullptr)
+            throw std::runtime_error("Failed to load the GameState xml file.");
+    }
+    catch (const std::exception& e)
+    {
+        std::cout << e.what() << std::endl;
         return false;
     }
 
@@ -62,11 +59,6 @@ bool StateParser::parseState(const char* pStateFile, const std::string& pStateID
     return true;
 }
 
-/**
- * This method parses and loads the game objects of a game state from the xml file
- * @param[in] pObjectRoot
- * @param[in] pObjects
- */
 void StateParser::parseObjects(xmlNodePtr pObjectRoot, std::vector<GameObject*>* pObjects)
 {
     for (xmlNodePtr node = pObjectRoot->children; node != nullptr; node = node->next)
@@ -113,11 +105,6 @@ void StateParser::parseObjects(xmlNodePtr pObjectRoot, std::vector<GameObject*>*
     }
 }
 
-/**
- * This method parses and loads textures of a game state from an xml file
- * @param[in] pTextureRoot
- * @param[in] pTextureIDs
- */
 void StateParser::parseTextures(xmlNodePtr pTextureRoot, std::vector<std::string>* pTextureIDs)
 {
     for (xmlNodePtr node = pTextureRoot->children; node != nullptr; node = node->next)
