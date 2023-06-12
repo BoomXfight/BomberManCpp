@@ -108,8 +108,8 @@
   </object>
  </objectgroup>
  <objectProperties>
-  <property name="Bomber1" value="../Assets/BomberMan1Animation.png"/>
-  <property name="Enemy1" value="../Assets/Enemy1Animation.png"/>
+  <property name="Bomber1" value="../Assets/Animations/BomberMan1Animation.png"/>
+  <property name="Enemy1" value="../Assets/Animations/Enemy1Animation.png"/>
  </objectProperties>
  <bonuses>
    <property name="speed" values="1,2,3,4,5"/>

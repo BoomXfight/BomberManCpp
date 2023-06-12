@@ -19,7 +19,7 @@ class CollisionManager
 {
 public:
     static CollisionManager* Instance();
-    void setTileLayer(TileLayer* pObjectLayer);
+    void setTileLayer(TileLayer* pTileLayer);
     void setObjectLayer(ObjectLayer* pObjectLayer);
     void setBonuses(std::vector<Bonus*> pBonuses);
     std::vector<Bonus*> getBonuses();

@@ -9,9 +9,9 @@ CollisionManager* CollisionManager::Instance()
     return mInstance;
 }
 
-void CollisionManager::setTileLayer(TileLayer* pObjectLayer)
+void CollisionManager::setTileLayer(TileLayer* pTileLayer)
 {
-    mTileLayer = pObjectLayer;
+    mTileLayer = pTileLayer;
     mMap = mTileLayer->getTileIDs();
     mTileSet = mTileLayer->getTileSetByID(1);
 }
