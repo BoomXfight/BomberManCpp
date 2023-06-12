@@ -23,6 +23,7 @@ public:
     /**
      * This method initializes the current level from the file
      * @return true
+     * @throw std::runtime_error if failed to load the level file
      */
     bool onEnter() override;
 

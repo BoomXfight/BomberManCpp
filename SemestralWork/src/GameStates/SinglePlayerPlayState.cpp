@@ -10,9 +10,6 @@
 #include "PauseMenuState.hpp"
 #include <algorithm>
 
-/**
- * This method updates the current level as well as checks for a game pause
- */
 void SinglePlayerPlayState::update()
 {
     mLevel->update();
@@ -27,23 +24,27 @@ void SinglePlayerPlayState::update()
         TheGame::Instance()->getStateMachine()->pushState(new PauseMenuState());
 }
 
-/**
- * This method renders the current level
- */
 void SinglePlayerPlayState::render()
 {
     mLevel->render();
-    handleGameInformation();
+    renderGameInformation();
 }
 
-/**
- * This method initializes the current level from the file
- * @return true
- */
 bool SinglePlayerPlayState::onEnter()
 {
-    LevelParser levelParser;
-    mLevel = levelParser.parseLevel("../Assets/Maps/map1.tmx");
+    try
+    {
+        LevelParser levelParser;
+        mLevel = levelParser.parseLevel("../Assets/Maps/map1.tmx");
+        if (mLevel == nullptr)
+            throw std::runtime_error("Failed to load the Level file.");
+    }
+    catch (const std::exception& e)
+    {
+        std::cout << e.what() << std::endl;
+        return false;
+    }
+
 
     mNoOfEnemies = 0;
     mScore = 0;
@@ -70,10 +71,6 @@ bool SinglePlayerPlayState::onEnter()
     return true;
 }
 
-/**
- * This method cleans up after the current game state
- * @return true
- */
 bool SinglePlayerPlayState::onExit()
 {
     if(!TheGame::Instance()->getP1().empty())
@@ -120,7 +117,7 @@ void SinglePlayerPlayState::updatePlayer()
     }
 }
 
-void SinglePlayerPlayState::handleGameInformation()
+void SinglePlayerPlayState::renderGameInformation() const
 {
     SDL_Color white = {255, 255, 255};
     TTF_Font* font = TheGame::Instance()->getFont();

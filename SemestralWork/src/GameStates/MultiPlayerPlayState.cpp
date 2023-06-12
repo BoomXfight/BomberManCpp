@@ -35,8 +35,19 @@ void MultiPlayerPlayState::render()
 
 bool MultiPlayerPlayState::onEnter()
 {
-    LevelParser levelParser;
-    mLevel = levelParser.parseLevel("../Assets/Maps/map2.tmx");
+    try
+    {
+        LevelParser levelParser;
+        mLevel = levelParser.parseLevel("../Assets/Maps/map2.tmx");
+        if (mLevel == nullptr)
+            throw std::runtime_error("Failed to load the Level file.");
+    }
+    catch (const std::exception& e)
+    {
+        std::cout << e.what() << std::endl;
+        return false;
+    }
+
     mP1Score = 0;
     mP2Score = 0;
     mP1Lives = 3;
