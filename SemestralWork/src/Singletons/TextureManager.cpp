@@ -1,22 +1,14 @@
 #include "TextureManager.hpp"
-#include "Game.hpp"
 #include <iostream>
 
 TextureManager* TextureManager::Instance()
 {
-    if(mInstance == 0)
+    if(mInstance == nullptr)
         mInstance = new TextureManager();
 
     return mInstance;
 }
 
-/**
- * This method loads an image from file and stores it into the textureMap
- * @param[in] fileName
- * @param[in] identifier
- * @param[in] pRenderer
- * @return true -> success, false -> failure
- */
 bool TextureManager::load(const std::string& pFileName, const std::string& pIdentifier, SDL_Renderer* pRenderer)
 {
     SDL_Surface* tmpSurface = IMG_Load(pFileName.c_str());
@@ -37,16 +29,6 @@ bool TextureManager::load(const std::string& pFileName, const std::string& pIden
     return false;
 }
 
-/**
- * This method draws an entire texture on the screen
- * @param[in] pIdentifier
- * @param[in] pX
- * @param[in] pY
- * @param[in] pWidth
- * @param[in] pHeight
- * @param[in] pRenderer
- * @param[in] pFlip
- */
 void TextureManager::draw(const std::string& pIdentifier, int pX, int pY, int pWidth, int pHeight,
                           SDL_Renderer* pRenderer, SDL_RendererFlip pFlip)
 {
@@ -62,19 +44,6 @@ void TextureManager::draw(const std::string& pIdentifier, int pX, int pY, int pW
                      nullptr, pFlip);
 }
 
-/**
- * This method draws part of the texture to the screen
- * Fit for drawing sprites and animations
- * @param[in] pIdentifier
- * @param[in] pX
- * @param[in] pY
- * @param[in] pWidth
- * @param[in] pHeight
- * @param[in] pCurrentRow
- * @param[in] pCurrentFrame
- * @param[in] pRenderer
- * @param[in] pFlip
- */
 void TextureManager::drawFrame(const std::string& pIdentifier, int pX, int pY, int pWidth, int pHeight, int pCurrentRow,
                                int pCurrentFrame, SDL_Renderer* pRenderer, SDL_RendererFlip pFlip)
 {
@@ -90,19 +59,6 @@ void TextureManager::drawFrame(const std::string& pIdentifier, int pX, int pY, i
                      nullptr, pFlip);
 }
 
-/**
- * This method is used to draw a tile from a tileSet to the screen
- * @param[in] pIdentifier
- * @param[in] pMargin
- * @param[in] pSpacing
- * @param[in] pX
- * @param[in] pY
- * @param[in] pWidth
- * @param[in] pHeight
- * @param[in] pCurrentRow
- * @param[in] pCurrentFrame
- * @param[in] pRenderer
- */
 void TextureManager::drawTile(const std::string& pIdentifier, int pMargin, int pSpacing, int pX, int pY, int pWidth,
                               int pHeight, int pCurrentRow, int pCurrentFrame, SDL_Renderer *pRenderer)
 {
@@ -140,4 +96,9 @@ void TextureManager::clearFromTextureMap(const std::string& pIdentifier)
 
 TextureManager::TextureManager() {};
 
-TextureManager* TextureManager::mInstance = 0;
+TextureManager::~TextureManager()
+{
+    delete mInstance;
+}
+
+TextureManager* TextureManager::mInstance = nullptr;
