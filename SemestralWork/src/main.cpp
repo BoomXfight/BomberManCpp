@@ -1,11 +1,11 @@
-#include "Singletons/Game.hpp"
+#include "Game.hpp"
 #include <SDL2/SDL.h>
 #include <iostream>
 
 int main(int argc, char* argv[])
 {
     float FPS = 60;
-    int DELAY_TIME = 1000.0f / FPS;
+    Uint32 DELAY_TIME = 1000.0f / FPS;
     Uint32 frameStart, frameTime;
 
     std::cout << "Game init attempt." << std::endl;

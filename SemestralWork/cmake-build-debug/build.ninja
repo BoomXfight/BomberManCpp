@@ -49,47 +49,89 @@ cmake_ninja_workdir = /home/beckaand/CLionProjects/beckaand/SemestralWork/cmake-
 
 build cmake_object_order_depends_target_a: phony || CMakeFiles/a.dir
 
-build CMakeFiles/a.dir/src/main.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/main.cpp || cmake_object_order_depends_target_a
-  DEP_FILE = CMakeFiles/a.dir/src/main.cpp.o.d
+build CMakeFiles/a.dir/src/Bonus.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/Bonus.cpp || cmake_object_order_depends_target_a
+  DEP_FILE = CMakeFiles/a.dir/src/Bonus.cpp.o.d
   FLAGS = -g -fdiagnostics-color=always
   INCLUDES = -I/usr/include/libxml2
   OBJECT_DIR = CMakeFiles/a.dir
   OBJECT_FILE_DIR = CMakeFiles/a.dir/src
 
-build CMakeFiles/a.dir/src/Singletons/Game.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/Singletons/Game.cpp || cmake_object_order_depends_target_a
-  DEP_FILE = CMakeFiles/a.dir/src/Singletons/Game.cpp.o.d
+build CMakeFiles/a.dir/src/CollisionManager.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/CollisionManager.cpp || cmake_object_order_depends_target_a
+  DEP_FILE = CMakeFiles/a.dir/src/CollisionManager.cpp.o.d
   FLAGS = -g -fdiagnostics-color=always
   INCLUDES = -I/usr/include/libxml2
   OBJECT_DIR = CMakeFiles/a.dir
-  OBJECT_FILE_DIR = CMakeFiles/a.dir/src/Singletons
+  OBJECT_FILE_DIR = CMakeFiles/a.dir/src
 
-build CMakeFiles/a.dir/src/GameObjects/GameObject.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/GameObjects/GameObject.cpp || cmake_object_order_depends_target_a
-  DEP_FILE = CMakeFiles/a.dir/src/GameObjects/GameObject.cpp.o.d
+build CMakeFiles/a.dir/src/Enemy.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/Enemy.cpp || cmake_object_order_depends_target_a
+  DEP_FILE = CMakeFiles/a.dir/src/Enemy.cpp.o.d
   FLAGS = -g -fdiagnostics-color=always
   INCLUDES = -I/usr/include/libxml2
   OBJECT_DIR = CMakeFiles/a.dir
-  OBJECT_FILE_DIR = CMakeFiles/a.dir/src/GameObjects
+  OBJECT_FILE_DIR = CMakeFiles/a.dir/src
 
-build CMakeFiles/a.dir/src/GameStates/GameState.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/GameStates/GameState.cpp || cmake_object_order_depends_target_a
-  DEP_FILE = CMakeFiles/a.dir/src/GameStates/GameState.cpp.o.d
+build CMakeFiles/a.dir/src/Game.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/Game.cpp || cmake_object_order_depends_target_a
+  DEP_FILE = CMakeFiles/a.dir/src/Game.cpp.o.d
   FLAGS = -g -fdiagnostics-color=always
   INCLUDES = -I/usr/include/libxml2
   OBJECT_DIR = CMakeFiles/a.dir
-  OBJECT_FILE_DIR = CMakeFiles/a.dir/src/GameStates
+  OBJECT_FILE_DIR = CMakeFiles/a.dir/src
 
-build CMakeFiles/a.dir/src/GameStates/GameStateMachine.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/GameStates/GameStateMachine.cpp || cmake_object_order_depends_target_a
-  DEP_FILE = CMakeFiles/a.dir/src/GameStates/GameStateMachine.cpp.o.d
+build CMakeFiles/a.dir/src/GameObject.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/GameObject.cpp || cmake_object_order_depends_target_a
+  DEP_FILE = CMakeFiles/a.dir/src/GameObject.cpp.o.d
   FLAGS = -g -fdiagnostics-color=always
   INCLUDES = -I/usr/include/libxml2
   OBJECT_DIR = CMakeFiles/a.dir
-  OBJECT_FILE_DIR = CMakeFiles/a.dir/src/GameStates
+  OBJECT_FILE_DIR = CMakeFiles/a.dir/src
 
-build CMakeFiles/a.dir/src/Singletons/InputHandler.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/Singletons/InputHandler.cpp || cmake_object_order_depends_target_a
-  DEP_FILE = CMakeFiles/a.dir/src/Singletons/InputHandler.cpp.o.d
+build CMakeFiles/a.dir/src/GameObjectFactory.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/GameObjectFactory.cpp || cmake_object_order_depends_target_a
+  DEP_FILE = CMakeFiles/a.dir/src/GameObjectFactory.cpp.o.d
   FLAGS = -g -fdiagnostics-color=always
   INCLUDES = -I/usr/include/libxml2
   OBJECT_DIR = CMakeFiles/a.dir
-  OBJECT_FILE_DIR = CMakeFiles/a.dir/src/Singletons
+  OBJECT_FILE_DIR = CMakeFiles/a.dir/src
+
+build CMakeFiles/a.dir/src/GameState.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/GameState.cpp || cmake_object_order_depends_target_a
+  DEP_FILE = CMakeFiles/a.dir/src/GameState.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -I/usr/include/libxml2
+  OBJECT_DIR = CMakeFiles/a.dir
+  OBJECT_FILE_DIR = CMakeFiles/a.dir/src
+
+build CMakeFiles/a.dir/src/GameStateMachine.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/GameStateMachine.cpp || cmake_object_order_depends_target_a
+  DEP_FILE = CMakeFiles/a.dir/src/GameStateMachine.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -I/usr/include/libxml2
+  OBJECT_DIR = CMakeFiles/a.dir
+  OBJECT_FILE_DIR = CMakeFiles/a.dir/src
+
+build CMakeFiles/a.dir/src/InputHandler.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/InputHandler.cpp || cmake_object_order_depends_target_a
+  DEP_FILE = CMakeFiles/a.dir/src/InputHandler.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -I/usr/include/libxml2
+  OBJECT_DIR = CMakeFiles/a.dir
+  OBJECT_FILE_DIR = CMakeFiles/a.dir/src
+
+build CMakeFiles/a.dir/src/Layer.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/Layer.cpp || cmake_object_order_depends_target_a
+  DEP_FILE = CMakeFiles/a.dir/src/Layer.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -I/usr/include/libxml2
+  OBJECT_DIR = CMakeFiles/a.dir
+  OBJECT_FILE_DIR = CMakeFiles/a.dir/src
+
+build CMakeFiles/a.dir/src/Level.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/Level.cpp || cmake_object_order_depends_target_a
+  DEP_FILE = CMakeFiles/a.dir/src/Level.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -I/usr/include/libxml2
+  OBJECT_DIR = CMakeFiles/a.dir
+  OBJECT_FILE_DIR = CMakeFiles/a.dir/src
+
+build CMakeFiles/a.dir/src/LevelParser.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/LevelParser.cpp || cmake_object_order_depends_target_a
+  DEP_FILE = CMakeFiles/a.dir/src/LevelParser.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -I/usr/include/libxml2
+  OBJECT_DIR = CMakeFiles/a.dir
+  OBJECT_FILE_DIR = CMakeFiles/a.dir/src
 
 build CMakeFiles/a.dir/src/LoaderParams.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/LoaderParams.cpp || cmake_object_order_depends_target_a
   DEP_FILE = CMakeFiles/a.dir/src/LoaderParams.cpp.o.d
@@ -98,40 +140,166 @@ build CMakeFiles/a.dir/src/LoaderParams.cpp.o: CXX_COMPILER__a_Debug /home/becka
   OBJECT_DIR = CMakeFiles/a.dir
   OBJECT_FILE_DIR = CMakeFiles/a.dir/src
 
-build CMakeFiles/a.dir/src/GameObjects/MenuButton.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/GameObjects/MenuButton.cpp || cmake_object_order_depends_target_a
-  DEP_FILE = CMakeFiles/a.dir/src/GameObjects/MenuButton.cpp.o.d
+build CMakeFiles/a.dir/src/MainMenuState.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/MainMenuState.cpp || cmake_object_order_depends_target_a
+  DEP_FILE = CMakeFiles/a.dir/src/MainMenuState.cpp.o.d
   FLAGS = -g -fdiagnostics-color=always
   INCLUDES = -I/usr/include/libxml2
   OBJECT_DIR = CMakeFiles/a.dir
-  OBJECT_FILE_DIR = CMakeFiles/a.dir/src/GameObjects
+  OBJECT_FILE_DIR = CMakeFiles/a.dir/src
 
-build CMakeFiles/a.dir/src/GameStates/MainMenuState.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/GameStates/MainMenuState.cpp || cmake_object_order_depends_target_a
-  DEP_FILE = CMakeFiles/a.dir/src/GameStates/MainMenuState.cpp.o.d
+build CMakeFiles/a.dir/src/MenuButton.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/MenuButton.cpp || cmake_object_order_depends_target_a
+  DEP_FILE = CMakeFiles/a.dir/src/MenuButton.cpp.o.d
   FLAGS = -g -fdiagnostics-color=always
   INCLUDES = -I/usr/include/libxml2
   OBJECT_DIR = CMakeFiles/a.dir
-  OBJECT_FILE_DIR = CMakeFiles/a.dir/src/GameStates
+  OBJECT_FILE_DIR = CMakeFiles/a.dir/src
 
-build CMakeFiles/a.dir/src/GameObjects/Player.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/GameObjects/Player.cpp || cmake_object_order_depends_target_a
-  DEP_FILE = CMakeFiles/a.dir/src/GameObjects/Player.cpp.o.d
+build CMakeFiles/a.dir/src/MenuState.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/MenuState.cpp || cmake_object_order_depends_target_a
+  DEP_FILE = CMakeFiles/a.dir/src/MenuState.cpp.o.d
   FLAGS = -g -fdiagnostics-color=always
   INCLUDES = -I/usr/include/libxml2
   OBJECT_DIR = CMakeFiles/a.dir
-  OBJECT_FILE_DIR = CMakeFiles/a.dir/src/GameObjects
+  OBJECT_FILE_DIR = CMakeFiles/a.dir/src
 
-build CMakeFiles/a.dir/src/GameObjects/SDLGameObject.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/GameObjects/SDLGameObject.cpp || cmake_object_order_depends_target_a
-  DEP_FILE = CMakeFiles/a.dir/src/GameObjects/SDLGameObject.cpp.o.d
+build CMakeFiles/a.dir/src/MultiPlayer1WinState.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/MultiPlayer1WinState.cpp || cmake_object_order_depends_target_a
+  DEP_FILE = CMakeFiles/a.dir/src/MultiPlayer1WinState.cpp.o.d
   FLAGS = -g -fdiagnostics-color=always
   INCLUDES = -I/usr/include/libxml2
   OBJECT_DIR = CMakeFiles/a.dir
-  OBJECT_FILE_DIR = CMakeFiles/a.dir/src/GameObjects
+  OBJECT_FILE_DIR = CMakeFiles/a.dir/src
 
-build CMakeFiles/a.dir/src/Singletons/TextureManager.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/Singletons/TextureManager.cpp || cmake_object_order_depends_target_a
-  DEP_FILE = CMakeFiles/a.dir/src/Singletons/TextureManager.cpp.o.d
+build CMakeFiles/a.dir/src/MultiPlayer2WinState.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/MultiPlayer2WinState.cpp || cmake_object_order_depends_target_a
+  DEP_FILE = CMakeFiles/a.dir/src/MultiPlayer2WinState.cpp.o.d
   FLAGS = -g -fdiagnostics-color=always
   INCLUDES = -I/usr/include/libxml2
   OBJECT_DIR = CMakeFiles/a.dir
-  OBJECT_FILE_DIR = CMakeFiles/a.dir/src/Singletons
+  OBJECT_FILE_DIR = CMakeFiles/a.dir/src
+
+build CMakeFiles/a.dir/src/MultiPlayerMenuState.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/MultiPlayerMenuState.cpp || cmake_object_order_depends_target_a
+  DEP_FILE = CMakeFiles/a.dir/src/MultiPlayerMenuState.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -I/usr/include/libxml2
+  OBJECT_DIR = CMakeFiles/a.dir
+  OBJECT_FILE_DIR = CMakeFiles/a.dir/src
+
+build CMakeFiles/a.dir/src/MultiPlayerPlayState.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/MultiPlayerPlayState.cpp || cmake_object_order_depends_target_a
+  DEP_FILE = CMakeFiles/a.dir/src/MultiPlayerPlayState.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -I/usr/include/libxml2
+  OBJECT_DIR = CMakeFiles/a.dir
+  OBJECT_FILE_DIR = CMakeFiles/a.dir/src
+
+build CMakeFiles/a.dir/src/ObjectLayer.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/ObjectLayer.cpp || cmake_object_order_depends_target_a
+  DEP_FILE = CMakeFiles/a.dir/src/ObjectLayer.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -I/usr/include/libxml2
+  OBJECT_DIR = CMakeFiles/a.dir
+  OBJECT_FILE_DIR = CMakeFiles/a.dir/src
+
+build CMakeFiles/a.dir/src/PauseMenuState.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/PauseMenuState.cpp || cmake_object_order_depends_target_a
+  DEP_FILE = CMakeFiles/a.dir/src/PauseMenuState.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -I/usr/include/libxml2
+  OBJECT_DIR = CMakeFiles/a.dir
+  OBJECT_FILE_DIR = CMakeFiles/a.dir/src
+
+build CMakeFiles/a.dir/src/Player.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/Player.cpp || cmake_object_order_depends_target_a
+  DEP_FILE = CMakeFiles/a.dir/src/Player.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -I/usr/include/libxml2
+  OBJECT_DIR = CMakeFiles/a.dir
+  OBJECT_FILE_DIR = CMakeFiles/a.dir/src
+
+build CMakeFiles/a.dir/src/Player1.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/Player1.cpp || cmake_object_order_depends_target_a
+  DEP_FILE = CMakeFiles/a.dir/src/Player1.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -I/usr/include/libxml2
+  OBJECT_DIR = CMakeFiles/a.dir
+  OBJECT_FILE_DIR = CMakeFiles/a.dir/src
+
+build CMakeFiles/a.dir/src/Player2.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/Player2.cpp || cmake_object_order_depends_target_a
+  DEP_FILE = CMakeFiles/a.dir/src/Player2.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -I/usr/include/libxml2
+  OBJECT_DIR = CMakeFiles/a.dir
+  OBJECT_FILE_DIR = CMakeFiles/a.dir/src
+
+build CMakeFiles/a.dir/src/ScoreboardState.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/ScoreboardState.cpp || cmake_object_order_depends_target_a
+  DEP_FILE = CMakeFiles/a.dir/src/ScoreboardState.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -I/usr/include/libxml2
+  OBJECT_DIR = CMakeFiles/a.dir
+  OBJECT_FILE_DIR = CMakeFiles/a.dir/src
+
+build CMakeFiles/a.dir/src/SDLGameObject.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/SDLGameObject.cpp || cmake_object_order_depends_target_a
+  DEP_FILE = CMakeFiles/a.dir/src/SDLGameObject.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -I/usr/include/libxml2
+  OBJECT_DIR = CMakeFiles/a.dir
+  OBJECT_FILE_DIR = CMakeFiles/a.dir/src
+
+build CMakeFiles/a.dir/src/SinglePlayerLostState.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/SinglePlayerLostState.cpp || cmake_object_order_depends_target_a
+  DEP_FILE = CMakeFiles/a.dir/src/SinglePlayerLostState.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -I/usr/include/libxml2
+  OBJECT_DIR = CMakeFiles/a.dir
+  OBJECT_FILE_DIR = CMakeFiles/a.dir/src
+
+build CMakeFiles/a.dir/src/SinglePlayerMenuState.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/SinglePlayerMenuState.cpp || cmake_object_order_depends_target_a
+  DEP_FILE = CMakeFiles/a.dir/src/SinglePlayerMenuState.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -I/usr/include/libxml2
+  OBJECT_DIR = CMakeFiles/a.dir
+  OBJECT_FILE_DIR = CMakeFiles/a.dir/src
+
+build CMakeFiles/a.dir/src/SinglePlayerPlayState.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/SinglePlayerPlayState.cpp || cmake_object_order_depends_target_a
+  DEP_FILE = CMakeFiles/a.dir/src/SinglePlayerPlayState.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -I/usr/include/libxml2
+  OBJECT_DIR = CMakeFiles/a.dir
+  OBJECT_FILE_DIR = CMakeFiles/a.dir/src
+
+build CMakeFiles/a.dir/src/SinglePlayerWonState.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/SinglePlayerWonState.cpp || cmake_object_order_depends_target_a
+  DEP_FILE = CMakeFiles/a.dir/src/SinglePlayerWonState.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -I/usr/include/libxml2
+  OBJECT_DIR = CMakeFiles/a.dir
+  OBJECT_FILE_DIR = CMakeFiles/a.dir/src
+
+build CMakeFiles/a.dir/src/StateParser.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/StateParser.cpp || cmake_object_order_depends_target_a
+  DEP_FILE = CMakeFiles/a.dir/src/StateParser.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -I/usr/include/libxml2
+  OBJECT_DIR = CMakeFiles/a.dir
+  OBJECT_FILE_DIR = CMakeFiles/a.dir/src
+
+build CMakeFiles/a.dir/src/StaticObject.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/StaticObject.cpp || cmake_object_order_depends_target_a
+  DEP_FILE = CMakeFiles/a.dir/src/StaticObject.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -I/usr/include/libxml2
+  OBJECT_DIR = CMakeFiles/a.dir
+  OBJECT_FILE_DIR = CMakeFiles/a.dir/src
+
+build CMakeFiles/a.dir/src/TextSquare.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/TextSquare.cpp || cmake_object_order_depends_target_a
+  DEP_FILE = CMakeFiles/a.dir/src/TextSquare.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -I/usr/include/libxml2
+  OBJECT_DIR = CMakeFiles/a.dir
+  OBJECT_FILE_DIR = CMakeFiles/a.dir/src
+
+build CMakeFiles/a.dir/src/TextureManager.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/TextureManager.cpp || cmake_object_order_depends_target_a
+  DEP_FILE = CMakeFiles/a.dir/src/TextureManager.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -I/usr/include/libxml2
+  OBJECT_DIR = CMakeFiles/a.dir
+  OBJECT_FILE_DIR = CMakeFiles/a.dir/src
+
+build CMakeFiles/a.dir/src/TileLayer.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/TileLayer.cpp || cmake_object_order_depends_target_a
+  DEP_FILE = CMakeFiles/a.dir/src/TileLayer.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -I/usr/include/libxml2
+  OBJECT_DIR = CMakeFiles/a.dir
+  OBJECT_FILE_DIR = CMakeFiles/a.dir/src
 
 build CMakeFiles/a.dir/src/Vector2D.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/Vector2D.cpp || cmake_object_order_depends_target_a
   DEP_FILE = CMakeFiles/a.dir/src/Vector2D.cpp.o.d
@@ -140,117 +308,12 @@ build CMakeFiles/a.dir/src/Vector2D.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/
   OBJECT_DIR = CMakeFiles/a.dir
   OBJECT_FILE_DIR = CMakeFiles/a.dir/src
 
-build CMakeFiles/a.dir/src/GameObjects/StaticObject.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/GameObjects/StaticObject.cpp || cmake_object_order_depends_target_a
-  DEP_FILE = CMakeFiles/a.dir/src/GameObjects/StaticObject.cpp.o.d
+build CMakeFiles/a.dir/src/main.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/main.cpp || cmake_object_order_depends_target_a
+  DEP_FILE = CMakeFiles/a.dir/src/main.cpp.o.d
   FLAGS = -g -fdiagnostics-color=always
   INCLUDES = -I/usr/include/libxml2
   OBJECT_DIR = CMakeFiles/a.dir
-  OBJECT_FILE_DIR = CMakeFiles/a.dir/src/GameObjects
-
-build CMakeFiles/a.dir/src/GameStates/SinglePlayerMenuState.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/GameStates/SinglePlayerMenuState.cpp || cmake_object_order_depends_target_a
-  DEP_FILE = CMakeFiles/a.dir/src/GameStates/SinglePlayerMenuState.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
-  INCLUDES = -I/usr/include/libxml2
-  OBJECT_DIR = CMakeFiles/a.dir
-  OBJECT_FILE_DIR = CMakeFiles/a.dir/src/GameStates
-
-build CMakeFiles/a.dir/src/GameStates/MultiPlayerMenuState.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/GameStates/MultiPlayerMenuState.cpp || cmake_object_order_depends_target_a
-  DEP_FILE = CMakeFiles/a.dir/src/GameStates/MultiPlayerMenuState.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
-  INCLUDES = -I/usr/include/libxml2
-  OBJECT_DIR = CMakeFiles/a.dir
-  OBJECT_FILE_DIR = CMakeFiles/a.dir/src/GameStates
-
-build CMakeFiles/a.dir/src/GameObjects/TextSquare.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/GameObjects/TextSquare.cpp || cmake_object_order_depends_target_a
-  DEP_FILE = CMakeFiles/a.dir/src/GameObjects/TextSquare.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
-  INCLUDES = -I/usr/include/libxml2
-  OBJECT_DIR = CMakeFiles/a.dir
-  OBJECT_FILE_DIR = CMakeFiles/a.dir/src/GameObjects
-
-build CMakeFiles/a.dir/src/GameStates/PauseMenuState.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/GameStates/PauseMenuState.cpp || cmake_object_order_depends_target_a
-  DEP_FILE = CMakeFiles/a.dir/src/GameStates/PauseMenuState.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
-  INCLUDES = -I/usr/include/libxml2
-  OBJECT_DIR = CMakeFiles/a.dir
-  OBJECT_FILE_DIR = CMakeFiles/a.dir/src/GameStates
-
-build CMakeFiles/a.dir/src/Singletons/GameObjectFactory.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/Singletons/GameObjectFactory.cpp || cmake_object_order_depends_target_a
-  DEP_FILE = CMakeFiles/a.dir/src/Singletons/GameObjectFactory.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
-  INCLUDES = -I/usr/include/libxml2
-  OBJECT_DIR = CMakeFiles/a.dir
-  OBJECT_FILE_DIR = CMakeFiles/a.dir/src/Singletons
-
-build CMakeFiles/a.dir/src/GameStates/StateParser.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/GameStates/StateParser.cpp || cmake_object_order_depends_target_a
-  DEP_FILE = CMakeFiles/a.dir/src/GameStates/StateParser.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
-  INCLUDES = -I/usr/include/libxml2
-  OBJECT_DIR = CMakeFiles/a.dir
-  OBJECT_FILE_DIR = CMakeFiles/a.dir/src/GameStates
-
-build CMakeFiles/a.dir/src/GameStates/MenuState.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/GameStates/MenuState.cpp || cmake_object_order_depends_target_a
-  DEP_FILE = CMakeFiles/a.dir/src/GameStates/MenuState.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
-  INCLUDES = -I/usr/include/libxml2
-  OBJECT_DIR = CMakeFiles/a.dir
-  OBJECT_FILE_DIR = CMakeFiles/a.dir/src/GameStates
-
-build CMakeFiles/a.dir/src/Levels/Level.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/Levels/Level.cpp || cmake_object_order_depends_target_a
-  DEP_FILE = CMakeFiles/a.dir/src/Levels/Level.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
-  INCLUDES = -I/usr/include/libxml2
-  OBJECT_DIR = CMakeFiles/a.dir
-  OBJECT_FILE_DIR = CMakeFiles/a.dir/src/Levels
-
-build CMakeFiles/a.dir/src/Levels/Layer.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/Levels/Layer.cpp || cmake_object_order_depends_target_a
-  DEP_FILE = CMakeFiles/a.dir/src/Levels/Layer.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
-  INCLUDES = -I/usr/include/libxml2
-  OBJECT_DIR = CMakeFiles/a.dir
-  OBJECT_FILE_DIR = CMakeFiles/a.dir/src/Levels
-
-build CMakeFiles/a.dir/src/Levels/LevelParser.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/Levels/LevelParser.cpp || cmake_object_order_depends_target_a
-  DEP_FILE = CMakeFiles/a.dir/src/Levels/LevelParser.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
-  INCLUDES = -I/usr/include/libxml2
-  OBJECT_DIR = CMakeFiles/a.dir
-  OBJECT_FILE_DIR = CMakeFiles/a.dir/src/Levels
-
-build CMakeFiles/a.dir/src/Levels/TileLayer.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/Levels/TileLayer.cpp || cmake_object_order_depends_target_a
-  DEP_FILE = CMakeFiles/a.dir/src/Levels/TileLayer.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
-  INCLUDES = -I/usr/include/libxml2
-  OBJECT_DIR = CMakeFiles/a.dir
-  OBJECT_FILE_DIR = CMakeFiles/a.dir/src/Levels
-
-build CMakeFiles/a.dir/src/Levels/ObjectLayer.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/Levels/ObjectLayer.cpp || cmake_object_order_depends_target_a
-  DEP_FILE = CMakeFiles/a.dir/src/Levels/ObjectLayer.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
-  INCLUDES = -I/usr/include/libxml2
-  OBJECT_DIR = CMakeFiles/a.dir
-  OBJECT_FILE_DIR = CMakeFiles/a.dir/src/Levels
-
-build CMakeFiles/a.dir/src/GameStates/MultiPlayerPlayState.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/GameStates/MultiPlayerPlayState.cpp || cmake_object_order_depends_target_a
-  DEP_FILE = CMakeFiles/a.dir/src/GameStates/MultiPlayerPlayState.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
-  INCLUDES = -I/usr/include/libxml2
-  OBJECT_DIR = CMakeFiles/a.dir
-  OBJECT_FILE_DIR = CMakeFiles/a.dir/src/GameStates
-
-build CMakeFiles/a.dir/src/GameStates/SinglePlayerPlayState.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/GameStates/SinglePlayerPlayState.cpp || cmake_object_order_depends_target_a
-  DEP_FILE = CMakeFiles/a.dir/src/GameStates/SinglePlayerPlayState.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
-  INCLUDES = -I/usr/include/libxml2
-  OBJECT_DIR = CMakeFiles/a.dir
-  OBJECT_FILE_DIR = CMakeFiles/a.dir/src/GameStates
-
-build CMakeFiles/a.dir/src/Singletons/CollisionManager.cpp.o: CXX_COMPILER__a_Debug /home/beckaand/CLionProjects/beckaand/SemestralWork/src/Singletons/CollisionManager.cpp || cmake_object_order_depends_target_a
-  DEP_FILE = CMakeFiles/a.dir/src/Singletons/CollisionManager.cpp.o.d
-  FLAGS = -g -fdiagnostics-color=always
-  INCLUDES = -I/usr/include/libxml2
-  OBJECT_DIR = CMakeFiles/a.dir
-  OBJECT_FILE_DIR = CMakeFiles/a.dir/src/Singletons
+  OBJECT_FILE_DIR = CMakeFiles/a.dir/src
 
 
 # =============================================================================
@@ -260,9 +323,9 @@ build CMakeFiles/a.dir/src/Singletons/CollisionManager.cpp.o: CXX_COMPILER__a_De
 #############################################
 # Link the executable a
 
-build a: CXX_EXECUTABLE_LINKER__a_Debug CMakeFiles/a.dir/src/main.cpp.o CMakeFiles/a.dir/src/Singletons/Game.cpp.o CMakeFiles/a.dir/src/GameObjects/GameObject.cpp.o CMakeFiles/a.dir/src/GameStates/GameState.cpp.o CMakeFiles/a.dir/src/GameStates/GameStateMachine.cpp.o CMakeFiles/a.dir/src/Singletons/InputHandler.cpp.o CMakeFiles/a.dir/src/LoaderParams.cpp.o CMakeFiles/a.dir/src/GameObjects/MenuButton.cpp.o CMakeFiles/a.dir/src/GameStates/MainMenuState.cpp.o CMakeFiles/a.dir/src/GameObjects/Player.cpp.o CMakeFiles/a.dir/src/GameObjects/SDLGameObject.cpp.o CMakeFiles/a.dir/src/Singletons/TextureManager.cpp.o CMakeFiles/a.dir/src/Vector2D.cpp.o CMakeFiles/a.dir/src/GameObjects/StaticObject.cpp.o CMakeFiles/a.dir/src/GameStates/SinglePlayerMenuState.cpp.o CMakeFiles/a.dir/src/GameStates/MultiPlayerMenuState.cpp.o CMakeFiles/a.dir/src/GameObjects/TextSquare.cpp.o CMakeFiles/a.dir/src/GameStates/PauseMenuState.cpp.o CMakeFiles/a.dir/src/Singletons/GameObjectFactory.cpp.o CMakeFiles/a.dir/src/GameStates/StateParser.cpp.o CMakeFiles/a.dir/src/GameStates/MenuState.cpp.o CMakeFiles/a.dir/src/Levels/Level.cpp.o CMakeFiles/a.dir/src/Levels/Layer.cpp.o CMakeFiles/a.dir/src/Levels/LevelParser.cpp.o CMakeFiles/a.dir/src/Levels/TileLayer.cpp.o CMakeFiles/a.dir/src/Levels/ObjectLayer.cpp.o CMakeFiles/a.dir/src/GameStates/MultiPlayerPlayState.cpp.o CMakeFiles/a.dir/src/GameStates/SinglePlayerPlayState.cpp.o CMakeFiles/a.dir/src/Singletons/CollisionManager.cpp.o | /usr/lib/x86_64-linux-gnu/libxml2.so
+build a: CXX_EXECUTABLE_LINKER__a_Debug CMakeFiles/a.dir/src/Bonus.cpp.o CMakeFiles/a.dir/src/CollisionManager.cpp.o CMakeFiles/a.dir/src/Enemy.cpp.o CMakeFiles/a.dir/src/Game.cpp.o CMakeFiles/a.dir/src/GameObject.cpp.o CMakeFiles/a.dir/src/GameObjectFactory.cpp.o CMakeFiles/a.dir/src/GameState.cpp.o CMakeFiles/a.dir/src/GameStateMachine.cpp.o CMakeFiles/a.dir/src/InputHandler.cpp.o CMakeFiles/a.dir/src/Layer.cpp.o CMakeFiles/a.dir/src/Level.cpp.o CMakeFiles/a.dir/src/LevelParser.cpp.o CMakeFiles/a.dir/src/LoaderParams.cpp.o CMakeFiles/a.dir/src/MainMenuState.cpp.o CMakeFiles/a.dir/src/MenuButton.cpp.o CMakeFiles/a.dir/src/MenuState.cpp.o CMakeFiles/a.dir/src/MultiPlayer1WinState.cpp.o CMakeFiles/a.dir/src/MultiPlayer2WinState.cpp.o CMakeFiles/a.dir/src/MultiPlayerMenuState.cpp.o CMakeFiles/a.dir/src/MultiPlayerPlayState.cpp.o CMakeFiles/a.dir/src/ObjectLayer.cpp.o CMakeFiles/a.dir/src/PauseMenuState.cpp.o CMakeFiles/a.dir/src/Player.cpp.o CMakeFiles/a.dir/src/Player1.cpp.o CMakeFiles/a.dir/src/Player2.cpp.o CMakeFiles/a.dir/src/ScoreboardState.cpp.o CMakeFiles/a.dir/src/SDLGameObject.cpp.o CMakeFiles/a.dir/src/SinglePlayerLostState.cpp.o CMakeFiles/a.dir/src/SinglePlayerMenuState.cpp.o CMakeFiles/a.dir/src/SinglePlayerPlayState.cpp.o CMakeFiles/a.dir/src/SinglePlayerWonState.cpp.o CMakeFiles/a.dir/src/StateParser.cpp.o CMakeFiles/a.dir/src/StaticObject.cpp.o CMakeFiles/a.dir/src/TextSquare.cpp.o CMakeFiles/a.dir/src/TextureManager.cpp.o CMakeFiles/a.dir/src/TileLayer.cpp.o CMakeFiles/a.dir/src/Vector2D.cpp.o CMakeFiles/a.dir/src/main.cpp.o | /usr/lib/x86_64-linux-gnu/libxml2.so
   FLAGS = -g
-  LINK_LIBRARIES = /usr/lib/x86_64-linux-gnu/libxml2.so  -lSDL2main  -lSDL2  -lSDL2_image
+  LINK_LIBRARIES = /usr/lib/x86_64-linux-gnu/libxml2.so  -lSDL2main  -lSDL2  -lSDL2_image  -lSDL2_ttf
   OBJECT_DIR = CMakeFiles/a.dir
   POST_BUILD = :
   PRE_LINK = :

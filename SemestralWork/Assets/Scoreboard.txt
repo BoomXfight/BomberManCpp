@@ -1,4 +1,0 @@
-Andrej 120
-Tomas 60
-Peter 20
-A 10
