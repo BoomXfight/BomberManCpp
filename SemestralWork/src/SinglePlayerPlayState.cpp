@@ -19,6 +19,8 @@ void SinglePlayerPlayState::update()
     mLevel->update();
     updatePlayer();
 
+    std::cout << mNoOfEnemies << std::endl;
+
     if(mLives == 0)
         TheGame::Instance()->getStateMachine()->changeState(new SinglePlayerLostState);
     if(mNoOfEnemies == 0)
@@ -117,7 +119,7 @@ void SinglePlayerPlayState::updatePlayer()
         }
 
         if(Enemy* enemy = dynamic_cast<Enemy *>(obj))
-            if(TheCollisionManager::Instance()->isEnemyHit(enemy->getPosition()))
+            if(TheCollisionManager::Instance()->isEnemyHit(enemy->getPosition(), enemy->getWidth(), enemy->getHeight()))
             {
                 mNoOfEnemies--;
                 mScore += 10;

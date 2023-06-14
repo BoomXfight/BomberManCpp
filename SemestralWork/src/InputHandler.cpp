@@ -18,7 +18,7 @@ void InputHandler::update()
         switch(event.type)
         {
             case SDL_QUIT:
-                TheGame::Instance()->clean();
+                TheGame::Instance()->quit();
                 break;
 
             case SDL_MOUSEMOTION:

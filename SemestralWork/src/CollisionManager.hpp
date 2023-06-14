@@ -31,7 +31,15 @@ public:
 
     void setBonuses(std::vector<Bonus*> pBonuses);
 
+    std::vector<std::vector<int>> getMap();
+
     std::vector<Bonus*> getBonuses();
+
+    std::pair<int, int> getPlayerPosition();
+
+    int getTileWidth();
+
+    int getTileHeight();
 
     /**
      * This method checks for the collision between player and some blocks of tile map.
@@ -64,9 +72,10 @@ public:
     /**
      * This method checks whether enemy walks over explosion.
      * @param pVec[in] enemy position.
+     * @param pWidth[in] enemy width
      * @return true -> on fire, false -> out of fire
      */
-    bool isEnemyHit(Vector2D pVec);
+    bool isEnemyHit(Vector2D pVec, int pWidth, int pHeight);
 
     /**
      * This method places the bomb to the current position.

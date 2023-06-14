@@ -27,6 +27,36 @@ void CollisionManager::setBonuses(std::vector<Bonus*> pBonuses)
     mBonuses = pBonuses;
 }
 
+std::vector<std::vector<int>> CollisionManager::getMap()
+{
+    return mMap;
+}
+
+std::pair<int, int> CollisionManager::getPlayerPosition()
+{
+    for(auto it = mGameObjects->begin(); it != mGameObjects->end(); it++)
+    {
+        if (dynamic_cast<Player1*>(*it))
+        {
+            Player1 *player = dynamic_cast<Player1*>(*it);
+            Vector2D vectorPos = player->getPosition();
+            int y = vectorPos.getX() / mTileSet.mTileWidth;
+            int x = vectorPos.getY() / mTileSet.mTileHeight;
+            return std::make_pair(x, y);
+        }
+    }
+}
+
+int CollisionManager::getTileWidth()
+{
+    return mTileSet.mTileWidth;
+}
+
+int CollisionManager::getTileHeight()
+{
+    return mTileSet.mTileHeight;
+}
+
 std::vector<Bonus*> CollisionManager::getBonuses()
 {
     return mBonuses;
@@ -92,21 +122,24 @@ bool CollisionManager::isPlayerDamaged(Vector2D pVec)
     return false;
 }
 
-bool CollisionManager::isEnemyHit(Vector2D pVec)
+bool CollisionManager::isEnemyHit(Vector2D pVec, int pWidth, int pHeight)
 {
-    int tileX = pVec.getX() / mTileSet.mTileWidth;
-    int tileY = pVec.getY() / mTileSet.mTileWidth;
+    int tileX1 = pVec.getX() / mTileSet.mTileWidth;
+    int tileY1 = pVec.getY() / mTileSet.mTileHeight;
+    int tileX2 = (pVec.getX() + pWidth) / mTileSet.mTileWidth;
+    int tileY2 = (pVec.getY() - pHeight) / mTileSet.mTileHeight;
 
-    if(mMap[tileY][tileX] == EXPLOSION)
+    if(mMap[tileY1][tileX1] == EXPLOSION || mMap[tileY2][tileX2] == EXPLOSION)
     {
         for (auto it = mGameObjects->begin(); it != mGameObjects->end(); it++) {
             if (dynamic_cast<Enemy *>(*it))
             {
                 Enemy* enemy = dynamic_cast<Enemy*>(*it);
                 if(enemy->getPosition().getX() == pVec.getX()
-                && enemy->getPosition().getY() == pVec.getY()) {
-                    mGameObjects->erase(it);
-                    break;
+                && enemy->getPosition().getY() == pVec.getY())
+                {
+                        mGameObjects->erase(it);
+                        break;
                 }
             }
         }

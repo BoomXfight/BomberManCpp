@@ -31,15 +31,35 @@ public:
      */
     void load(const LoaderParams *pParams) override;
 
+    enum
+    {
+        DOWN_MOVEMENT = 1,
+        UP_MOVEMENT = 2,
+        RIGHT_MOVEMENT = 3,
+        LEFT_MOVEMENT = 4
+    };
+
 private:
     /**
      * This method implements a simple enemy AI
      */
     void handleMovement();
+    void handleAnimation();
+    void move(std::pair<int,int> pEnemyPos, std::pair<int,int> pNextPos);
+    void placeBomb();
+    void handleBomb();
 
     float mSpeed;
-    float mBuffer;
-    bool mMoveUp;
+    float mBombTickingTime;
+    Vector2D mBombPosition;
+
+    bool mExplosion;
+    bool mBombReady;
+    bool mMoving;
+
+    Uint32 mNow;
+    Uint32 mTimer;
+    Uint32 mBombTickingTimer;
 };
 
 /**
