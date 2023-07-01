@@ -1,0 +1,73 @@
+==Zadanie==
+
+Tato semestrální práce patří do kategorie her. Vaším cílem je vytvořit konkrétní hru, která bude modifikovatelná prostřednictvím konfiguračních souborů.
+Nesnažte se všechny hodnoty definovat přímo v kódu (a to ani pomocí konstant). Umístěte je do konfiguračních souborů (jednoho nebo více), 
+které váš program bude načítat.
+
+Implementujte jednoduchou hru po vzoru hry Bomberman. 
+Ve hře Bomberman hráč může umisťovat bomby, které po výbuchu ničí okolní zdi a případně eliminují postavy.
+
+Hra musí umožňovat alespoň tyto dva režimy:
+	hru dvou hráčů na jednom počítači,
+	hru proti počítači.
+	
+Implementujte následující funkcionality:
+	Implementujte jednoduchou AI počítačového hráče (náhodné tahy nestačí).
+	Některé zdi je možné zničit, po zničení s určitou pravděpodobností zanechají bonus.
+	Implementujte alespoň 5 druhů bonusů, například se můžete inspirovat těmito:
+		změna počtu dostupných bomb,
+		změna velikosti plamene plamene,
+		hráč může po určitou dobu chodit přes bomby,
+		automatické kladení bomb (postava nemůže ovládat umístění bomby, bomba je umístěna automaticky, jakmile ji má hráč k dispozici),
+		manuální odpálení bomby.
+		
+Hra musí být konfigurovatelná ze souboru:
+	načítání herních úrovní (př. mapy, …),
+	pravděpodobnosti jednotlivých bonusů,
+	
+Hra umožňuje zobrazit tabulku nejlepších hráčů.
+
+Kde lze využít polymorfismus? (doporučené)
+	efekty bonusů a nemocí: zvětšení plamenu, zvýšení počtu bomb, inverze ovládání, …
+	ovládání hráčů: lokální hráč (nastavení klávesnice), umělá inteligence (různé druhy), síťový hráč, …
+	uživatelské rozhraní: konzolové, ncurses, SDL, OpenGL (různé druhy), …
+	
+Další informace:
+Není nutné implementovat přesnou kopii hry Bomberman, zamyslete se, jakým způsobem můžete základní požadavky rozšířit a udělat hru zajímavější.
+Poznámka 29.4.2023: Není nutné implementovat hru real-time, hra může být i tahová.
+https://en.wikipedia.org/wiki/Bomberman
+
+==Špecifikácia==
+
+V mojej semestrálnej práci riešim návrh a implementáciu hry Bomberman.
+Rozhodol som sa pre real-time variant s vlastným oknom iplementovaným v SDL.
+
+Hra bude implementovať 2 herné módy : single-player, multi-player
+
+Single-player mód: Mód kde hráč hraje proti npc. Hráč získava body za elimináciu každého nepriateľa.
+Level je načítaný zo súboru a jdenoducho modifikovateľný : provdapodobnosť jednotilivých bonusov, počet nepriateľov,
+mapa, textúry mapy
+
+NPC je jednoduchý počítačový hráč, ktorý po každej kolízii mení smer. Ak hráč do npc narazí stráca život.
+
+Multi-player mód hrajú dvaja hráči na 1 klávesnici. V tomto móde sa nevyskytujú npc. 
+Hráč vyhráva v momente ak druhý hráč umiera. Hráči získavaju bonusy za rozbitie stien a snažia sa znížiť počet životov
+2. hráča na 0.
+
+Obidva herné režimy pozostávaju z mapy, ktorá obsahuje 3 typy blokov : zničiteľná stena, nezničiteľná stena, prichodný blok 
+
+Zničiteľné setny sa dajú zničiť položením bomby v istom rádiuse (rádius sa mení podľa aktuálneho levelu a aktivovaných bonusoch)
+Zničená stena zanechá s istou pravdepodobnosťou bonus(špecifikované v súbore)
+Náhodný bonus môže mať pozitivný vplyv: 1) zvýšenie rýchlosti 2) chvíľková nesmrteľnosť 3) zvýšenie rádiusu
+					4) pridanie životu (max 3)
+		       negatívny vplyv: 1) rýchlejší výbuch bomby
+		       
+Hra obsahuje tabuľku hráčov s najlepším skóre. Pred začiatkom každého herného módu sa hráč môže identifikovať svojou prezívkou.
+Ak sa táto prezývka nachádza v databáze hráčov, na konci módu bude hráčovi pridelený počet získaných bodov. Tabuľka zobrazuje 5 hráčov s najlepším skóre.
+
+Impementácia bude postavená na SDL framworku, ktorý je inšipirvaný touto knihou: https://www.amazon.com/SDL-Game-Development-Black-White/dp/1849696829
+
+-- Polymorfizmus
+- Použitý pri gameObjectoch 
+- Použitý pri gameStatoch
+

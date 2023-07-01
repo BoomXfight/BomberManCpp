@@ -1,0 +1,6 @@
+Andrej 260
+pl 90
+Tomas 60
+w 30
+Peter 20
+A 10
